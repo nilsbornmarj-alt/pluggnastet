@@ -244,125 +244,124 @@ m.position.set(x,y,z);parent.add(m);return m;
 
 }
 
-function build(){
 
+function build(){
 while(parts.children.length)parts.remove(parts.children[0]);
 
 const skin=document.getElementById("skin").value;
-
 const hair=document.getElementById("hairColor").value;
-
 const clothes=document.getElementById("clothes").value;
-
 const style=document.getElementById("hair").value;
-
 const extra=document.getElementById("extra").value;
+const pants="#35334f";
+const shoes="#e5d9ff";
 
-// Body and neck
+// Hjälpfunktion för armar och ben
+function limb(x,y,z,length,radius,color,rotation=0){
+const m=new THREE.Mesh(
+new THREE.CapsuleGeometry(radius,length,8,16),
+mat(color)
+);
+m.position.set(x,y,z);
+m.rotation.z=rotation;
+parts.add(m);
+return m;
+}
 
-const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.72,.75,8,24),mat(clothes));
+// Kropp och hals
+const torso=new THREE.Mesh(
+new THREE.CapsuleGeometry(.55,.75,8,24),
+mat(clothes)
+);
+torso.position.y=-.65;
+torso.scale.set(1,.9,.8);
+parts.add(torso);
 
-torso.position.y=-.65;torso.scale.set(1,.9,.65);parts.add(torso);
+sphere(parts,0,.15,0,.23,.3,.23,skin);
 
-sphere(parts,0,.25,0,.25,.35,.24,skin);
+// Ben
+limb(-.29,-1.65,0,.65,.20,pants);
+limb(.29,-1.65,0,.65,.20,pants);
 
-// Head
+// Skor
+sphere(parts,-.30,-2.15,.13,.29,.17,.43,shoes);
+sphere(parts,.30,-2.15,.13,.29,.17,.43,shoes);
 
+// Armar
+limb(-.78,-.65,0,.65,.19,clothes,-.28);
+limb(.78,-.65,0,.65,.19,clothes,.28);
+
+// Händer
+sphere(parts,-1.00,-1.08,.04,.17,.17,.17,skin);
+sphere(parts,1.00,-1.08,.04,.17,.17,.17,skin);
+
+// Huvud
 sphere(parts,0,1.15,0,.78,.95,.68,skin);
 
-// Hair cap and fringe
-
+// Hår
 sphere(parts,0,1.72,-.02,.81,.58,.7,hair);
-
 sphere(parts,0,1.48,.51,.72,.25,.25,hair);
 
 if(style==="long"){
-
 sphere(parts,-.68,.95,-.05,.18,.85,.3,hair);
-
 sphere(parts,.68,.95,-.05,.18,.85,.3,hair);
-
 }
-
 if(style==="short"){
-
 sphere(parts,-.62,1.25,-.05,.18,.35,.3,hair);
-
 sphere(parts,.62,1.25,-.05,.18,.35,.3,hair);
-
 }
-
 if(style==="spiky"){
-
 for(let i=-2;i<=2;i++){
-
-const spike=new THREE.Mesh(new THREE.ConeGeometry(.16,.48,16),mat(hair));
-
-spike.position.set(i*.24,2.12,0);spike.rotation.z=i*.16;parts.add(spike);
-
+const spike=new THREE.Mesh(
+new THREE.ConeGeometry(.16,.48,16),
+mat(hair)
+);
+spike.position.set(i*.24,2.12,0);
+spike.rotation.z=i*.16;
+parts.add(spike);
+}
 }
 
-}
-
-// Eyes
-
+// Ansikte
 sphere(parts,-.29,1.22,.61,.085,.13,.06,"#30233e");
-
 sphere(parts,.29,1.22,.61,.085,.13,.06,"#30233e");
-
-// Nose and smile
-
 sphere(parts,0,1.03,.67,.055,.07,.045,"#d99f82");
 
 const smile=torus(parts,0,.91,.64,.13,.018,"#a65f6c");
-
 smile.scale.y=.38;
 
-// Accessory
-
+// Accessoarer
 if(extra==="headphones"){
-
 torus(parts,0,1.75,0,.83,.09,"#6bd0df");
-
 sphere(parts,-.79,1.35,0,.16,.25,.16,"#6bd0df");
-
 sphere(parts,.79,1.35,0,.16,.25,.16,"#6bd0df");
-
 }
-
 if(extra==="crown"){
-
 for(let i=0;i<5;i++){
-
-const spike=new THREE.Mesh(new THREE.ConeGeometry(.12,.32,4),mat("#f6ce65"));
-
-spike.position.set((i-2)*.22,2.28,0);parts.add(spike);
-
+const spike=new THREE.Mesh(
+new THREE.ConeGeometry(.12,.32,4),
+mat("#f6ce65")
+);
+spike.position.set((i-2)*.22,2.28,0);
+parts.add(spike);
 }
-
 box(parts,0,2.12,0,.95,.12,.22,"#f6ce65");
-
 }
-
 if(extra==="glasses"){
-
 torus(parts,-.29,1.22,.69,.19,.035,"#e6d7ff");
-
 torus(parts,.29,1.22,.69,.19,.035,"#e6d7ff");
-
 box(parts,0,1.22,.69,.17,.045,.04,"#e6d7ff");
-
 }
-
 if(extra==="star"){
-
-const star=new THREE.Mesh(new THREE.OctahedronGeometry(.22),mat("#ffe17b"));
-
-star.position.set(.9,2.1,.1);parts.add(star);
-
+const star=new THREE.Mesh(
+new THREE.OctahedronGeometry(.22),
+mat("#ffe17b")
+);
+star.position.set(.9,2.1,.1);
+parts.add(star);
+}
 }
 
-}
 
 build();
 
