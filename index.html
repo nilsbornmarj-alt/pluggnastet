@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html>
+
+<html lang="sv">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Pluggnästet – Ditt study space</title>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{margin:0;background:#11131e;color:#f4f0ff;font-family:Inter,system-ui,sans-serif}
+
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff12}
+
+.logo{font-size:23px;font-weight:800;letter-spacing:-1px}
+
+.logo span{color:#b49aff}
+
+nav a{color:#b9b5ca;text-decoration:none;margin-left:22px;font-size:14px}
+
+main{max-width:1100px;margin:auto;padding:35px 22px}
+
+.welcome{color:#aaa5bd;font-size:14px}
+
+h1{font-size:32px;margin:8px 0}
+
+.sub{color:#aaa5bd}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0}
+
+.card{background:#1c1d2d;border:1px solid #ffffff12;border-radius:18px;padding:20px}
+
+.stat{font-size:25px;font-weight:800;margin-top:7px}
+
+.muted{color:#aaa5bd;font-size:13px}
+
+.room{margin-top:25px;border-radius:24px;min-height:390px;padding:28px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 110%,#654d8c 0%,transparent 60%),linear-gradient(140deg,#292844,#171a2b 65%,#34304b);border:1px solid #ffffff20}
+
+.room h2{font-size:23px}
+
+.timer{font-size:76px;font-weight:800;letter-spacing:-4px;margin:35px 0 20px;font-variant-numeric:tabular-nums}
+
+button{border:0;border-radius:12px;padding:12px 20px;font-weight:700;cursor:pointer;background:#b49aff;color:#171322}
+
+button.secondary{background:#ffffff16;color:white}
+
+.controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+
+.environments{display:flex;justify-content:center;gap:9px;margin-top:24px;flex-wrap:wrap}
+
+.environments button{font-size:12px;padding:9px 13px}
+
+.section-title{margin:35px 0 15px}
+
+.courses{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+.course{background:#1c1d2d;border:1px solid #ffffff12;border-radius:18px;padding:20px}
+
+.course .emoji{font-size:26px}
+
+.progress{height:6px;background:#343448;border-radius:8px;margin:15px 0 8px}
+
+.progress span{display:block;height:100%;background:#b49aff;border-radius:8px}
+
+footer{text-align:center;padding:35px;color:#77758c;font-size:12px}
+
+@media(max-width:650px){nav{display:none}.stats,.courses{grid-template-columns:1fr}.timer{font-size:62px}h1{font-size:27px}}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">pluggnästet<span>.</span></div>
+
+<nav><a href="#hem">Hem</a><a href="#fokus">Fokusrum</a><a href="#kurser">Mina kurser</a></nav>
+
+</header>
+
+<main id="hem">
+
+<p class="welcome">DITT PERSONLIGA STUDIEUNIVERSUM</p>
+
+<h1>Välkommen tillbaka! ✨</h1>
+
+<p class="sub">En liten stunds fokus kan göra stor skillnad.</p>
+
+<div class="stats">
+
+<div class="card"><div class="muted">Dina studiepoäng</div><div class="stat">⭐ 1 250 XP</div><div class="muted">Nivå 4 · Kunskapssökare</div></div>
+
+<div class="card"><div class="muted">Din studiestreak</div><div class="stat">🔥 5 dagar</div><div class="muted">Fortsätt i din egen takt</div></div>
+
+<div class="card"><div class="muted">Veckans mål</div><div class="stat">3 / 5</div><div class="muted">Studiepass genomförda</div></div>
+
+</div>
+
+<section class="room" id="fokus">
+
+<p class="muted">✦ YOUR PERSONAL FOCUS SPACE ✦</p>
+
+<h2>Välkommen till ditt fokusrum</h2>
+
+<p class="muted" id="mode">Dags att fokusera på dig själv.</p>
+
+<div class="timer" id="timer">25:00</div>
+
+<div class="controls">
+
+<button id="start">Starta fokus</button>
+
+<button class="secondary" id="reset">Återställ</button>
+
+<button class="secondary" id="break">Paus 5 min</button>
+
+</div>
+
+<div class="environments">
+
+<button class="secondary" onclick="setRoom(0)">🌙 Natt</button>
+
+<button class="secondary" onclick="setRoom(1)">🌌 Rymd</button>
+
+<button class="secondary" onclick="setRoom(2)">🌿 Natur</button>
+
+</div>
+
+</section>
+
+<h2 class="section-title" id="kurser">📚 Dina kurser</h2>
+
+<div class="courses">
+
+<div class="course"><div class="emoji">📐</div><h3>Matematik</h3><p class="muted">Algebra och funktioner</p><div class="progress"><span style="width:65%"></span></div><small class="muted">65% genomfört</small></div>
+
+<div class="course"><div class="emoji">🧬</div><h3>Biologi</h3><p class="muted">Cellen och genetik</p><div class="progress"><span style="width:40%"></span></div><small class="muted">40% genomfört</small></div>
+
+<div class="course"><div class="emoji">📖</div><h3>Svenska</h3><p class="muted">Textanalys och skrivande</p><div class="progress"><span style="width:80%"></span></div><small class="muted">80% genomfört</small></div>
+
+</div>
+
+</main>
+
+<footer>Pluggnästet · Lär dig i din egen takt ♡</footer>
+
+<script>
+
+let seconds=1500,interval=null;
+
+const timer=document.getElementById('timer');
+
+const mode=document.getElementById('mode');
+
+function show(){timer.textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')}
+
+document.getElementById('start').onclick=()=>{
+
+if(interval){clearInterval(interval);interval=null;document.getElementById('start').textContent='Fortsätt';return}
+
+document.getElementById('start').textContent='Pausa';
+
+interval=setInterval(()=>{if(seconds>0){seconds--;show()}else{clearInterval(interval);interval=null;mode.textContent='Bra jobbat! Ditt pass är klart ✨';document.getElementById('start').textContent='Starta igen'}},1000)
+
+};
+
+document.getElementById('reset').onclick=()=>{clearInterval(interval);interval=null;seconds=1500;show();document.getElementById('start').textContent='Starta fokus';mode.textContent='Dags att fokusera på dig själv.'};
+
+document.getElementById('break').onclick=()=>{clearInterval(interval);interval=null;seconds=300;show();mode.textContent='Ta en välförtjänt paus.';document.getElementById('start').textContent='Starta paus'};
+
+function setRoom(n){let b=['radial-gradient(ellipse at 50% 110%,#654d8c,transparent 60%),linear-gradient(140deg,#292844,#171a2b 65%,#34304b)','radial-gradient(ellipse at 50% 110%,#315b87,transparent 60%),linear-gradient(140deg,#151d3c,#111526 65%,#302b56)','radial-gradient(ellipse at 50% 110%,#386b55,transparent 60%),linear-gradient(140deg,#183b37,#111e28 65%,#344b40)'];document.querySelector('.room').style.background=b[n]}
+
+</script>
+
+</body>
+
+</html>
