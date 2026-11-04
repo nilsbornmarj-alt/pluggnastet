@@ -10,47 +10,105 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Pluggnästet – Avatar Studio</title>
+<title>Pluggnästet – Study Universe</title>
 
 <style>
 
 *{box-sizing:border-box}
 
-body{margin:0;background:#111126;color:#f5efff;font-family:Arial,sans-serif}
+body{margin:0;background:#101020;color:#f5efff;font-family:Inter,Arial,sans-serif}
 
-header{text-align:center;padding:28px 15px}
+header{padding:22px 18px;text-align:center;background:#19172f;border-bottom:1px solid #40365e}
 
-h1{color:#d6baff;font-size:34px;margin:0 0 8px}
+header h1{margin:0;color:#d2b5ff;font-size:30px}
 
-.sub{color:#b8acd5}
+header p{color:#b9afd0;margin:7px 0 0}
 
-main{max-width:950px;margin:auto;padding:12px;display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:#17152a;position:sticky;top:0;z-index:5}
 
-.panel{background:#211f40;border:1px solid #514775;border-radius:22px;padding:20px}
+nav button{white-space:nowrap;background:#292542;color:#eee;border:1px solid #514775;padding:11px 15px;border-radius:12px}
 
-h2{margin:0 0 16px}
+nav button.active{background:#a98af5;color:#1a1530}
 
-#stage{height:520px;border-radius:18px;overflow:hidden;background:radial-gradient(circle,#55427e,#211b40 75%);position:relative;touch-action:pan-y}
+main{max-width:1100px;margin:auto;padding:16px}
 
-#stage canvas{display:block;width:100%;height:100%}
+.page{display:none}
 
-.hint{text-align:center;color:#c9b9e8;font-size:13px;margin-top:10px}
+.page.active{display:block}
 
-.controls{display:grid;gap:13px}
+.card{background:#211f40;border:1px solid #514775;border-radius:20px;padding:19px;margin-bottom:16px}
 
-label{display:block;font-size:14px;color:#c9b9e8;margin-bottom:6px}
+h2{margin:0 0 15px;font-size:22px}
 
-select{width:100%;padding:12px;background:#302b50;color:white;border:1px solid #66598c;border-radius:10px;font-size:15px}
+h3{margin:0 0 9px}
 
-button{padding:13px;border:0;border-radius:12px;background:#ae91fa;color:#1a1530;font-size:15px;font-weight:bold;cursor:pointer}
+.muted{color:#b9afd0}
 
-button:active{transform:scale(.98)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 
-.stats{color:#e3d4ff;margin-top:16px;font-size:14px}
+.stat{background:#302b50;border-radius:14px;padding:13px;text-align:center}
 
-.note{color:#b9afd0;font-size:13px;line-height:1.5}
+.stat strong{display:block;font-size:22px;color:#d8c5ff;margin-top:5px}
 
-@media(max-width:680px){main{grid-template-columns:1fr}#stage{height:350px}h1{font-size:29px}}
+button{cursor:pointer;font:inherit}
+
+.action{background:#ac8cf7;color:#1b1530;border:0;border-radius:12px;padding:12px 16px;font-weight:bold}
+
+.secondary{background:#34304f;color:#fff;border:1px solid #625687;border-radius:12px;padding:11px 14px}
+
+select{width:100%;background:#302b50;color:white;border:1px solid #66598c;border-radius:10px;padding:12px;font-size:15px}
+
+label{display:block;color:#c9b9e8;font-size:14px;margin:13px 0 6px}
+
+#avatarStage{height:440px;border-radius:17px;overflow:hidden;background:radial-gradient(circle,#55427e,#211b40 75%);touch-action:pan-y}
+
+#avatarStage canvas{display:block;width:100%;height:100%}
+
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+.item{background:#302b50;padding:13px;border-radius:13px;margin:8px 0}
+
+.item button{margin-top:9px}
+
+.room{min-height:260px;border-radius:18px;background:radial-gradient(ellipse at 50% 100%,#554078,#22203f 65%,#111126);display:flex;align-items:center;justify-content:center;text-align:center;padding:25px;position:relative;overflow:hidden}
+
+.lamp{position:absolute;right:12%;top:12%;width:65px;height:65px;border-radius:50%;background:#ffdc9a;box-shadow:0 0 65px 35px #e8a65b55}
+
+.desk{position:absolute;bottom:28px;width:75%;height:18px;background:#72517b;border-radius:10px}
+
+.roomText{position:relative;z-index:1;background:#211f40bb;padding:20px;border-radius:15px}
+
+.question{font-size:19px;line-height:1.5;margin:15px 0}
+
+.answer{display:block;width:100%;text-align:left;background:#302b50;color:white;border:1px solid #625687;padding:13px;margin:8px 0;border-radius:12px}
+
+.answer:active{background:#625087}
+
+#timer{font-size:58px;font-weight:bold;text-align:center;color:#d7c1ff;margin:20px}
+
+.progress{height:10px;background:#393451;border-radius:20px;overflow:hidden;margin:12px 0}
+
+.progress div{height:100%;background:#b99bff;width:0%;transition:width .3s}
+
+footer{text-align:center;padding:25px;color:#8f85a9;font-size:12px}
+
+@media(max-width:650px){
+
+ .columns{grid-template-columns:1fr}
+
+ .stats{grid-template-columns:1fr 1fr 1fr}
+
+ #avatarStage{height:390px}
+
+ main{padding:11px}
+
+ header h1{font-size:26px}
+
+ .controls{grid-template-columns:1fr}
+
+}
 
 </style>
 
@@ -62,35 +120,113 @@ button:active{transform:scale(.98)}
 
 <h1>🐝 Pluggnästet</h1>
 
-<div class="sub">Avatar Studio · Skapa din egen karaktär</div>
+<p>Ditt rum. Din stil. Din studieresa.</p>
 
 </header>
 
+<nav>
+
+<button class="active" data-page="home">🏠 Hem</button>
+
+<button data-page="avatar">🧑 Avatar</button>
+
+<button data-page="room">🌙 Studierum</button>
+
+<button data-page="math">📚 Matematik</button>
+
+<button data-page="focus">⏱️ Fokus</button>
+
+<button data-page="shop">🛍️ Butik</button>
+
+</nav>
+
 <main>
 
-<section class="panel">
+<section class="page active" id="home">
 
-<h2>✨ Min 3D-avatar</h2>
+<div class="card">
 
-<div id="stage"></div>
+<h2>Välkommen till Pluggnästet!</h2>
 
-<div class="hint">Dra med fingret för att vrida avataren ↔</div>
+<p class="muted">En liten stunds fokus kan göra stor skillnad.</p>
 
-<div class="stats">⭐ 1 250 XP · Nivå 4</div>
+<div class="stats">
+
+<div class="stat">⭐ XP<strong id="xp">1250</strong></div>
+
+<div class="stat">🏆 Nivå<strong id="level">4</strong></div>
+
+<div class="stat">🔥 Studiedagar<strong id="streak">1</strong></div>
+
+</div>
+
+<div class="progress"><div id="levelBar"></div></div>
+
+<p class="muted" id="levelText">Samla XP för att nå nästa nivå.</p>
+
+</div>
+
+<div class="card">
+
+<h2>🌟 Din nästa aktivitet</h2>
+
+<div class="columns">
+
+<div>
+
+<h3>📐 Matematik</h3>
+
+<p class="muted">Träna på ekvationer och algebra.</p>
+
+<button class="action" onclick="showPage('math')">Börja plugga</button>
+
+</div>
+
+<div>
+
+<h3>🌙 Fokusrum</h3>
+
+<p class="muted">Hitta lugnet och koncentrationen.</p>
+
+<button class="action" onclick="showPage('room')">Öppna rummet</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🎯 Dagens mål</h2>
+
+<p class="muted">Genomför en matematikövning och ett fokuserat pass.</p>
+
+</div>
 
 </section>
 
-<section class="panel">
+<section class="page" id="avatar">
 
-<h2>🎨 Anpassa din avatar</h2>
+<div class="card">
+
+<h2>✨ Min 3D-avatar</h2>
+
+<div id="avatarStage"></div>
+
+<p class="muted" style="text-align:center">Dra med fingret för att vrida din avatar ↔</p>
+
+</div>
+
+<div class="card">
+
+<h2>🎨 Anpassa din karaktär</h2>
 
 <div class="controls">
 
-<div><label for="hair">Frisyr</label>
+<div><label>Frisyr</label><select id="hair">
 
-<select id="hair">
-
-<option value="round">Mjuk och rund</option>
+<option value="round">Rund frisyr</option>
 
 <option value="short">Kort frisyr</option>
 
@@ -100,9 +236,7 @@ button:active{transform:scale(.98)}
 
 </select></div>
 
-<div><label for="hairColor">Hårfärg</label>
-
-<select id="hairColor">
+<div><label>Hårfärg</label><select id="hairColor">
 
 <option value="#593c32">Chokladbrun</option>
 
@@ -112,15 +246,13 @@ button:active{transform:scale(.98)}
 
 <option value="#a76bd6">Lavendel</option>
 
-<option value="#bd6689">Rosaröd</option>
+<option value="#bd6689">Rosa</option>
 
 <option value="#648b9f">Blå</option>
 
 </select></div>
 
-<div><label for="skin">Hudton</label>
-
-<select id="skin">
+<div><label>Hudton</label><select id="skin">
 
 <option value="#f2c5a5">Ljus varm</option>
 
@@ -132,9 +264,7 @@ button:active{transform:scale(.98)}
 
 </select></div>
 
-<div><label for="clothes">Kläder</label>
-
-<select id="clothes">
+<div><label>Tröja</label><select id="clothes">
 
 <option value="#a78bfa">Lila hoodie</option>
 
@@ -148,9 +278,19 @@ button:active{transform:scale(.98)}
 
 </select></div>
 
-<div><label for="extra">Accessoar</label>
+<div><label>Byxor</label><select id="pants">
 
-<select id="extra">
+<option value="#35334f">Midnattsblå</option>
+
+<option value="#777b91">Grå</option>
+
+<option value="#654b3d">Brun</option>
+
+<option value="#423f72">Lila</option>
+
+</select></div>
+
+<div><label>Accessoar</label><select id="extra">
 
 <option value="none">Ingen</option>
 
@@ -164,17 +304,151 @@ button:active{transform:scale(.98)}
 
 </select></div>
 
-<button id="save">Spara min avatar</button>
+</div>
 
-<div id="message" class="stats">Välj din stil!</div>
+<br>
 
-<p class="note">Dina val sparas på den här enheten. Fler frisyrer och belöningar kommer i nästa uppdatering.</p>
+<button class="action" onclick="saveAvatar()">💾 Spara avatar</button>
+
+<p class="muted" id="avatarMessage">Dina val sparas på den här enheten.</p>
+
+</div>
+
+</section>
+
+<section class="page" id="room">
+
+<div class="card">
+
+<h2>🌙 Ditt personliga studierum</h2>
+
+<div class="room">
+
+<div class="lamp"></div>
+
+<div class="roomText">
+
+<h2>Välkommen hem!</h2>
+
+<p>Här kan du fokusera på dina mål.</p>
+
+</div>
+
+<div class="desk"></div>
+
+</div>
+
+<p class="muted">Ett lugnt utrymme för lärande, fokus och återhämtning.</p>
+
+<button class="action" onclick="showPage('focus')">Starta fokuspass</button>
+
+</div>
+
+<div class="card">
+
+<h3>🪴 Ditt rum</h3>
+
+<p class="muted">Fler möbler, dekorationer och miljöer kommer i kommande versioner.</p>
+
+</div>
+
+</section>
+
+<section class="page" id="math">
+
+<div class="card">
+
+<h2>📐 Matematik – Algebra</h2>
+
+<p class="muted">Träna på grunderna i algebra. Läs frågan och välj det svar du tror är rätt.</p>
+
+<div class="item">
+
+<h3>Lektion 1: Vad är en variabel?</h3>
+
+<p>En variabel är en bokstav som representerar ett tal. I uttrycket 3x betyder det 3 multiplicerat med x.</p>
+
+</div>
+
+<div class="item">
+
+<h3>Lektion 2: Lös en enkel ekvation</h3>
+
+<p>Om x + 4 = 10, subtraherar vi 4 från båda sidor. Då får vi x = 6.</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>🧠 Kunskapsquiz</h2>
+
+<div id="quiz">
+
+<p class="question" id="question">Vad är x om x + 4 = 10?</p>
+
+<div id="answers"></div>
+
+<p id="feedback" class="muted"></p>
+
+</div>
+
+<button class="secondary" id="nextQuestion" onclick="nextQuestion()" style="display:none">Nästa fråga →</button>
+
+</div>
+
+</section>
+
+<section class="page" id="focus">
+
+<div class="card">
+
+<h2>⏱️ Fokusläge</h2>
+
+<p class="muted" style="text-align:center">Ta en sak i taget. Du klarar det!</p>
+
+<div id="timer">25:00</div>
+
+<div class="progress"><div id="timerBar"></div></div>
+
+<div style="display:flex;justify-content:center;gap:9px;flex-wrap:wrap">
+
+<button class="action" id="startTimer" onclick="startTimer()">Starta fokus</button>
+
+<button class="secondary" onclick="pauseTimer()">Pausa</button>
+
+<button class="secondary" onclick="resetTimer()">Återställ</button>
+
+<button class="secondary" onclick="setBreak()">5 min paus</button>
+
+</div>
+
+<p class="muted" id="timerMessage" style="text-align:center">25 minuter fokus.</p>
+
+</div>
+
+</section>
+
+<section class="page" id="shop">
+
+<div class="card">
+
+<h2>🛍️ Avatarbutiken</h2>
+
+<p class="muted">Använd XP för att låsa upp nya stilar. Alla köp sparas lokalt.</p>
+
+<p>Din XP: ⭐ <strong id="shopXP">1250</strong></p>
+
+<div id="shopItems"></div>
 
 </div>
 
 </section>
 
 </main>
+
+<footer>Pluggnästet · Lär i din egen takt 💜</footer>
 
 <script type="importmap">
 
@@ -186,7 +460,55 @@ button:active{transform:scale(.98)}
 
 import * as THREE from "three";
 
-const stage=document.getElementById("stage");
+const $=id=>document.getElementById(id);
+
+let data=JSON.parse(localStorage.getItem("pluggnastetData")||"{}");
+
+data.xp=data.xp??1250;
+
+data.streak=data.streak??1;
+
+data.owned=data.owned||[];
+
+data.avatar=data.avatar||{};
+
+function saveData(){localStorage.setItem("pluggnastetData",JSON.stringify(data));updateStats()}
+
+function addXP(n){data.xp+=n;saveData()}
+
+function updateStats(){
+
+$("xp").textContent=data.xp;
+
+$("shopXP").textContent=data.xp;
+
+$("level").textContent=Math.floor(data.xp/300)+1;
+
+$("streak").textContent=data.streak;
+
+const progress=data.xp%300;
+
+$("levelBar").style.width=(progress/300*100)+"%";
+
+$("levelText").textContent=(300-progress)+" XP till nästa nivå.";
+
+}
+
+updateStats();
+
+window.showPage=id=>{
+
+document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));
+
+document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+
+if(id==="avatar")resizeAvatar();
+
+};
+
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+
+const stage=$("avatarStage");
 
 const scene=new THREE.Scene();
 
@@ -218,21 +540,13 @@ const avatar=new THREE.Group();scene.add(avatar);
 
 const parts=new THREE.Group();avatar.add(parts);
 
-const mat=(color,roughness=.8)=>new THREE.MeshStandardMaterial({color,roughness});
+const mat=(color)=>new THREE.MeshStandardMaterial({color,roughness:.8});
 
 function sphere(parent,x,y,z,sx,sy,sz,color){
 
 const m=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),mat(color));
 
 m.position.set(x,y,z);m.scale.set(sx,sy,sz);parent.add(m);return m;
-
-}
-
-function box(parent,x,y,z,sx,sy,sz,color){
-
-const m=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),mat(color));
-
-m.position.set(x,y,z);parent.add(m);return m;
 
 }
 
@@ -244,160 +558,179 @@ m.position.set(x,y,z);parent.add(m);return m;
 
 }
 
-
-function build(){
-while(parts.children.length)parts.remove(parts.children[0]);
-
-const skin=document.getElementById("skin").value;
-const hair=document.getElementById("hairColor").value;
-const clothes=document.getElementById("clothes").value;
-const style=document.getElementById("hair").value;
-const extra=document.getElementById("extra").value;
-const pants="#35334f";
-const shoes="#e5d9ff";
-
-// Hjälpfunktion för armar och ben
 function limb(x,y,z,length,radius,color,rotation=0){
-const m=new THREE.Mesh(
-new THREE.CapsuleGeometry(radius,length,8,16),
-mat(color)
-);
-m.position.set(x,y,z);
-m.rotation.z=rotation;
-parts.add(m);
-return m;
+
+const m=new THREE.Mesh(new THREE.CapsuleGeometry(radius,length,8,16),mat(color));
+
+m.position.set(x,y,z);m.rotation.z=rotation;parts.add(m);return m;
+
 }
 
-// Kropp och hals
-const torso=new THREE.Mesh(
-new THREE.CapsuleGeometry(.55,.75,8,24),
-mat(clothes)
-);
-torso.position.y=-.65;
-torso.scale.set(1,.9,.8);
-parts.add(torso);
+function box(parent,x,y,z,sx,sy,sz,color){
+
+const m=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),mat(color));
+
+m.position.set(x,y,z);parent.add(m);return m;
+
+}
+
+function buildAvatar(){
+
+while(parts.children.length)parts.remove(parts.children[0]);
+
+const skin=$("skin").value,hair=$("hairColor").value;
+
+const clothes=$("clothes").value,pants=$("pants").value;
+
+const style=$("hair").value,extra=$("extra").value;
+
+const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.55,.75,8,24),mat(clothes));
+
+torso.position.y=-.65;torso.scale.set(1,.9,.8);parts.add(torso);
 
 sphere(parts,0,.15,0,.23,.3,.23,skin);
 
-// Ben
 limb(-.29,-1.65,0,.65,.20,pants);
+
 limb(.29,-1.65,0,.65,.20,pants);
 
-// Skor
-sphere(parts,-.30,-2.15,.13,.29,.17,.43,shoes);
-sphere(parts,.30,-2.15,.13,.29,.17,.43,shoes);
+sphere(parts,-.30,-2.15,.13,.29,.17,.43,"#e5d9ff");
 
-// Armar
+sphere(parts,.30,-2.15,.13,.29,.17,.43,"#e5d9ff");
+
 limb(-.78,-.65,0,.65,.19,clothes,-.28);
+
 limb(.78,-.65,0,.65,.19,clothes,.28);
 
-// Händer
-sphere(parts,-1.00,-1.08,.04,.17,.17,.17,skin);
-sphere(parts,1.00,-1.08,.04,.17,.17,.17,skin);
+sphere(parts,-1,-1.08,.04,.17,.17,.17,skin);
 
-// Huvud
+sphere(parts,1,-1.08,.04,.17,.17,.17,skin);
+
 sphere(parts,0,1.15,0,.78,.95,.68,skin);
 
-// Hår
 sphere(parts,0,1.72,-.02,.81,.58,.7,hair);
+
 sphere(parts,0,1.48,.51,.72,.25,.25,hair);
 
 if(style==="long"){
+
 sphere(parts,-.68,.95,-.05,.18,.85,.3,hair);
+
 sphere(parts,.68,.95,-.05,.18,.85,.3,hair);
-}
-if(style==="short"){
-sphere(parts,-.62,1.25,-.05,.18,.35,.3,hair);
-sphere(parts,.62,1.25,-.05,.18,.35,.3,hair);
-}
-if(style==="spiky"){
-for(let i=-2;i<=2;i++){
-const spike=new THREE.Mesh(
-new THREE.ConeGeometry(.16,.48,16),
-mat(hair)
-);
-spike.position.set(i*.24,2.12,0);
-spike.rotation.z=i*.16;
-parts.add(spike);
-}
+
 }
 
-// Ansikte
+if(style==="short"){
+
+sphere(parts,-.62,1.25,-.05,.18,.35,.3,hair);
+
+sphere(parts,.62,1.25,-.05,.18,.35,.3,hair);
+
+}
+
+if(style==="spiky"){
+
+for(let i=-2;i<=2;i++){
+
+const spike=new THREE.Mesh(new THREE.ConeGeometry(.16,.48,16),mat(hair));
+
+spike.position.set(i*.24,2.12,0);spike.rotation.z=i*.16;parts.add(spike);
+
+}
+
+}
+
 sphere(parts,-.29,1.22,.61,.085,.13,.06,"#30233e");
+
 sphere(parts,.29,1.22,.61,.085,.13,.06,"#30233e");
+
 sphere(parts,0,1.03,.67,.055,.07,.045,"#d99f82");
 
-const smile=torus(parts,0,.91,.64,.13,.018,"#a65f6c");
-smile.scale.y=.38;
+const smile=torus(parts,0,.91,.64,.13,.018,"#a65f6c");smile.scale.y=.38;
 
-// Accessoarer
 if(extra==="headphones"){
+
 torus(parts,0,1.75,0,.83,.09,"#6bd0df");
+
 sphere(parts,-.79,1.35,0,.16,.25,.16,"#6bd0df");
+
 sphere(parts,.79,1.35,0,.16,.25,.16,"#6bd0df");
+
 }
+
 if(extra==="crown"){
+
 for(let i=0;i<5;i++){
-const spike=new THREE.Mesh(
-new THREE.ConeGeometry(.12,.32,4),
-mat("#f6ce65")
-);
-spike.position.set((i-2)*.22,2.28,0);
-parts.add(spike);
+
+const spike=new THREE.Mesh(new THREE.ConeGeometry(.12,.32,4),mat("#f6ce65"));
+
+spike.position.set((i-2)*.22,2.28,0);parts.add(spike);
+
 }
+
 box(parts,0,2.12,0,.95,.12,.22,"#f6ce65");
+
 }
+
 if(extra==="glasses"){
+
 torus(parts,-.29,1.22,.69,.19,.035,"#e6d7ff");
+
 torus(parts,.29,1.22,.69,.19,.035,"#e6d7ff");
+
 box(parts,0,1.22,.69,.17,.045,.04,"#e6d7ff");
+
 }
+
 if(extra==="star"){
-const star=new THREE.Mesh(
-new THREE.OctahedronGeometry(.22),
-mat("#ffe17b")
-);
-star.position.set(.9,2.1,.1);
-parts.add(star);
-}
+
+const star=new THREE.Mesh(new THREE.OctahedronGeometry(.22),mat("#ffe17b"));
+
+star.position.set(.9,2.1,.1);parts.add(star);
+
 }
 
+}
 
-build();
+function applySavedAvatar(){
 
-let targetRotation=0,dragging=false,lastX=0;
+Object.entries(data.avatar).forEach(([id,value])=>{if($(id))$(id).value=value});
 
-stage.addEventListener("pointerdown",e=>{dragging=true;lastX=e.clientX;stage.setPointerCapture(e.pointerId)});
+}
 
-stage.addEventListener("pointermove",e=>{
+applySavedAvatar();buildAvatar();
 
-if(!dragging)return;
+["hair","hairColor","skin","clothes","pants","extra"].forEach(id=>$(id).addEventListener("change",buildAvatar));
 
-targetRotation+=(e.clientX-lastX)*.012;lastX=e.clientX;
+let rotation=0,drag=false,lastX=0;
 
-});
+stage.addEventListener("pointerdown",e=>{drag=true;lastX=e.clientX;stage.setPointerCapture(e.pointerId)});
 
-stage.addEventListener("pointerup",()=>dragging=false);
+stage.addEventListener("pointermove",e=>{if(drag){rotation+=(e.clientX-lastX)*.012;lastX=e.clientX}});
 
-stage.addEventListener("pointercancel",()=>dragging=false);
+stage.addEventListener("pointerup",()=>drag=false);
 
-function resize(){
+stage.addEventListener("pointercancel",()=>drag=false);
+
+function resizeAvatar(){
 
 const w=stage.clientWidth,h=stage.clientHeight;
 
-renderer.setSize(w,h,false);
-
-camera.aspect=w/h;camera.updateProjectionMatrix();
+renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
 
 }
 
-new ResizeObserver(resize).observe(stage);resize();
+new ResizeObserver(resizeAvatar).observe(stage);resizeAvatar();
+
+let blink=0;
 
 function animate(){
 
 requestAnimationFrame(animate);
 
-avatar.rotation.y+=(targetRotation-avatar.rotation.y)*.12;
+avatar.rotation.y+=(rotation-avatar.rotation.y)*.12;
+
+avatar.position.y=Math.sin(Date.now()*.0015)*.035;
 
 renderer.render(scene,camera);
 
@@ -405,35 +738,171 @@ renderer.render(scene,camera);
 
 animate();
 
-["hair","hairColor","skin","clothes","extra"].forEach(id=>{
+window.saveAvatar=()=>{
 
-document.getElementById(id).addEventListener("change",build);
+data.avatar={};
+
+["hair","hairColor","skin","clothes","pants","extra"].forEach(id=>data.avatar[id]=$(id).value);
+
+saveData();$("avatarMessage").textContent="✨ Din avatar är sparad!";
+
+};
+
+// Matematikquiz
+
+const questions=[
+
+{q:"Vad är x om x + 4 = 10?",a:["4","6","14"],correct:1,explain:"10 − 4 = 6, alltså är x = 6."},
+
+{q:"Vad är 3 × 5?",a:["8","15","20"],correct:1,explain:"Tre grupper med fem blir 15."},
+
+{q:"Vad är x om 2x = 12?",a:["6","10","14"],correct:0,explain:"Dela båda sidor med 2. x = 6."},
+
+{q:"Förenkla 4x + 2x.",a:["6x","8x","6"],correct:0,explain:"4x + 2x = 6x."},
+
+{q:"Vad är 10²?",a:["20","100","1000"],correct:1,explain:"10 gånger 10 är 100."}
+
+];
+
+let qIndex=0,answered=false;
+
+function renderQuestion(){
+
+const q=questions[qIndex];answered=false;
+
+$("question").textContent=q.q;$("feedback").textContent="";
+
+$("nextQuestion").style.display="none";$("answers").innerHTML="";
+
+q.a.forEach((a,i)=>{
+
+const b=document.createElement("button");b.className="answer";b.textContent=a;
+
+b.onclick=()=>{
+
+if(answered)return;answered=true;
+
+if(i===q.correct){$("feedback").textContent="Rätt! "+q.explain;addXP(25)}
+
+else $("feedback").textContent="Inte riktigt. "+q.explain;
+
+$("nextQuestion").style.display="inline-block";
+
+};$("answers").appendChild(b);
 
 });
-
-const ids=["hair","hairColor","skin","clothes","extra"];
-
-const saved=JSON.parse(localStorage.getItem("pluggnastetAvatar3D")||"null");
-
-if(saved){
-
-ids.forEach(id=>{if(saved[id])document.getElementById(id).value=saved[id]});
-
-build();
 
 }
 
-document.getElementById("save").addEventListener("click",()=>{
+window.nextQuestion=()=>{qIndex=(qIndex+1)%questions.length;renderQuestion()};
 
-const data={};
+renderQuestion();
 
-ids.forEach(id=>data[id]=document.getElementById(id).value);
+// Fokus-timer
 
-localStorage.setItem("pluggnastetAvatar3D",JSON.stringify(data));
+let total=1500,remaining=1500,interval=null;
 
-document.getElementById("message").textContent="✨ Din 3D-avatar är sparad!";
+function showTimer(){
+
+const m=Math.floor(remaining/60),s=remaining%60;
+
+$("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+
+$("timerBar").style.width=((total-remaining)/total*100)+"%";
+
+}
+
+window.startTimer=()=>{
+
+if(interval)return;
+
+$("timerMessage").textContent="Bra jobbat – fokusera i din egen takt.";
+
+interval=setInterval(()=>{
+
+remaining--;showTimer();
+
+if(remaining<=0){
+
+clearInterval(interval);interval=null;
+
+$("timerMessage").textContent="Fokuspass klart! Du fick 50 XP.";
+
+addXP(50);
+
+}
+
+},1000);
+
+};
+
+window.pauseTimer=()=>{clearInterval(interval);interval=null;$("timerMessage").textContent="Pausat. Starta när du är redo."};
+
+window.resetTimer=()=>{pauseTimer();total=1500;remaining=1500;showTimer();$("timerMessage").textContent="25 minuter fokus."};
+
+window.setBreak=()=>{pauseTimer();total=300;remaining=300;showTimer();$("timerMessage").textContent="Fem minuters paus."};
+
+showTimer();
+
+// Butik
+
+const items=[
+
+{id:"hoodie",name:"Stjärnhoodie",cost:150,desc:"En hoodie med stjärnglans."},
+
+{id:"crown",name:"Gyllene krona",cost:250,desc:"En liten krona till din avatar."},
+
+{id:"headphones",name:"Neonhörlurar",cost:200,desc:"Lila och blå hörlurar."},
+
+{id:"star",name:"Magisk stjärna",cost:300,desc:"En stjärna som följer din stil."}
+
+];
+
+function renderShop(){
+
+$("shopItems").innerHTML="";
+
+items.forEach(item=>{
+
+const owned=data.owned.includes(item.id);
+
+const div=document.createElement("div");div.className="item";
+
+const title=document.createElement("h3");title.textContent=item.name;
+
+const desc=document.createElement("p");desc.className="muted";desc.textContent=item.desc;
+
+const button=document.createElement("button");button.className=owned?"secondary":"action";
+
+button.textContent=owned?"Upplåst ✓":"Köp · "+item.cost+" XP";
+
+button.disabled=owned;
+
+button.onclick=()=>{
+
+if(data.xp<item.cost){alert("Du behöver samla mer XP först!");return}
+
+data.xp-=item.cost;data.owned.push(item.id);
+
+if(item.id==="crown")$("extra").value="crown";
+
+if(item.id==="headphones")$("extra").value="headphones";
+
+if(item.id==="star")$("extra").value="star";
+
+if(item.id==="hoodie")$("clothes").value="#a78bfa";
+
+buildAvatar();saveAvatar();renderShop();saveData();
+
+};
+
+div.append(title,desc,button);$("shopItems").appendChild(div);
 
 });
+
+}
+
+renderShop();
 
 </script>
 
