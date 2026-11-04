@@ -8,415 +8,577 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="theme-color" content="#10101b">
+<meta name="theme-color" content="#0c0d16">
 
-<title>Pluggnästet — Din studie värld</title>
+<title>Pluggnästet — Din värld för lärande</title>
 
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-:root {
+:root{
 
-  --bg:#0c0c15;
+ --bg:#0c0d16;--surface:#141623;--surface2:#1a1d2d;--surface3:#22253a;
 
-  --panel:#151522;
+ --text:#f4f3ff;--muted:#9296ad;--line:rgba(255,255,255,.075);
 
-  --panel2:#1c1b2c;
+ --purple:#a88af5;--violet:#8174ed;--blue:#83b5ff;--pink:#eca8d9;
 
-  --line:rgba(255,255,255,.075);
+ --green:#73d9ae;--yellow:#e9c47c;--red:#ef929e;
 
-  --text:#f4f1ff;
-
-  --muted:#9290a9;
-
-  --purple:#a78bfa;
-
-  --blue:#78a8ff;
-
-  --pink:#ed9bd5;
-
-  --green:#75d9b0;
-
-  --radius:20px;
+ --radius:19px;--sidebar:248px;
 
 }
 
 *{box-sizing:border-box}
 
-body{
+html{scroll-behavior:smooth}
 
-  margin:0;background:var(--bg);color:var(--text);
+body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
 
-  font-family:'DM Sans',sans-serif;min-height:100vh;
+button,input,select,textarea{font:inherit}
 
-  background-image:radial-gradient(ellipse at 75% 0%,rgba(112,78,190,.15),transparent 40%);
+button{cursor:pointer}
 
-}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
 
-button{font:inherit;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
 
-.app{display:flex;min-height:100vh}
+::selection{background:#9276df66}
+
+.app{min-height:100vh}
 
 .sidebar{
 
-  width:245px;position:fixed;inset:0 auto 0 0;
+ position:fixed;inset:0 auto 0 0;width:var(--sidebar);z-index:20;
 
-  padding:27px 18px;background:rgba(15,15,25,.95);
+ background:rgba(15,17,28,.96);border-right:1px solid var(--line);
 
-  border-right:1px solid var(--line);z-index:10;
+ padding:25px 17px 19px;display:flex;flex-direction:column;
 
-  display:flex;flex-direction:column;
-
-}
-
-.logo{display:flex;align-items:center;gap:11px;padding:0 10px 34px}
-
-.logo-mark{
-
-  width:39px;height:39px;border-radius:13px;
-
-  display:grid;place-items:center;font-size:21px;
-
-  background:linear-gradient(135deg,#a78bfa,#6b75e8);
-
-  box-shadow:0 5px 25px #8c70ed44;
+ backdrop-filter:blur(20px)
 
 }
 
-.logo-name{font-family:'Space Grotesk';font-size:19px;font-weight:700}
+.brand{display:flex;align-items:center;gap:12px;padding:0 9px 31px}
 
-.logo-name span{color:var(--purple)}
+.brand-mark{
 
-.nav-label{font-size:10px;letter-spacing:1.5px;color:#69677e;font-weight:800;padding:0 12px;margin:10px 0}
+ width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
+
+ background:linear-gradient(140deg,#ba9bff,#756be7);font-size:22px;
+
+ box-shadow:0 7px 25px #9b80f044
+
+}
+
+.brand-title{font:700 19px 'Space Grotesk';letter-spacing:-.6px}
+
+.brand-title span{color:#bba4ff}
+
+.brand-sub{font-size:9px;color:var(--muted);letter-spacing:1.5px;margin-top:2px}
+
+.nav-heading{font-size:9px;color:#70748c;letter-spacing:1.7px;font-weight:800;padding:0 12px;margin:13px 0 8px}
 
 .nav-btn{
 
-  display:flex;align-items:center;gap:13px;width:100%;
+ border:0;background:none;color:#9a9db2;width:100%;display:flex;align-items:center;
 
-  border:0;background:transparent;color:var(--muted);
+ gap:12px;text-align:left;padding:11px 13px;border-radius:12px;margin:2px 0;
 
-  padding:12px;border-radius:12px;text-align:left;
-
-  margin:2px 0;font-size:13px;font-weight:600;transition:.2s;
+ font-size:12px;font-weight:600;transition:.2s
 
 }
 
-.nav-btn:hover,.nav-btn.active{background:#29253c;color:#fff}
+.nav-btn:hover{background:#ffffff08;color:white}
 
-.nav-btn.active{box-shadow:inset 3px 0 var(--purple)}
+.nav-btn.active{background:linear-gradient(100deg,#a78af52a,#7e73e51a);color:white;box-shadow:inset 3px 0 var(--purple)}
 
-.nav-icon{font-size:18px;width:23px;text-align:center}
+.nav-icon{font-size:18px;width:22px;text-align:center}
 
-.sidebar-bottom{margin-top:auto}
+.nav-spacer{flex:1}
 
-.profile-mini{display:flex;align-items:center;gap:10px;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:15px}
+.side-profile{display:flex;align-items:center;gap:11px;padding:13px;background:#ffffff06;border:1px solid var(--line);border-radius:15px}
 
-.mini-avatar{width:35px;height:35px;border-radius:12px;background:linear-gradient(140deg,#b68ef4,#e9a9d8);display:grid;place-items:center;font-size:20px}
+.profile-dot{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#b495fb,#e5a5d6);display:grid;place-items:center;font-size:20px}
 
-.mini-name{font-size:12px;font-weight:700}
+.side-profile strong{display:block;font-size:11px}
 
-.mini-level{font-size:10px;color:var(--muted);margin-top:3px}
+.side-profile small{font-size:10px;color:var(--muted)}
 
-.main{margin-left:245px;width:calc(100% - 245px);padding:32px 4.2%;max-width:1700px}
+.main{margin-left:var(--sidebar);width:calc(100% - var(--sidebar));padding:29px clamp(19px,4vw,57px) 60px;max-width:1700px}
 
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:15px}
 
-.eyebrow{font-size:11px;color:var(--muted);letter-spacing:1.4px;text-transform:uppercase}
+.eyebrow{font-size:9px;color:#aaa3c7;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}
 
 h1,h2,h3,p{margin-top:0}
 
-h1{font:700 clamp(25px,3vw,35px) 'Space Grotesk';margin:7px 0}
+h1{font:700 clamp(25px,3vw,34px) 'Space Grotesk';letter-spacing:-.9px;margin:6px 0 5px}
 
-.subtitle{color:var(--muted);font-size:13px}
+h2{font:700 23px 'Space Grotesk';letter-spacing:-.5px}
 
-.top-actions{display:flex;align-items:center;gap:12px}
+h3{font:600 15px 'Space Grotesk';margin-bottom:0}
 
-.pill{background:var(--panel);border:1px solid var(--line);border-radius:30px;padding:9px 13px;font-size:12px;color:#e8dfff}
+.subtitle{font-size:12px;color:var(--muted);line-height:1.7}
 
-.avatar-top{width:39px;height:39px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f1a5d6);display:grid;place-items:center;font-size:21px}
+.top-actions{display:flex;align-items:center;gap:10px}
 
-.page{display:none;animation:fade .3s ease}
+.top-chip{padding:9px 13px;border:1px solid var(--line);background:#ffffff07;border-radius:30px;font-size:11px;color:#e6ddff}
+
+.top-avatar{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#b495fb,#e4a0d4);font-size:20px}
+
+.page{display:none;animation:show .3s ease}
 
 .page.active{display:block}
 
-@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@keyframes show{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
 
 .hero{
 
-  border:1px solid #a58bfa28;border-radius:25px;padding:30px;
+ position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:center;
 
-  min-height:205px;position:relative;overflow:hidden;
+ min-height:230px;border-radius:25px;padding:31px 34px;
 
-  background:linear-gradient(110deg,#282344,#1b1d35 60%,#202b45);
+ border:1px solid #ac91ff30;
 
-  display:flex;align-items:center;justify-content:space-between;
+ background:
 
-}
+ radial-gradient(circle at 78% 20%,#a88af52b,transparent 28%),
 
-.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:8%;top:-170px;background:#a78bfa25;filter:blur(10px)}
+ radial-gradient(circle at 95% 100%,#6391ef20,transparent 40%),
 
-.hero-content{position:relative;z-index:1;max-width:550px}
-
-.hero h2{font:700 clamp(24px,3vw,34px) 'Space Grotesk';margin:12px 0}
-
-.hero p{color:#c1bad9;font-size:13px;line-height:1.7;max-width:420px}
-
-.hero-art{font-size:95px;position:relative;z-index:1;filter:drop-shadow(0 15px 20px #0005);padding-right:4%}
-
-.btn{
-
-  border:0;border-radius:11px;padding:11px 17px;
-
-  color:white;background:linear-gradient(120deg,#9978ec,#727fe8);
-
-  font-size:12px;font-weight:700;box-shadow:0 5px 18px #8168dc30;
+ linear-gradient(115deg,#26233c,#20233a 65%,#202d43)
 
 }
 
-.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.hero:after{content:"";position:absolute;width:330px;height:330px;border:1px solid #ffffff0c;border-radius:50%;right:5%;top:-190px;box-shadow:0 0 0 35px #ffffff05,0 0 0 75px #ffffff03}
 
-.btn.secondary{background:#ffffff0c;border:1px solid var(--line);box-shadow:none}
+.hero-content{position:relative;z-index:2;max-width:590px}
 
-.btn.small{padding:8px 12px}
+.hero h2{font-size:clamp(27px,3vw,37px);margin:12px 0}
 
-.section-head{display:flex;justify-content:space-between;align-items:center;margin:27px 0 14px}
+.hero p{font-size:12px;color:#c2c0d6;line-height:1.8;max-width:430px}
 
-.section-head h3{font:600 17px 'Space Grotesk';margin:0}
+.hero-art{z-index:2;font-size:100px;padding:0 5%;filter:drop-shadow(0 18px 24px #0006);animation:float 5s ease-in-out infinite}
 
-.section-head span{font-size:11px;color:var(--muted)}
+@keyframes float{50%{transform:translateY(-9px)}}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:18px}
+.button{
 
-.stat,.card{
+ border:0;border-radius:11px;padding:11px 16px;background:linear-gradient(120deg,#a78af5,#7779e9);
 
-  background:linear-gradient(145deg,#191927,#151521);
-
-  border:1px solid var(--line);border-radius:var(--radius);padding:18px;
+ color:#fff;font-size:11px;font-weight:800;box-shadow:0 7px 21px #9478e82b;transition:.2s
 
 }
 
-.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+.button:hover{filter:brightness(1.1);transform:translateY(-1px)}
+
+.button.secondary{background:#ffffff0b;border:1px solid var(--line);box-shadow:none}
+
+.button.ghost{background:transparent;color:#c3b1ff;border:1px solid #a78af544;box-shadow:none}
+
+.button.small{padding:8px 12px;font-size:10px}
+
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:25px 0 13px;gap:10px}
+
+.section-head span{font-size:9px;color:var(--muted);letter-spacing:1px}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+
+.panel,.stat{
+
+ background:linear-gradient(145deg,#191c2b,#141623);border:1px solid var(--line);
+
+ border-radius:var(--radius);padding:17px
+
+}
+
+.stat-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--muted)}
 
 .stat-icon{font-size:18px}
 
-.stat-value{font:700 25px 'Space Grotesk';margin:12px 0 3px}
+.stat-value{font:700 27px 'Space Grotesk';margin:11px 0 3px}
 
-.stat-foot{font-size:10px;color:var(--green)}
+.stat-note{font-size:9px;color:var(--green)}
 
-.grid-2{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
+.two-col{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}
 
-.course-list{display:grid;gap:11px}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
 
-.course{
+.course-list{display:grid;gap:10px}
 
-  display:flex;align-items:center;gap:14px;padding:14px;
+.course-card{display:flex;align-items:center;gap:13px;padding:13px;background:#ffffff04;border:1px solid var(--line);border-radius:15px;transition:.2s}
 
-  background:#ffffff04;border:1px solid var(--line);border-radius:15px;
+.course-card:hover{border-color:#aa91f54f;transform:translateY(-2px)}
+
+.course-icon{width:43px;height:43px;flex-shrink:0;display:grid;place-items:center;border-radius:13px;font-size:21px;background:#a78af522}
+
+.course-info{flex:1;min-width:0}
+
+.course-info strong{font-size:11px;display:block}
+
+.course-info small{font-size:9px;color:var(--muted);display:block;margin-top:4px}
+
+.progress{height:5px;background:#ffffff13;border-radius:20px;overflow:hidden;margin-top:9px}
+
+.progress span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#aa8cf7,#78b2fa)}
+
+.percent{font-size:10px;color:#c6b5ff;white-space:nowrap}
+
+.task-row{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:11px}
+
+.task-row:last-child{border:0}
+
+.check{width:19px;height:19px;border:1px solid #777c97;border-radius:6px;display:grid;place-items:center;cursor:pointer;flex-shrink:0;font-size:11px}
+
+.check.done{background:#8474df;border-color:#8474df}
+
+.task-row.done .task-text{text-decoration:line-through;color:var(--muted)}
+
+.task-text{flex:1}
+
+.mini-tag{font-size:9px;color:#c5b0ff;background:#9c80f51a;border-radius:30px;padding:5px 8px}
+
+.week-bars{height:110px;display:flex;align-items:end;justify-content:space-around;gap:12px;padding:9px 4px 0}
+
+.week-bar-wrap{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:7px;flex:1}
+
+.week-bar{width:100%;max-width:29px;border-radius:7px 7px 3px 3px;background:linear-gradient(#b39af9,#716dd3);min-height:4px}
+
+.week-bar.today{background:linear-gradient(#8dc3ff,#8d7bea)}
+
+.week-bar-wrap small{font-size:9px;color:var(--muted)}
+
+.course-filters{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+
+.filter-btn{border:1px solid var(--line);background:#ffffff05;color:var(--muted);padding:8px 12px;border-radius:30px;font-size:10px}
+
+.filter-btn.active{border-color:#a78af56b;color:white;background:#a78af51b}
+
+.search{background:#ffffff07;border:1px solid var(--line);border-radius:11px;color:white;padding:11px 13px;min-width:190px;font-size:11px;outline:none}
+
+.search:focus{border-color:var(--purple)}
+
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+
+.course-tile{padding:17px;min-height:180px;display:flex;flex-direction:column;cursor:pointer;transition:.2s}
+
+.course-tile:hover{transform:translateY(-3px);border-color:#a78af577}
+
+.tile-head{display:flex;align-items:center;justify-content:space-between}
+
+.tile-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:#a78af522;font-size:22px}
+
+.tile-badge{font-size:8px;background:#ffffff0a;color:#bcb5d2;padding:6px 8px;border-radius:20px}
+
+.course-tile h3{margin:13px 0 5px}
+
+.course-tile p{font-size:10px;line-height:1.6;color:var(--muted);flex:1}
+
+.tile-foot{display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#b9abf6}
+
+.lesson-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:15px}
+
+.lesson-menu{align-self:start}
+
+.lesson-menu button{display:block;width:100%;text-align:left;background:none;color:#a3a6ba;border:0;padding:12px;border-radius:10px;font-size:11px}
+
+.lesson-menu button.active,.lesson-menu button:hover{background:#a78af51c;color:white}
+
+.lesson-content{min-height:430px}
+
+.lesson-content h2{margin:7px 0 14px}
+
+.lesson-content p{font-size:12px;line-height:1.85;color:#c0c2d2}
+
+.lesson-content ul{font-size:12px;line-height:1.9;color:#c0c2d2}
+
+.formula{padding:20px;text-align:center;border-radius:15px;background:#a78af515;border:1px solid #a78af535;color:#ded2ff;font:600 23px 'Space Grotesk';margin:17px 0}
+
+.video-placeholder{
+
+ min-height:230px;border-radius:16px;display:grid;place-items:center;text-align:center;
+
+ background:radial-gradient(circle at 50% 40%,#695c9a66,transparent 36%),linear-gradient(145deg,#252740,#111523);
+
+ border:1px solid var(--line);padding:25px
 
 }
 
-.course-icon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;font-size:21px;background:#9577ed20}
+.video-symbol{width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:#ffffff15;font-size:22px;margin:0 auto 12px}
 
-.course-info{flex:1}
+.input{width:100%;background:#101321;border:1px solid #ffffff20;color:white;border-radius:11px;padding:12px 13px;font-size:12px;outline:none}
 
-.course-info strong{font-size:12px}
+.input:focus{border-color:var(--purple)}
 
-.course-info small{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.feedback{font-size:11px;line-height:1.7;margin-top:12px;min-height:20px}
 
-.progress{height:5px;border-radius:10px;background:#ffffff12;margin-top:9px;overflow:hidden}
+.feedback.good{color:var(--green)}.feedback.bad{color:#efa0ac}
 
-.progress span{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#a78bfa,#78a8ff)}
-
-.course-percent{font-size:11px;color:#c4b5fd}
-
-.task{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}
-
-.task:last-child{border:0}
-
-.task-check{width:19px;height:19px;border:1px solid #706b8d;border-radius:6px;display:grid;place-items:center;cursor:pointer}
-
-.task-check.done{background:#8d7ae4;border-color:#8d7ae4}
-
-.task.done span{text-decoration:line-through;color:var(--muted)}
+.hint{padding:12px 14px;border-radius:11px;background:#e9c47c12;border:1px solid #e9c47c32;color:#e4cb93;font-size:11px;line-height:1.7;margin-top:12px}
 
 .room{
 
-  min-height:440px;border-radius:24px;overflow:hidden;position:relative;
+ position:relative;min-height:470px;border-radius:23px;overflow:hidden;border:1px solid #a78af53a;
 
-  border:1px solid #b39af833;
-
-  background:
-
-  radial-gradient(ellipse at 50% 80%,#b58bfa25,transparent 40%),
-
-  linear-gradient(160deg,#1c2540,#171629 55%,#30213d);
+ background:radial-gradient(ellipse at 50% 72%,#ac86f436,transparent 39%),linear-gradient(155deg,#1b2a45,#17172c 60%,#30213d)
 
 }
 
-.room.space{background:radial-gradient(ellipse at 50% 80%,#7772e844,transparent 50%),linear-gradient(160deg,#101c38,#19132c)}
+.room.space{background:radial-gradient(ellipse at 50% 75%,#7a80e04a,transparent 42%),linear-gradient(155deg,#101e3b,#1b1634)}
 
-.room.nature{background:radial-gradient(ellipse at 50% 90%,#67c49b35,transparent 45%),linear-gradient(160deg,#172e32,#17251f)}
+.room.forest{background:radial-gradient(ellipse at 50% 80%,#72cb9a39,transparent 45%),linear-gradient(155deg,#172e32,#18251f)}
 
-.room-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.room.dawn{background:radial-gradient(ellipse at 50% 80%,#e7a88d35,transparent 45%),linear-gradient(155deg,#3a2945,#242039)}
 
-.window{position:absolute;top:35px;width:170px;height:155px;border:7px solid #302d48;border-radius:80px 80px 8px 8px;background:linear-gradient(#293d65,#4d4872 55%,#f1b1a4);box-shadow:0 0 55px #a78bfa22}
+.room-scene{position:absolute;inset:0;perspective:700px}
 
-.window:before,.window:after{content:"";position:absolute;background:#302d48}
+.window-frame{position:absolute;top:30px;left:50%;transform:translateX(-50%);width:175px;height:165px;border:8px solid #302b48;border-radius:85px 85px 9px 9px;background:linear-gradient(#263b62,#55517d 58%,#e8a99e);box-shadow:0 0 70px #a88af52a}
 
-.window:before{width:5px;height:100%;left:50%}
+.window-frame:before,.window-frame:after{content:"";position:absolute;background:#302b48}
 
-.window:after{height:5px;width:100%;top:58%}
+.window-frame:before{width:5px;height:100%;left:50%}.window-frame:after{height:5px;width:100%;top:58%}
 
-.desk{position:absolute;bottom:0;width:80%;height:100px;background:linear-gradient(#674a48,#382c39);border-top:8px solid #9d756b;box-shadow:0 -15px 40px #0004}
+.room-stars{position:absolute;inset:0;background-image:radial-gradient(#ffffffba 1px,transparent 1px);background-size:49px 53px;opacity:.3;mask-image:linear-gradient(#000,transparent 75%)}
 
-.lamp{position:absolute;bottom:103px;left:17%;font-size:49px;filter:drop-shadow(0 0 18px #ffc77d)}
+.desk3d{position:absolute;bottom:0;left:8%;right:8%;height:100px;background:linear-gradient(#855f62,#402e40);border-top:8px solid #a87d75;box-shadow:0 -15px 40px #0005;transform:rotateX(-3deg)}
 
-.room-center{position:relative;z-index:2;text-align:center;margin-top:35px}
+.desk3d:before,.desk3d:after{content:"";position:absolute;top:100%;height:75px;width:11px;background:#463246}
 
-.timer{font:700 clamp(48px,8vw,75px) 'Space Grotesk';letter-spacing:-3px;text-shadow:0 5px 30px #a78bfa66}
+.desk3d:before{left:15%}.desk3d:after{right:15%}
 
-.timer-label{font-size:11px;letter-spacing:2px;color:#d0c5ec;text-transform:uppercase}
+.room-lamp{position:absolute;bottom:105px;left:18%;font-size:43px;filter:drop-shadow(0 0 25px #ffc78b)}
 
-.room-controls{display:flex;gap:9px;justify-content:center;margin-top:19px}
+.room-plants{position:absolute;bottom:94px;right:16%;font-size:43px}
 
-.room-bottom{position:absolute;z-index:3;bottom:17px;left:0;right:0;text-align:center;font-size:11px;color:#d2c9e5}
+.room-timer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;z-index:3;padding-bottom:45px}
 
-.room-options{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+.timer-label{font-size:9px;letter-spacing:2px;color:#d2c7ee}
 
-.option{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 13px;border-radius:30px;font-size:11px}
+.timer-display{font:700 clamp(55px,8vw,82px) 'Space Grotesk';letter-spacing:-4px;text-shadow:0 5px 35px #a78af577;margin:6px 0}
 
-.option.active{border-color:var(--purple);color:white;background:#a78bfa20}
+.timer-controls{display:flex;gap:8px;margin-top:12px}
 
-.study-layout{display:grid;grid-template-columns:1.5fr .7fr;gap:17px}
+.room-caption{position:absolute;bottom:17px;text-align:center;left:0;right:0;font-size:10px;color:#d0c9e4;z-index:4}
 
-.lesson-card{padding:25px}
+.room-options{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}
 
-.lesson-card h2{font:700 23px 'Space Grotesk'}
+.room-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
 
-.lesson-card p{font-size:13px;line-height:1.8;color:#b3b0c4}
+.tool-card{padding:15px;text-align:left}
 
-.formula{padding:20px;text-align:center;background:#a78bfa12;border:1px solid #a78bfa33;border-radius:14px;font:600 22px 'Space Grotesk';margin:20px 0;color:#d9c9ff}
+.tool-card strong{font-size:11px;display:block;margin:7px 0}
 
-.answer-input{width:100%;background:#0f0f1b;border:1px solid #ffffff20;color:white;border-radius:11px;padding:13px;font:inherit;outline:none}
+.tool-card p{font-size:9px;color:var(--muted);line-height:1.6;margin:0}
 
-.answer-input:focus{border-color:var(--purple)}
+.coach-layout{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:15px}
 
-.feedback{font-size:12px;margin-top:12px;min-height:18px}
+.chat-panel{min-height:440px;display:flex;flex-direction:column}
 
-.chapter{padding:13px;border-radius:12px;border:1px solid var(--line);margin-bottom:9px;cursor:pointer;font-size:12px}
+.chat-messages{flex:1;overflow:auto;max-height:470px;padding:4px}
 
-.chapter:hover,.chapter.active{background:#a78bfa18;border-color:#a78bfa66}
+.message{font-size:11px;line-height:1.8;padding:12px 15px;border-radius:14px;margin:9px 0;max-width:87%;white-space:pre-wrap}
 
-.chapter small{display:block;color:var(--muted);margin-top:5px}
+.message.bot{background:#a78af517;border:1px solid #a78af52b}
 
-.coach-box{min-height:350px;display:flex;flex-direction:column}
+.message.user{background:#33304d;margin-left:auto}
 
-.chat-messages{flex:1;padding:5px 0}
+.chat-compose{display:flex;gap:8px;margin-top:13px}
 
-.message{padding:13px 15px;border-radius:14px;margin:10px 0;max-width:85%;font-size:12px;line-height:1.7}
+.chat-compose input{flex:1;min-width:0}
 
-.message.bot{background:#a78bfa17;border:1px solid #a78bfa22}
+.coach-side h3{margin-bottom:13px}
 
-.message.user{background:#30304a;margin-left:auto}
+.suggestion{padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0;font-size:10px;line-height:1.6}
 
-.chat-row{display:flex;gap:8px;margin-top:15px}
-
-.chat-row input{flex:1;min-width:0}
+.avatar-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);gap:15px}
 
 .avatar-stage{
 
-  height:350px;border-radius:20px;position:relative;overflow:hidden;
+ position:relative;min-height:420px;overflow:hidden;border-radius:22px;
 
-  display:grid;place-items:center;
+ background:radial-gradient(ellipse at 50% 73%,#ad91fb38,transparent 54%),linear-gradient(145deg,#20233e,#171725);
 
-  background:radial-gradient(ellipse at 50% 80%,#a78bfa35,transparent 55%),linear-gradient(145deg,#202039,#161624);
-
-  border:1px solid var(--line);
+ border:1px solid var(--line);display:grid;place-items:center
 
 }
 
-.avatar-figure{display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 15px 16px #0007);transition:.2s}
+#avatarCanvas{width:100%;height:400px;display:block;touch-action:pan-y}
 
-.avatar-head{width:105px;height:112px;border-radius:46% 46% 44% 44%;background:var(--skin,#e9b99c);position:relative;z-index:2}
+.avatar-fallback{position:absolute;font-size:120px;opacity:.85}
 
-.avatar-hair{position:absolute;top:-14px;left:-5px;width:115px;height:57px;border-radius:55% 55% 20% 20%;background:var(--hair,#4a3040);z-index:3}
+.avatar-controls{display:grid;gap:13px}
 
-.avatar-eyes{position:absolute;top:51px;left:23px;width:60px;display:flex;justify-content:space-between}
+.control-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:11px}
 
-.avatar-eyes i{width:8px;height:11px;border-radius:50%;background:#342738}
+input[type=color]{width:42px;height:32px;border:0;background:transparent;cursor:pointer}
 
-.avatar-body{width:130px;height:125px;border-radius:45px 45px 20px 20px;background:var(--outfit,#8070c9);margin-top:-5px;position:relative}
+select{background:#161829;border:1px solid var(--line);color:white;border-radius:10px;padding:9px;font-size:10px}
 
-.avatar-body:before,.avatar-body:after{content:"";position:absolute;top:22px;width:32px;height:105px;border-radius:20px;background:inherit}
+.color-swatches{display:flex;gap:8px}
 
-.avatar-body:before{left:-22px;transform:rotate(9deg)}
+.swatch{width:25px;height:25px;border-radius:50%;border:2px solid #ffffff33;cursor:pointer}
 
-.avatar-body:after{right:-22px;transform:rotate(-9deg)}
+.progress-ring{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;margin:17px auto;background:conic-gradient(#aa8af6 var(--pct,0%),#ffffff12 0)}
 
-.avatar-legs{display:flex;gap:12px}
+.ring-inner{width:108px;height:108px;border-radius:50%;background:#191c2b;display:grid;place-items:center;text-align:center}
 
-.avatar-legs i{width:34px;height:60px;border-radius:12px;background:#34334b}
+.ring-inner strong{font:700 30px 'Space Grotesk'}
 
-.custom-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}
+.achievement{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0}
 
-input[type=color]{width:38px;height:30px;border:0;background:none;cursor:pointer}
+.achievement-icon{font-size:21px}
 
-.level-ring{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#a78bfa 0 68%,#ffffff13 68%);margin:15px auto}
+.achievement strong{font-size:10px;display:block}
 
-.level-inner{width:108px;height:108px;border-radius:50%;background:#191927;display:grid;place-items:center;text-align:center}
+.achievement small{font-size:9px;color:var(--muted);display:block;margin-top:3px}
 
-.level-inner strong{font:700 29px 'Space Grotesk'}
+.xp-history{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:10px}
 
-.achievement{display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--line);border-radius:13px;margin:9px 0}
+.store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 
-.achievement-icon{font-size:23px}
+.store-item{text-align:center}
 
-.achievement small{display:block;color:var(--muted);margin-top:4px}
+.store-item .item-icon{font-size:38px;margin:10px 0}
 
-.mobile-bar{display:none}
+.store-item strong{font-size:11px;display:block}
 
-.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:#29253c;border:1px solid #a78bfa66;padding:12px 18px;border-radius:13px;font-size:12px;z-index:30;transition:.25s;pointer-events:none}
+.store-item small{font-size:9px;color:var(--muted)}
 
-.toast.show{opacity:1;transform:translateX(-50%)}
+.store-item button{margin-top:10px}
 
-@media(max-width:950px){
+.modal-backdrop{
 
- .sidebar{width:205px}.main{margin-left:205px;width:calc(100% - 205px);padding:27px 3%}
+ display:none;position:fixed;inset:0;z-index:60;background:#060710c9;
+
+ align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(9px)
+
+}
+
+.modal-backdrop.open{display:flex}
+
+.modal{
+
+ width:min(680px,100%);max-height:90vh;overflow:auto;background:#171a29;
+
+ border:1px solid #ffffff1b;border-radius:22px;padding:23px;
+
+ box-shadow:0 25px 90px #0009
+
+}
+
+.modal h2{margin-bottom:7px}
+
+.modal p{font-size:11px;color:var(--muted);line-height:1.7}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+
+.field label{display:block;font-size:10px;color:#b8bbcf;margin-bottom:7px}
+
+.field input,.field select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#101321;color:white;font-size:11px}
+
+.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}
+
+.toast{position:fixed;z-index:100;bottom:26px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#292b43;border:1px solid #ad95f55a;border-radius:13px;padding:12px 17px;font-size:11px;transition:.25s;box-shadow:0 9px 35px #0005}
+
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.mobile-nav{display:none}
+
+.empty{padding:35px;text-align:center;color:var(--muted);font-size:11px}
+
+@media(max-width:1100px){
+
+ :root{--sidebar:215px}
+
+ .course-grid{grid-template-columns:repeat(2,1fr)}
 
  .stats{grid-template-columns:repeat(2,1fr)}
 
 }
 
-@media(max-width:680px){
+@media(max-width:760px){
 
- .sidebar{display:none}.main{margin:0;width:100%;padding:22px 17px 95px}
+ .sidebar{display:none}
 
- .topbar{margin-bottom:22px}.top-actions .pill{display:none}
+ .main{margin:0;width:100%;padding:22px 16px 100px}
 
- .hero{padding:23px;min-height:190px}.hero-art{font-size:65px;padding:0}
+ .topbar{margin-bottom:22px}
 
- .grid-2,.study-layout{grid-template-columns:1fr}
+ .top-chip.streak{display:none}
 
- .stats{gap:9px}.stat{padding:14px}.stat-value{font-size:22px}
+ .hero{padding:24px;min-height:190px}
 
- .mobile-bar{
+ .hero-art{font-size:67px}
 
-  display:flex;position:fixed;z-index:20;bottom:0;left:0;right:0;
+ .two-col,.coach-layout,.avatar-layout{grid-template-columns:1fr}
 
-  background:#11111df2;backdrop-filter:blur(20px);
+ .three-col{grid-template-columns:1fr 1fr}
 
-  border-top:1px solid var(--line);justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom));
+ .lesson-layout{grid-template-columns:1fr}
+
+ .lesson-menu{display:flex;overflow:auto;gap:5px}
+
+ .lesson-menu button{white-space:nowrap;width:auto}
+
+ .course-grid{grid-template-columns:1fr 1fr}
+
+ .mobile-nav{
+
+  display:flex;position:fixed;z-index:30;bottom:0;left:0;right:0;
+
+  background:#111421ed;backdrop-filter:blur(20px);border-top:1px solid var(--line);
+
+  justify-content:space-around;padding:9px 3px calc(9px + env(safe-area-inset-bottom))
 
  }
 
- .mobile-bar button{border:0;background:none;color:var(--muted);font-size:9px;display:flex;flex-direction:column;align-items:center;gap:4px}
+ .mobile-nav button{border:0;background:none;color:var(--muted);font-size:8px;display:flex;flex-direction:column;align-items:center;gap:4px}
 
- .mobile-bar button span{font-size:19px}.mobile-bar button.active{color:#c5aaff}
+ .mobile-nav button span{font-size:19px}
 
- .room{min-height:410px}.window{top:30px}.room-center{margin-top:45px}
+ .mobile-nav button.active{color:#c9b5ff}
+
+ .room{min-height:430px}
+
+ .window-frame{top:25px}
+
+ .room-lamp{left:10%}
+
+ .room-plants{right:9%}
+
+ .store-grid{grid-template-columns:1fr 1fr}
+
+}
+
+@media(max-width:430px){
+
+ .stats{gap:8px}
+
+ .stat{padding:13px}
+
+ .stat-value{font-size:23px}
+
+ .hero-art{font-size:55px}
+
+ .course-grid{grid-template-columns:1fr}
+
+ .three-col{grid-template-columns:1fr 1fr}
+
+ .form-grid{grid-template-columns:1fr}
+
+ .top-avatar{width:34px;height:34px}
+
+ .top-chip{font-size:9px;padding:8px}
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+ *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 
 }
 
@@ -430,27 +592,35 @@ input[type=color]{width:38px;height:30px;border:0;background:none;cursor:pointer
 
 <aside class="sidebar">
 
-  <div class="logo"><div class="logo-mark">✦</div><div class="logo-name">Plugg<span>nästet</span></div></div>
+ <div class="brand">
 
-  <div class="nav-label">MENY</div>
+  <div class="brand-mark">✦</div>
 
-  <button class="nav-btn active" data-page="home"><span class="nav-icon">⌂</span>Översikt</button>
+  <div><div class="brand-title">Plugg<span>nästet</span></div><div class="brand-sub">YOUR LEARNING WORLD</div></div>
 
-  <button class="nav-btn" data-page="room"><span class="nav-icon">◷</span>Studierum</button>
+ </div>
 
-  <button class="nav-btn" data-page="courses"><span class="nav-icon">▤</span>Mina kurser</button>
+ <div class="nav-heading">ARBETSPLATS</div>
 
-  <button class="nav-btn" data-page="coach"><span class="nav-icon">✧</span>AI-coach</button>
+ <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span>Översikt</button>
 
-  <button class="nav-btn" data-page="avatar"><span class="nav-icon">♙</span>Avatarstudio</button>
+ <button class="nav-btn" data-page="courses"><span class="nav-icon">▤</span>Mina kurser</button>
 
-  <button class="nav-btn" data-page="progress"><span class="nav-icon">◈</span>Framsteg</button>
+ <button class="nav-btn" data-page="focus"><span class="nav-icon">◷</span>Studierum</button>
 
-  <div class="sidebar-bottom">
+ <button class="nav-btn" data-page="coach"><span class="nav-icon">✧</span>AI Study Coach</button>
 
-    <div class="profile-mini"><div class="mini-avatar">🧑‍🎓</div><div><div class="mini-name">Min profil</div><div class="mini-level">Nivå <span id="sideLevel">1</span> · Pluggare</div></div></div>
+ <div class="nav-heading">DIN VÄRLD</div>
 
-  </div>
+ <button class="nav-btn" data-page="avatar"><span class="nav-icon">♙</span>Avatar & garderob</button>
+
+ <button class="nav-btn" data-page="progress"><span class="nav-icon">◈</span>Framsteg & belöningar</button>
+
+ <div class="nav-spacer"></div>
+
+ <button class="nav-btn" onclick="openProfile()"><span class="nav-icon">⚙</span>Min studieprofil</button>
+
+ <div class="side-profile"><div class="profile-dot">🧑‍🎓</div><div><strong id="sideName">Din profil</strong><small id="sideLevel">Nivå 1 · Nybörjare</small></div></div>
 
 </aside>
 
@@ -458,277 +628,387 @@ input[type=color]{width:38px;height:30px;border:0;background:none;cursor:pointer
 
 <header class="topbar">
 
-  <div><div class="eyebrow" id="dateLabel">DIN STUDIEPLATS</div><h1 id="pageTitle">Välkommen tillbaka!</h1><div class="subtitle" id="pageSubtitle">Dags att ta ett steg närmare dina mål.</div></div>
+ <div>
 
-  <div class="top-actions"><div class="pill">✦ <span id="topXP">0</span> XP</div><div class="avatar-top">🧑‍🎓</div></div>
+  <div class="eyebrow" id="dateLabel">DIN STUDIEVÄRLD</div>
+
+  <h1 id="pageTitle">Välkommen till Pluggnästet</h1>
+
+  <div class="subtitle" id="pageSubtitle">En bättre studieupplevelse börjar här.</div>
+
+ </div>
+
+ <div class="top-actions">
+
+  <div class="top-chip streak">🔥 <span id="topStreak">0</span> dagar</div>
+
+  <div class="top-chip">✦ <strong id="topXP">0</strong> XP</div>
+
+  <div class="top-avatar" id="topAvatar">🧑‍🎓</div>
+
+ </div>
 
 </header>
 
-<section class="page active" id="home">
+<!-- DASHBOARD -->
 
-  <div class="hero">
+<section class="page active" id="dashboard">
 
-    <div class="hero-content">
+ <div class="hero">
 
-      <div class="eyebrow">✦ DIN STUDIEVÄRLD</div>
+  <div class="hero-content">
 
-      <h2>Små steg. Stora framsteg.</h2>
+   <div class="eyebrow">✦ DIN PERSONLIGA STUDIEVÄRLD</div>
 
-      <p>Välkommen till din egen studieplats. Lär dig i din takt, samla XP och bygg vanor som tar dig framåt.</p>
+   <h2>Små steg. Stora möjligheter.</h2>
 
-      <button class="btn" onclick="navigate('room')">Starta ett fokuspass ↗</button>
+   <p>En plats där dina studier möter en värld av upptäckter. Bygg kunskap, hitta fokus och lås upp nya delar av din värld.</p>
 
-    </div>
-
-    <div class="hero-art">🌙</div>
+   <button class="button" onclick="go('focus')">Gå till studierummet ↗</button>
 
   </div>
 
-  <div class="stats">
+  <div class="hero-art">🌙</div>
 
-    <div class="stat"><div class="stat-top">Totala XP <span class="stat-icon">✦</span></div><div class="stat-value" id="statXP">0</div><div class="stat-foot">Samla poäng när du pluggar</div></div>
+ </div>
 
-    <div class="stat"><div class="stat-top">Din nivå <span class="stat-icon">♛</span></div><div class="stat-value" id="statLevel">1</div><div class="stat-foot">Fortsätt utvecklas</div></div>
+ <div class="stats">
 
-    <div class="stat"><div class="stat-top">Fokusminuter <span class="stat-icon">◷</span></div><div class="stat-value" id="statMinutes">0</div><div class="stat-foot">Minuter i studierummet</div></div>
+  <div class="stat"><div class="stat-top">Totala erfarenhetspoäng <span class="stat-icon">✦</span></div><div class="stat-value" id="statXP">0</div><div class="stat-note">Fortsätt samla kunskap</div></div>
 
-    <div class="stat"><div class="stat-top">Avklarade uppgifter <span class="stat-icon">✓</span></div><div class="stat-value" id="statTasks">0</div><div class="stat-foot">En uppgift i taget</div></div>
+  <div class="stat"><div class="stat-top">Din nivå <span class="stat-icon">♛</span></div><div class="stat-value" id="statLevel">1</div><div class="stat-note">Varje steg räknas</div></div>
+
+  <div class="stat"><div class="stat-top">Fokustid totalt <span class="stat-icon">◷</span></div><div class="stat-value" id="statMinutes">0</div><div class="stat-note">Minuter av koncentration</div></div>
+
+  <div class="stat"><div class="stat-top">Avklarade uppgifter <span class="stat-icon">✓</span></div><div class="stat-value" id="statTasks">0</div><div class="stat-note">Du gör framsteg</div></div>
+
+ </div>
+
+ <div class="two-col">
+
+  <div>
+
+   <div class="section-head"><h3>Fortsätt där du slutade</h3><span>DIN STUDIEPLAN</span></div>
+
+   <div id="dashboardCourses" class="course-list"></div>
+
+  </div>
+
+  <div>
+
+   <div class="section-head"><h3>Dagens uppdrag</h3><span id="taskProgress">0 / 3</span></div>
+
+   <div class="panel" id="dailyTasks">
+
+    <div class="task-row"><div class="check" onclick="completeDailyTask('lesson',this)"></div><span class="task-text">Öppna en lektion</span><span class="mini-tag">+10 XP</span></div>
+
+    <div class="task-row"><div class="check" onclick="completeDailyTask('exercise',this)"></div><span class="task-text">Lös en övningsuppgift</span><span class="mini-tag">+15 XP</span></div>
+
+    <div class="task-row"><div class="check" onclick="completeDailyTask('focus',this)"></div><span class="task-text">Fokusera i 10 minuter</span><span class="mini-tag">+15 XP</span></div>
+
+   </div>
+
+   <div class="section-head"><h3>Veckans fokus</h3><span>MINUTER</span></div>
+
+   <div class="panel"><div class="week-bars" id="weekBars"></div></div>
 
   </div>
 
-  <div class="grid-2">
+ </div>
 
-    <div>
+ <div class="section-head"><h3>Din personliga rekommendation</h3><span>SMART STUDIESTÖD</span></div>
 
-      <div class="section-head"><h3>Fortsätt lära dig</h3><span>DIN STUDIEPLAN</span></div>
+ <div class="panel" id="recommendationBox">
 
-      <div class="course-list">
+  <div style="display:flex;gap:13px;align-items:center"><div class="course-icon">✧</div><div><strong style="font-size:12px">Börja med en kort lektion</strong><p class="subtitle" style="margin:5px 0 0">När du har gjort några övningar kan Pluggnästet hitta vilka områden du kan träna vidare på.</p></div></div>
 
-        <div class="course"><div class="course-icon">📐</div><div class="course-info"><strong>Matematik 1c</strong><small>Algebra · Ekvationer</small><div class="progress"><span style="width:35%"></span></div></div><div class="course-percent">35%</div></div>
-
-        <div class="course"><div class="course-icon">⚛️</div><div class="course-info"><strong>Fysik 1</strong><small>Rörelse och krafter</small><div class="progress"><span style="width:12%"></span></div></div><div class="course-percent">12%</div></div>
-
-        <div class="course"><div class="course-icon">🧪</div><div class="course-info"><strong>Kemi 1</strong><small>Materia och atomer</small><div class="progress"><span style="width:5%"></span></div></div><div class="course-percent">5%</div></div>
-
-      </div>
-
-    </div>
-
-    <div>
-
-      <div class="section-head"><h3>Dagens uppdrag</h3><span id="taskCount">0/3</span></div>
-
-      <div class="card" id="taskCard">
-
-        <div class="task"><div class="task-check" onclick="completeTask(this)">✓</div><span>Öppna en lektion</span></div>
-
-        <div class="task"><div class="task-check" onclick="completeTask(this)">✓</div><span>Gör en matteövning</span></div>
-
-        <div class="task"><div class="task-check" onclick="completeTask(this)">✓</div><span>Fokusera i 10 minuter</span></div>
-
-      </div>
-
-    </div>
-
-  </div>
+ </div>
 
 </section>
 
-<section class="page" id="room">
-
-  <div class="section-head"><h3>Ditt personliga studierum</h3><span>HITTA DITT FOKUS</span></div>
-
-  <div class="room" id="roomScene">
-
-    <div class="room-scene"><div class="window"></div><div class="lamp">♨</div><div class="desk"></div>
-
-      <div class="room-center"><div class="timer-label" id="timerLabel">FOKUSTID</div><div class="timer" id="timer">25:00</div><div class="room-controls"><button class="btn" id="timerToggle" onclick="toggleTimer()">▶ Starta</button><button class="btn secondary" onclick="resetTimer()">↺ Återställ</button></div></div>
-
-      <div class="room-bottom">✦ Du behöver inte skynda. Bara börja.</div>
-
-    </div>
-
-  </div>
-
-  <div class="room-options"><button class="option active" onclick="setRoom('night',this)">🌙 Kvällsro</button><button class="option" onclick="setRoom('space',this)">🌌 Rymden</button><button class="option" onclick="setRoom('nature',this)">🌿 Naturen</button></div>
-
-  <div class="card"><strong style="font-size:13px">Fokustid</strong><p class="subtitle" style="margin:8px 0 0">Ett pass är 25 minuter. När timern är klar får du XP för ditt fokuspass.</p></div>
-
-</section>
+<!-- COURSES -->
 
 <section class="page" id="courses">
 
-  <div class="section-head"><h3>Mina kurser</h3><span>DIN LÄRANDE RESA</span></div>
+ <div class="eyebrow">DIN UTBILDNING</div><h1>Mina kurser</h1>
 
-  <div class="course-list">
+ <p class="subtitle" id="courseIntro">Kurser anpassade efter din studieprofil.</p>
 
-    <div class="course"><div class="course-icon">📐</div><div class="course-info"><strong>Matematik 1c</strong><small>Algebra, funktioner, geometri och statistik</small><div class="progress"><span style="width:35%"></span></div></div><button class="btn small" onclick="navigate('math')">Öppna</button></div>
+ <div class="course-filters">
 
-    <div class="course"><div class="course-icon">⚛️</div><div class="course-info"><strong>Fysik 1</strong><small>Rörelse, krafter och energi</small><div class="progress"><span style="width:12%"></span></div></div><span class="course-percent">12%</span></div>
+  <input class="search" id="courseSearch" placeholder="⌕ Sök ämne eller kurs..." oninput="renderCourses()">
 
-    <div class="course"><div class="course-icon">🧪</div><div class="course-info"><strong>Kemi 1</strong><small>Atomer, bindningar och reaktioner</small><div class="progress"><span style="width:5%"></span></div></div><span class="course-percent">5%</span></div>
+  <button class="filter-btn active" data-filter="all" onclick="setCourseFilter('all',this)">Alla</button>
 
-    <div class="course"><div class="course-icon">💻</div><div class="course-info"><strong>Programmering</strong><small>Logik och problemlösning</small><div class="progress"><span style="width:0%"></span></div></div><span class="course-percent">0%</span></div>
+  <button class="filter-btn" data-filter="active" onclick="setCourseFilter('active',this)">Påbörjade</button>
 
-  </div>
+  <button class="filter-btn" data-filter="new" onclick="setCourseFilter('new',this)">Inte påbörjade</button>
 
-  <div class="section-head"><h3>Matematik 1c</h3><span>FÖRSTA KURSEN</span></div>
+ </div>
 
-  <div class="study-layout">
+ <div class="course-grid" id="courseGrid"></div>
 
-    <div class="card lesson-card">
+ <div class="section-head"><h3>Din studieplan</h3><span>ANPASSAD EFTER DINA VAL</span></div>
 
-      <div class="eyebrow">KAPITEL 01 · ALGEBRA</div><h2>Att lösa ekvationer</h2>
+ <div class="panel">
 
-      <p>En ekvation är en likhet som innehåller en eller flera obekanta. Målet är att hitta det värde som gör att båda sidor är lika stora.</p>
+  <p class="subtitle" id="studyPlanText">Din studieplan visas här.</p>
 
-      <div class="formula">2x + 4 = 14</div>
+  <button class="button ghost small" onclick="openProfile()">Ändra studieprofil</button>
 
-      <p>För att lösa ekvationen gör vi samma sak på båda sidor:</p>
-
-      <p>1. Subtrahera 4 från båda sidor.<br>2. Då får vi 2x = 10.<br>3. Dela båda sidor med 2.<br>4. Då blir svaret x = 5.</p>
-
-      <div class="section-head"><h3>Testa själv</h3></div>
-
-      <p>Vad är x i ekvationen 3x + 6 = 18?</p>
-
-      <input class="answer-input" id="mathAnswer" placeholder="Skriv ditt svar här..." inputmode="decimal">
-
-      <button class="btn" style="margin-top:12px" onclick="checkMath()">Kontrollera svar</button>
-
-      <div class="feedback" id="mathFeedback"></div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="section-head"><h3>Kapitel</h3></div>
-
-      <div class="chapter active"><strong>01 · Algebra</strong><small>Påbörjad · Ekvationer</small></div>
-
-      <div class="chapter"><strong>02 · Funktioner</strong><small>Grafer och samband</small></div>
-
-      <div class="chapter"><strong>03 · Geometri</strong><small>Area och volym</small></div>
-
-      <div class="chapter"><strong>04 · Statistik</strong><small>Data och sannolikhet</small></div>
-
-    </div>
-
-  </div>
+ </div>
 
 </section>
 
-<section class="page" id="math">
+<!-- LESSON -->
 
-  <div class="eyebrow">MATEMATIK 1C</div><h1>Algebraövning</h1><p class="subtitle">Träna på att lösa ekvationer och få direkt feedback.</p>
+<section class="page" id="lesson">
 
-  <div class="card lesson-card" style="max-width:700px;margin-top:20px">
+ <button class="button ghost small" onclick="go('courses')">← Tillbaka till kurser</button>
 
-    <div class="eyebrow">ÖVNING 01</div><h2>Lös ekvationen</h2>
+ <div class="section-head"><div><div class="eyebrow" id="lessonEyebrow">KURS</div><h1 id="lessonTitle">Lektion</h1><p class="subtitle" id="lessonSubtitle"></p></div><span id="lessonProgressTag">0% klart</span></div>
 
-    <div class="formula">4x − 8 = 20</div>
+ <div class="lesson-layout">
 
-    <p>Vilket värde har x?</p>
+  <div class="panel lesson-menu">
 
-    <input class="answer-input" id="mathAnswer2" placeholder="Ditt svar..." inputmode="decimal">
+   <div class="eyebrow" style="padding:8px 12px">LEKTIONENS DELAR</div>
 
-    <button class="btn" style="margin-top:12px" onclick="checkMath2()">Kontrollera</button>
+   <button class="active" data-tab="video" onclick="lessonTab('video',this)">▶ Videogenomgång</button>
 
-    <div class="feedback" id="mathFeedback2"></div>
+   <button data-tab="read" onclick="lessonTab('read',this)">▤ Läs & förstå</button>
+
+   <button data-tab="practice" onclick="lessonTab('practice',this)">✎ Öva själv</button>
+
+   <button data-tab="test" onclick="lessonTab('test',this)">◈ Kunskapskoll</button>
+
+   <div style="border-top:1px solid var(--line);margin-top:9px;padding-top:12px">
+
+    <button onclick="showFormula()">∑ Formelsamling</button>
+
+   </div>
 
   </div>
 
+  <div class="panel lesson-content" id="lessonPanel"></div>
+
+ </div>
+
 </section>
+
+<!-- FOCUS ROOM -->
+
+<section class="page" id="focus">
+
+ <div class="section-head"><div><div class="eyebrow">DIN DIGITALA STUDIEPLATS</div><h1>Studierummet</h1><p class="subtitle">Skapa en miljö där det blir lättare att komma igång.</p></div><span>✦ FOKUSZON</span></div>
+
+ <div class="room" id="roomScene">
+
+  <div class="room-scene">
+
+   <div class="room-stars"></div><div class="window-frame"></div><div class="room-lamp">♨</div><div class="room-plants">🪴</div><div class="desk3d"></div>
+
+   <div class="room-timer">
+
+    <div class="timer-label" id="timerLabel">FOKUSPASS · 25 MIN</div>
+
+    <div class="timer-display" id="timerDisplay">25:00</div>
+
+    <div class="timer-controls"><button class="button" id="timerButton" onclick="toggleTimer()">▶ Starta fokus</button><button class="button secondary" onclick="resetTimer()">↺</button></div>
+
+   </div>
+
+   <div class="room-caption">Du behöver inte göra allt. Börja med nästa lilla steg.</div>
+
+  </div>
+
+ </div>
+
+ <div class="room-options">
+
+  <button class="filter-btn active" onclick="setRoom('cozy',this)">🌙 Kvällsro</button>
+
+  <button class="filter-btn" onclick="setRoom('space',this)">🌌 Rymden</button>
+
+  <button class="filter-btn" onclick="setRoom('forest',this)">🌿 Skogsglänta</button>
+
+  <button class="filter-btn" onclick="setRoom('dawn',this)">🌅 Gryning</button>
+
+ </div>
+
+ <div class="three-col room-tools">
+
+  <button class="panel tool-card" onclick="setTimerLength(25)"><span>🍅</span><strong>Pomodoro 25/5</strong><p>25 min fokus följt av 5 min paus.</p></button>
+
+  <button class="panel tool-card" onclick="openCalculator()"><span>🧮</span><strong>Miniräknare</strong><p>Räkna utan att lämna studierummet.</p></button>
+
+  <button class="panel tool-card" onclick="showFormula()"><span>∑</span><strong>Formelsamling</strong><p>Snabb tillgång till användbara formler.</p></button>
+
+ </div>
+
+ <div class="section-head"><h3>Lugnande bakgrundsljud</h3><span>SKAPAS LOKALT</span></div>
+
+ <div class="panel" style="display:flex;align-items:center;justify-content:space-between;gap:14px">
+
+  <div><strong style="font-size:11px">Mjukt ambientljud</strong><p class="subtitle" style="margin:5px 0 0">Ett enkelt, syntetiskt bakgrundsljud. Ingen musik spelas.</p></div>
+
+  <button class="button secondary small" id="soundButton" onclick="toggleAmbient()">♫ Starta ljud</button>
+
+ </div>
+
+</section>
+
+<!-- COACH -->
 
 <section class="page" id="coach">
 
-  <div class="eyebrow">DIN DIGITALA STUDIEKOMPIS</div><h1>AI Study Coach</h1><p class="subtitle">Ställ frågor, få förklaringar och lär dig steg för steg.</p>
+ <div class="eyebrow">PERSONLIGT STUDIESTÖD</div><h1>AI Study Coach</h1>
 
-  <div class="card coach-box" style="margin-top:20px">
+ <p class="subtitle">En plats för frågor, förklaringar och hjälp med din studieteknik.</p>
 
-    <div class="chat-messages" id="chatMessages">
+ <div class="coach-layout" style="margin-top:18px">
 
-      <div class="message bot">Hej! ✨ Jag är din studiecoach. Jag kan hjälpa dig att förstå svåra begrepp, förklara matte steg för steg och skapa studieplaner. Vad vill du lära dig idag?</div>
+  <div class="panel chat-panel">
 
-    </div>
+   <div class="chat-messages" id="chatMessages">
 
-    <div class="chat-row"><input class="answer-input" id="chatInput" placeholder="Skriv en fråga..." onkeydown="if(event.key==='Enter')sendChat()"><button class="btn" onclick="sendChat()">Skicka ↗</button></div>
+    <div class="message bot">Hej! ✨ Jag är din Pluggnästet-studiecoach. Jag kan hjälpa dig att förstå ett begrepp, arbeta igenom en uppgift steg för steg eller planera dina studier. Vad vill du börja med?</div>
 
-    <p class="subtitle" style="margin:10px 0 0">Detta är en gränssnittsdemonstration. En riktig AI-coach kräver en säker AI-anslutning.</p>
+   </div>
+
+   <div class="chat-compose"><input class="input" id="chatInput" placeholder="Skriv din fråga..." onkeydown="if(event.key==='Enter')sendChat()"><button class="button" onclick="sendChat()">Skicka ↗</button></div>
+
+   <p class="subtitle" style="margin:10px 0 0">Demoläge: coachen använder förinställda pedagogiska svar. En riktig AI-tjänst kopplas in via en säker server senare.</p>
 
   </div>
 
+  <aside class="panel coach-side">
+
+   <h3>Vad kan du få hjälp med?</h3>
+
+   <div class="suggestion">📘 <strong>Förklara ett ämne</strong><br>Be om en enklare förklaring med exempel.</div>
+
+   <div class="suggestion">🧩 <strong>Ledtrådar</strong><br>Få hjälp utan att direkt få hela svaret.</div>
+
+   <div class="suggestion">📅 <strong>Studieplan</strong><br>Dela upp ett stort mål i små steg.</div>
+
+   <div class="suggestion">🎯 <strong>Träna vidare</strong><br>Få förslag utifrån dina registrerade misstag.</div>
+
+   <button class="button ghost small" style="width:100%;margin-top:8px" onclick="showWeakAreas()">Visa vad jag behöver öva på</button>
+
+  </aside>
+
+ </div>
+
 </section>
+
+<!-- AVATAR -->
 
 <section class="page" id="avatar">
 
-  <div class="eyebrow">DIN KARAKTÄR</div><h1>Avatarstudio</h1><p class="subtitle">Skapa en karaktär som representerar dig i Pluggnästet.</p>
+ <div class="eyebrow">DIN KARAKTÄR OCH DINA FÖREMÅL</div><h1>Avatarstudio</h1>
 
-  <div class="grid-2" style="margin-top:20px">
+ <p class="subtitle">Din karaktär följer med dig genom Pluggnästet. Dra i modellen för att rotera den.</p>
 
-    <div class="avatar-stage">
+ <div class="avatar-layout" style="margin-top:18px">
 
-      <div class="avatar-figure" id="avatarFigure">
+  <div class="avatar-stage">
 
-        <div class="avatar-head" id="avatarHead"><div class="avatar-hair" id="avatarHair"></div><div class="avatar-eyes"><i></i><i></i></div></div>
+   <div class="avatar-fallback" id="avatarFallback">🧑‍🎓</div>
 
-        <div class="avatar-body" id="avatarBody"></div><div class="avatar-legs"><i></i><i></i></div>
-
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="section-head"><h3>Anpassa din avatar</h3></div>
-
-      <div class="custom-row"><span>Hudton</span><input type="color" value="#e9b99c" onchange="changeAvatar('--skin',this.value)"></div>
-
-      <div class="custom-row"><span>Hårfärg</span><input type="color" value="#4a3040" onchange="changeAvatar('--hair',this.value)"></div>
-
-      <div class="custom-row"><span>Klädfärg</span><input type="color" value="#8070c9" onchange="changeAvatar('--outfit',this.value)"></div>
-
-      <div style="margin-top:20px"><button class="btn" onclick="saveAvatar()">Spara avatar</button><button class="btn secondary" onclick="resetAvatar()" style="margin-left:7px">Återställ</button></div>
-
-    </div>
+   <canvas id="avatarCanvas" aria-label="Roterbar 3D-avatar"></canvas>
 
   </div>
+
+  <div class="panel">
+
+   <div class="section-head"><h3>Karaktärens utseende</h3><span>ANPASSA</span></div>
+
+   <div class="control-row"><span>Hudton</span><input type="color" id="skinColor" value="#e9b99c" onchange="updateAvatarColor()"></div>
+
+   <div class="control-row"><span>Hårfärg</span><input type="color" id="hairColor" value="#493447" onchange="updateAvatarColor()"></div>
+
+   <div class="control-row"><span>Klädfärg</span><input type="color" id="outfitColor" value="#8174d8" onchange="updateAvatarColor()"></div>
+
+   <div class="control-row"><span>Ögonfärg</span><input type="color" id="eyeColor" value="#48394f" onchange="updateAvatarColor()"></div>
+
+   <div class="control-row"><span>Tillbehör</span><select id="accessorySelect" onchange="updateAvatarColor()"><option value="none">Inget</option><option value="halo">Ljusgloria</option><option value="headphones">Hörlurar</option><option value="glasses">Glasögon</option></select></div>
+
+   <div class="control-row"><span>Bakgrundsaura</span><select id="auraSelect" onchange="updateAvatarColor()"><option value="purple">Lila</option><option value="blue">Blå</option><option value="pink">Rosa</option><option value="green">Grön</option></select></div>
+
+   <div style="display:flex;gap:8px;margin-top:17px"><button class="button" onclick="saveAvatar()">Spara utseende</button><button class="button secondary" onclick="resetAvatar()">Återställ</button></div>
+
+ </div>
+
+ </div>
+
+ <div class="section-head"><h3>Garderob & belöningar</h3><button class="button ghost small" onclick="openStore()">Öppna butiken ↗</button></div>
+
+ <div class="panel" id="wardrobeSummary"><p class="subtitle">Lås upp nya föremål med erfarenhetspoäng.</p></div>
 
 </section>
 
+<!-- PROGRESS -->
+
 <section class="page" id="progress">
 
-  <div class="eyebrow">DIN UTVECKLING</div><h1>Framsteg</h1><p class="subtitle">Varje fokuspass och varje uppgift tar dig framåt.</p>
+ <div class="eyebrow">DIN UTVECKLING</div><h1>Framsteg & belöningar</h1>
 
-  <div class="grid-2" style="margin-top:20px">
+ <p class="subtitle">Följ din läranderesa och upptäck vad du har blivit bättre på.</p>
 
-    <div class="card" style="text-align:center">
+ <div class="two-col" style="margin-top:18px">
 
-      <div class="eyebrow">DIN NUVÅRANDE NIVÅ</div>
+  <div class="panel" style="text-align:center">
 
-      <div class="level-ring"><div class="level-inner"><div><strong id="progressLevel">1</strong><div style="font-size:10px;color:var(--muted)">NIVÅ</div></div></div></div>
+   <div class="eyebrow">DIN NUVARANDE NIVÅ</div>
 
-      <h3 id="progressXP">0 XP</h3><p class="subtitle">Samla XP genom att studera och öva.</p>
+   <div class="progress-ring" id="levelRing"><div class="ring-inner"><div><strong id="progressLevel">1</strong><div style="font-size:8px;color:var(--muted)">NIVÅ</div></div></div></div>
 
-      <div class="progress"><span id="levelProgress" style="width:0%"></span></div>
+   <h3 id="progressXP">0 XP</h3>
 
-      <p class="subtitle" id="nextLevelText" style="margin-top:9px">0 / 100 XP till nästa nivå</p>
+   <p class="subtitle" id="nextLevelText">0 XP till nästa nivå</p>
 
-    </div>
-
-    <div class="card">
-
-      <div class="section-head"><h3>Dina prestationer</h3></div>
-
-      <div class="achievement"><div class="achievement-icon">🌱</div><div><strong style="font-size:12px">Första steget</strong><small>Du har börjat din resa</small></div></div>
-
-      <div class="achievement"><div class="achievement-icon">📚</div><div><strong style="font-size:12px">Kunskapssökare</strong><small>Öppna din första lektion</small></div></div>
-
-      <div class="achievement"><div class="achievement-icon">⏳</div><div><strong style="font-size:12px">Fokusmästare</strong><small>Slutför ditt första fokuspass</small></div></div>
-
-    </div>
+   <div class="progress"><span id="levelBar" style="width:0%"></span></div>
 
   </div>
+
+  <div class="panel">
+
+   <div class="section-head"><h3>Din aktivitetsöversikt</h3></div>
+
+   <div class="stat-top"><span>Fokustid denna vecka</span><strong id="weekTotal">0 min</strong></div>
+
+   <div class="week-bars" id="progressBars"></div>
+
+   <div class="stat-top" style="margin-top:14px"><span>Aktiva dagar i följd</span><strong id="progressStreak">0</strong></div>
+
+  </div>
+
+ </div>
+
+ <div class="two-col">
+
+  <div>
+
+   <div class="section-head"><h3>Dina prestationer</h3><span>BADGES</span></div>
+
+   <div class="panel" id="achievements"></div>
+
+  </div>
+
+  <div>
+
+   <div class="section-head"><h3>Det här kan du träna mer på</h3><span>BEHOVSANALYS</span></div>
+
+   <div class="panel" id="weakAreas"></div>
+
+  </div>
+
+ </div>
+
+ <div class="section-head"><h3>Senaste aktivitet</h3><span>DIN HISTORIK</span></div>
+
+ <div class="panel" id="xpHistory"><p class="subtitle">Dina studieaktiviteter visas här.</p></div>
 
 </section>
 
@@ -736,59 +1016,561 @@ input[type=color]{width:38px;height:30px;border:0;background:none;cursor:pointer
 
 </div>
 
-<nav class="mobile-bar">
+<nav class="mobile-nav">
 
-  <button class="active" data-page="home"><span>⌂</span>Hem</button>
+ <button class="active" data-page="dashboard"><span>⌂</span>Hem</button>
 
-  <button data-page="room"><span>◷</span>Fokus</button>
+ <button data-page="courses"><span>▤</span>Kurser</button>
 
-  <button data-page="courses"><span>▤</span>Kurser</button>
+ <button data-page="focus"><span>◷</span>Fokus</button>
 
-  <button data-page="coach"><span>✧</span>Coach</button>
+ <button data-page="coach"><span>✧</span>Coach</button>
 
-  <button data-page="avatar"><span>♙</span>Avatar</button>
+ <button data-page="avatar"><span>♙</span>Avatar</button>
 
 </nav>
 
-<div class="toast" id="toast">Sparat!</div>
+<!-- ONBOARDING -->
+
+<div class="modal-backdrop" id="onboardingModal">
+
+ <div class="modal">
+
+  <div class="brand" style="padding:0 0 12px"><div class="brand-mark">✦</div><div><div class="brand-title">Plugg<span>nästet</span></div><div class="brand-sub">VÄLKOMMEN TILL DIN STUDIEVÄRLD</div></div></div>
+
+  <h2>Skapa din studieprofil</h2>
+
+  <p>Vi använder dina val för att anpassa ämnesförslag och din studieöversikt. Du kan ändra dem senare.</p>
+
+  <div class="form-grid">
+
+   <div class="field"><label>Vad ska vi kalla dig? (frivilligt)</label><input id="profileName" placeholder="Ditt förnamn eller alias" maxlength="24"></div>
+
+   <div class="field"><label>Årskurs</label><select id="profileYear"><option value="1">Årskurs 1</option><option value="2">Årskurs 2</option><option value="3">Årskurs 3</option></select></div>
+
+   <div class="field"><label>Gymnasieprogram</label><select id="profileProgram">
+
+    <option value="NA">Naturvetenskapsprogrammet</option>
+
+    <option value="TE">Teknikprogrammet</option>
+
+    <option value="EK">Ekonomiprogrammet</option>
+
+    <option value="SA">Samhällsvetenskapsprogrammet</option>
+
+    <option value="ES">Estetiska programmet</option>
+
+    <option value="HU">Humanistiska programmet</option>
+
+    <option value="BF">Barn- och fritidsprogrammet</option>
+
+    <option value="BA">Bygg- och anläggningsprogrammet</option>
+
+    <option value="EE">El- och energiprogrammet</option>
+
+    <option value="FT">Fordons- och transportprogrammet</option>
+
+    <option value="FS">Försäljnings- och serviceprogrammet</option>
+
+    <option value="HT">Hotell- och turismprogrammet</option>
+
+    <option value="IN">Industritekniska programmet</option>
+
+    <option value="NB">Naturbruksprogrammet</option>
+
+    <option value="RL">Restaurang- och livsmedelsprogrammet</option>
+
+    <option value="VF">VVS- och fastighetsprogrammet</option>
+
+    <option value="VO">Vård- och omsorgsprogrammet</option>
+
+    <option value="AN">Annat / individuellt program</option>
+
+   </select></div>
+
+   <div class="field"><label>Vilket betygssystem gäller för dig?</label><select id="profileSystem"><option value="gy25">Gy25 – ämnen och nivåer</option><option value="gy11">Gy11 – kurser</option></select></div>
+
+  </div>
+
+  <div class="hint">Tips: Om du började gymnasiet efter den 30 juni 2025 ska du normalt välja Gy25. Välj Gy11 om du började före övergången och fortfarande läser enligt det äldre kurssystemet.</div>
+
+  <div class="modal-actions"><button class="button" onclick="finishOnboarding()">Skapa min studieplats ↗</button></div>
+
+ </div>
+
+</div>
+
+<!-- PROFILE MODAL -->
+
+<div class="modal-backdrop" id="profileModal">
+
+ <div class="modal">
+
+  <h2>Min studieprofil</h2><p>Ändra dina val när din studieplan förändras.</p>
+
+  <div class="form-grid">
+
+   <div class="field"><label>Namn / alias</label><input id="editName" maxlength="24"></div>
+
+   <div class="field"><label>Årskurs</label><select id="editYear"><option value="1">Årskurs 1</option><option value="2">Årskurs 2</option><option value="3">Årskurs 3</option></select></div>
+
+   <div class="field"><label>Program</label><select id="editProgram">
+
+    <option value="NA">Naturvetenskap</option><option value="TE">Teknik</option><option value="EK">Ekonomi</option><option value="SA">Samhällsvetenskap</option><option value="ES">Estetiska</option><option value="HU">Humanistiska</option><option value="BF">Barn och fritid</option><option value="BA">Bygg och anläggning</option><option value="EE">El och energi</option><option value="FT">Fordon och transport</option><option value="FS">Försäljning och service</option><option value="HT">Hotell och turism</option><option value="IN">Industriteknik</option><option value="NB">Naturbruk</option><option value="RL">Restaurang och livsmedel</option><option value="VF">VVS och fastighet</option><option value="VO">Vård och omsorg</option><option value="AN">Annat</option>
+
+   </select></div>
+
+   <div class="field"><label>Betygssystem</label><select id="editSystem"><option value="gy25">Gy25 – ämnen och nivåer</option><option value="gy11">Gy11 – kurser</option></select></div>
+
+  </div>
+
+  <p>Profil och framsteg sparas lokalt i webbläsaren på den här enheten.</p>
+
+  <div class="modal-actions"><button class="button secondary" onclick="closeModal('profileModal')">Avbryt</button><button class="button" onclick="saveProfile()">Spara ändringar</button></div>
+
+ </div>
+
+</div>
+
+<!-- STORE -->
+
+<div class="modal-backdrop" id="storeModal">
+
+ <div class="modal">
+
+  <div class="section-head"><div><div class="eyebrow">DIN VÄRLD</div><h2>Avatarbutiken</h2></div><span>✦ <strong id="storeXP">0</strong> XP</span></div>
+
+  <p>Lås upp kosmetiska föremål med XP. Föremålen påverkar inte dina skolresultat.</p>
+
+  <div class="store-grid" id="storeGrid"></div>
+
+  <div class="modal-actions"><button class="button secondary" onclick="closeModal('storeModal')">Stäng</button></div>
+
+ </div>
+
+</div>
+
+<!-- CALCULATOR -->
+
+<div class="modal-backdrop" id="calculatorModal">
+
+ <div class="modal" style="max-width:390px">
+
+  <h2>Miniräknare</h2><p>En enkel räknare för dina studieuppgifter.</p>
+
+  <input class="input" id="calcInput" placeholder="Exempel: (12 + 8) * 3" onkeydown="if(event.key==='Enter')calculate()">
+
+  <div class="formula" id="calcResult">0</div>
+
+  <div class="modal-actions"><button class="button secondary" onclick="closeModal('calculatorModal')">Stäng</button><button class="button" onclick="calculate()">Beräkna</button></div>
+
+ </div>
+
+</div>
+
+<!-- FORMULAS -->
+
+<div class="modal-backdrop" id="formulaModal">
+
+ <div class="modal">
+
+  <h2>Formelsamling</h2><p>Snabbreferens för några vanliga matematiska samband.</p>
+
+  <div class="achievement"><div class="achievement-icon">📐</div><div><strong>Rektangelns area</strong><small>A = längd × bredd</small></div></div>
+
+  <div class="achievement"><div class="achievement-icon">⭕</div><div><strong>Cirkelns area</strong><small>A = π × r²</small></div></div>
+
+  <div class="achievement"><div class="achievement-icon">📊</div><div><strong>Räta linjens ekvation</strong><small>y = kx + m</small></div></div>
+
+  <div class="achievement"><div class="achievement-icon">🔺</div><div><strong>Pythagoras sats</strong><small>a² + b² = c²</small></div></div>
+
+  <div class="achievement"><div class="achievement-icon">⚡</div><div><strong>Hastighet</strong><small>v = sträcka / tid</small></div></div>
+
+  <div class="modal-actions"><button class="button" onclick="closeModal('formulaModal')">Stäng</button></div>
+
+ </div>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 
-const titles={
+/* -------------------------------------------------------
 
- home:['Välkommen tillbaka!','Dags att ta ett steg närmare dina mål.'],
+   PLUGGNÄSTET V2 — FRONTEND STATE & LEARNING EXPERIENCE
 
- room:['Ditt studierum','Skapa lugn och hitta ditt fokus.'],
+   ------------------------------------------------------- */
 
- courses:['Mina kurser','Din personliga läranderesa börjar här.'],
+const STORAGE_KEY='pluggnastet.v2.profile';
 
- math:['Algebraövning','Öva, förstå och utvecklas.'],
+const STATE_KEY='pluggnastet.v2.state';
 
- coach:['AI Study Coach','Din digitala studiekompis.'],
+function readJSON(key,fallback){
 
- avatar:['Avatarstudio','Skapa din karaktär.'],
+ try{return JSON.parse(localStorage.getItem(key)) ?? fallback}
 
- progress:['Dina framsteg','Se hur långt du har kommit.']
+ catch(e){return fallback}
+
+}
+
+let profile=readJSON(STORAGE_KEY,null);
+
+let state=readJSON(STATE_KEY,{
+
+ xp:0,minutes:0,tasks:0,streak:0,lastActive:null,week:{},doneTasks:{},
+
+ courseProgress:{},completedLessons:[],mistakes:{},history:[],
+
+ avatar:{skin:'#e9b99c',hair:'#493447',outfit:'#8174d8',eyes:'#48394f',accessory:'none',aura:'purple'},
+
+ unlocked:['basic'],equipped:'basic'
+
+});
+
+if(!state.week)state.week={};
+
+if(!state.doneTasks)state.doneTasks={};
+
+if(!state.courseProgress)state.courseProgress={};
+
+if(!state.completedLessons)state.completedLessons=[];
+
+if(!state.mistakes)state.mistakes={};
+
+if(!state.history)state.history=[];
+
+if(!state.avatar)state.avatar={skin:'#e9b99c',hair:'#493447',outfit:'#8174d8',eyes:'#48394f',accessory:'none',aura:'purple'};
+
+let activeCourse=null,activeLessonTab='video',courseFilter='all';
+
+const programs={
+
+ NA:'Naturvetenskapsprogrammet',TE:'Teknikprogrammet',EK:'Ekonomiprogrammet',
+
+ SA:'Samhällsvetenskapsprogrammet',ES:'Estetiska programmet',HU:'Humanistiska programmet',
+
+ BF:'Barn- och fritidsprogrammet',BA:'Bygg- och anläggningsprogrammet',EE:'El- och energiprogrammet',
+
+ FT:'Fordons- och transportprogrammet',FS:'Försäljnings- och serviceprogrammet',HT:'Hotell- och turismprogrammet',
+
+ IN:'Industritekniska programmet',NB:'Naturbruksprogrammet',RL:'Restaurang- och livsmedelsprogrammet',
+
+ VF:'VVS- och fastighetsprogrammet',VO:'Vård- och omsorgsprogrammet',AN:'Annat / individuellt program'
 
 };
 
-let state=JSON.parse(localStorage.getItem('pluggnastet_v2')||'{}');
+/* Kurskatalogens innehåll är en första redaktionell katalog.
 
-state.xp=state.xp||0;state.minutes=state.minutes||0;state.tasks=state.tasks||0;
+   Fullständig programstruktur ska senare synkas mot Skolverkets data
 
-function save(){localStorage.setItem('pluggnastet_v2',JSON.stringify(state));updateStats()}
+   och elevens individuella studieplan. */
 
-function navigate(page){
+const courseData=[
+
+ {id:'math',icon:'📐',subject:'Matematik',gy25:'Matematik nivå 1',gy11:'Matematik 1',programs:['ALL'],category:'Matematik',desc:'Tal, algebra, samband och problemlösning.',unit:'Algebra och ekvationer',topic:'Ekvationer',task:'Lös ekvationen 3x + 6 = 18.',answer:'4',hint:'Börja med att subtrahera 6 från båda sidor.',explain:'3x + 6 = 18. Subtrahera 6: 3x = 12. Dela med 3: x = 4.',text:'En ekvation är en likhet där minst ett värde är obekant. När du löser en ekvation försöker du isolera den obekanta variabeln. En viktig regel är att du måste göra samma räkneoperation på båda sidor av likhetstecknet. Då bevaras likheten.'},
+
+ {id:'english',icon:'🌍',subject:'Engelska',gy25:'Engelska nivå 1',gy11:'Engelska 5',programs:['ALL'],category:'Språk',desc:'Läsförståelse, kommunikation och språk.',unit:'Reading strategies',topic:'Läsförståelse',task:'Which word is closest in meaning to “rapid”?',answer:'fast',hint:'Tänk på vilket engelskt ord som betyder snabb.',explain:'“Rapid” betyder snabb eller hastig. “Fast” är därför ett bra synonymval.',text:'Reading comprehension involves understanding both the explicit meaning of a text and the ideas that are implied. Look at context, identify key words and consider how paragraphs connect to one another.'},
+
+ {id:'swedish',icon:'📚',subject:'Svenska',gy25:'Svenska nivå 1',gy11:'Svenska 1',programs:['ALL'],category:'Språk',desc:'Skrivande, läsning, språk och retorik.',unit:'Text och kommunikation',topic:'Textanalys',task:'Vad kallas textens huvudbudskap?',answer:'tema',hint:'Det är den övergripande tanke eller idé som texten kretsar kring.',explain:'Ett tema beskriver textens övergripande ämne eller centrala idé.',text:'När du analyserar en text kan du undersöka tema, motiv, berättarperspektiv och språk. Skilj mellan vad texten handlar om och vad den försöker säga om ämnet.'},
+
+ {id:'physics',icon:'⚛️',subject:'Fysik',gy25:'Fysik nivå 1',gy11:'Fysik 1',programs:['NA','TE'],category:'Naturvetenskap',desc:'Rörelse, krafter, energi och modeller.',unit:'Rörelse',topic:'Hastighet',task:'En bil åker 100 km på 2 timmar. Vilken medelhastighet har bilen i km/h?',answer:'50',hint:'Hastighet = sträcka delat med tid.',explain:'v = s/t = 100/2 = 50 km/h.',text:'Medelhastighet beskriver hur lång sträcka som tillryggaläggs per tidsenhet. Sambandet skrivs v = s/t, där v är hastighet, s är sträcka och t är tid.'},
+
+ {id:'chemistry',icon:'🧪',subject:'Kemi',gy25:'Kemi nivå 1',gy11:'Kemi 1',programs:['NA'],category:'Naturvetenskap',desc:'Atomer, ämnen och kemiska reaktioner.',unit:'Atomens uppbyggnad',topic:'Atomer',task:'Vilken partikel har negativ elektrisk laddning?',answer:'elektron',hint:'Den finns runt atomkärnan.',explain:'Elektronen har negativ laddning. Protonen är positiv och neutronen saknar laddning.',text:'En atom består av en atomkärna med protoner och neutroner, samt elektroner som befinner sig runt kärnan. Antalet protoner bestämmer vilket grundämne atomen tillhör.'},
+
+ {id:'biology',icon:'🌱',subject:'Biologi',gy25:'Biologi nivå 1',gy11:'Biologi 1',programs:['NA'],category:'Naturvetenskap',desc:'Liv, celler, ekosystem och evolution.',unit:'Cellen',topic:'Cellbiologi',task:'Vilken celldel brukar kallas cellens kraftverk?',answer:'mitokondrie',hint:'Cellandningen sker här.',explain:'Mitokondrierna är viktiga för cellens energiomsättning och cellandning.',text:'Celler är livets grundläggande byggstenar. I eukaryota celler finns flera organeller med olika funktioner, exempelvis cellkärnan, ribosomerna och mitokondrierna.'},
+
+ {id:'technology',icon:'⚙️',subject:'Teknik',gy25:'Teknik nivå 1',gy11:'Teknik 1',programs:['TE'],category:'Teknik',desc:'Tekniska system, design och utveckling.',unit:'Tekniska system',topic:'Systemanalys',task:'Vad kallas en förenklad bild av verkligheten som används för att förstå ett system?',answer:'modell',hint:'Ordet används också när man beskriver eller testar en idé.',explain:'En modell är en förenklad representation som hjälper oss att undersöka ett system.',text:'Teknik utvecklas genom att människor identifierar behov, formulerar problem och skapar lösningar. Modeller kan användas för att undersöka funktion och konsekvenser innan en lösning byggs.'},
+
+ {id:'programming',icon:'💻',subject:'Programmering',gy25:'Programmering nivå 1',gy11:'Programmering 1',programs:['TE','EE'],category:'Teknik',desc:'Logik, algoritmer och problemlösning.',unit:'Algoritmer',topic:'Algoritmer',task:'Vad kallas en tydlig steg-för-steg-beskrivning av hur ett problem löses?',answer:'algoritm',hint:'Det är ett centralt begrepp inom programmering.',explain:'En algoritm är en ändlig uppsättning instruktioner som beskriver hur ett problem kan lösas.',text:'En algoritm beskriver en metod för att lösa ett problem. I programmering översätts algoritmer till instruktioner som en dator kan utföra. En bra algoritm är tydlig, systematisk och möjlig att följa.'},
+
+ {id:'economics',icon:'📈',subject:'Företagsekonomi',gy25:'Företagsekonomi nivå 1',gy11:'Företagsekonomi 1',programs:['EK'],category:'Ekonomi',desc:'Företag, ekonomi och beslutsfattande.',unit:'Ekonomiska grunder',topic:'Intäkter och kostnader',task:'Ett företag säljer 10 produkter för 100 kr styck. Hur stor är intäkten?',answer:'1000',hint:'Intäkt = pris multiplicerat med antal sålda produkter.',explain:'10 × 100 = 1 000 kr i intäkt.',text:'Företagsekonomi handlar om hur verksamheter använder resurser för att nå sina mål. Centrala begrepp är intäkter, kostnader, resultat, budget och lönsamhet.'},
+
+ {id:'social',icon:'🏛️',subject:'Samhällskunskap',gy25:'Samhällskunskap nivå 1',gy11:'Samhällskunskap 1b',programs:['SA','EK'],category:'Samhälle',desc:'Demokrati, ekonomi och samhällsfrågor.',unit:'Demokrati',topic:'Demokratiska principer',task:'Vad innebär principen att alla röster väger lika i ett val?',answer:'en person en röst',hint:'Tänk på hur rösterna räknas.',explain:'Principen innebär att varje röst har samma vikt, oavsett vem som röstar.',text:'Demokrati bygger på principer som politisk jämlikhet, fria val, yttrandefrihet och möjlighet till ansvarsutkrävande. Olika demokratiska system organiserar beslutsfattande på olika sätt.'},
+
+ {id:'history',icon:'🏺',subject:'Historia',gy25:'Historia nivå 1',gy11:'Historia 1b',programs:['SA','EK','HU','ES'],category:'Samhälle',desc:'Historiska förändringar, källor och perspektiv.',unit:'Historiska källor',topic:'Källkritik',task:'Vad kallas det när en källa skapats nära den händelse den beskriver?',answer:'närhet',hint:'Det handlar om tidsavståndet mellan händelse och källa.',explain:'Närhetskriteriet undersöker hur nära i tid källan är den händelse den berättar om.',text:'Källkritik innebär att granska information systematiskt. Vanliga kriterier är äkthet, tid, beroende och tendens. Fråga vem som skapat en källa, när den skapades och varför.'},
+
+ {id:'arts',icon:'🎨',subject:'Estetisk kommunikation',gy25:'Estetisk kommunikation nivå 1',gy11:'Estetisk kommunikation',programs:['ES'],category:'Estetiska ämnen',desc:'Uttryck, gestaltning och kreativ kommunikation.',unit:'Visuellt uttryck',topic:'Gestaltning',task:'Vad innebär det att gestalta en idé?',answer:'uttrycka',hint:'Tänk på hur en idé blir synlig eller upplevbar.',explain:'Att gestalta innebär att ge en idé eller tanke ett konkret uttryck, till exempel visuellt eller genom ljud.',text:'Estetisk kommunikation använder olika uttrycksformer för att förmedla idéer, känslor och perspektiv. Gestaltning kan ske genom bild, form, rörelse, ljud eller andra medier.'},
+
+ {id:'health',icon:'🤝',subject:'Hälsa och välbefinnande',gy25:'Hälsa nivå 1',gy11:'Hälsa 1',programs:['BF','VO'],category:'Yrkesämnen',desc:'Hälsa, livsstil och människors välbefinnande.',unit:'Hälsans grunder',topic:'Hälsa',task:'Vilka tre dimensioner brukar användas för att beskriva hälsa?',answer:'fysisk psykisk social',hint:'De handlar om kroppen, tankar/känslor och relationer.',explain:'Hälsa beskrivs ofta som fysisk, psykisk och social hälsa.',text:'Hälsa är ett brett begrepp som omfattar fysiska, psykiska och sociala aspekter. Sömn, återhämtning, rörelse, relationer och livsvillkor kan påverka välbefinnandet.'},
+
+ {id:'construction',icon:'🏗️',subject:'Bygg och anläggning',gy25:'Bygg och anläggning nivå 1',gy11:'Bygg och anläggning 1',programs:['BA'],category:'Yrkesämnen',desc:'Byggteknik, material och arbetsprocesser.',unit:'Material och konstruktion',topic:'Materialkunskap',task:'Vilket material tillverkas vanligtvis genom att blanda cement, vatten och ballast?',answer:'betong',hint:'Det är ett vanligt konstruktionsmaterial.',explain:'Betong framställs bland annat av cement, vatten och ballast som sand och sten.',text:'Byggprocesser innefattar planering, materialval, utförande och kontroll. Materialens egenskaper påverkar konstruktionens hållbarhet, funktion och miljöpåverkan.'},
+
+ {id:'care',icon:'🩺',subject:'Vård och omsorg',gy25:'Vård och omsorg nivå 1',gy11:'Vård och omsorg 1',programs:['VO'],category:'Yrkesämnen',desc:'Bemötande, omsorg och människors behov.',unit:'Bemötande',topic:'Kommunikation',task:'Vad innebär ett professionellt bemötande?',answer:'respekt',hint:'Tänk på respekt, lyhördhet och integritet.',explain:'Ett professionellt bemötande bygger bland annat på respekt, lyhördhet och att värna personens integritet.',text:'I vård och omsorg är kommunikationen central. Ett professionellt bemötande innebär att se individens behov, vara lyhörd och agera respektfullt.'}
+
+];
+
+const programExtra={
+
+ NA:['Biologi','Fysik','Kemi','Matematik'],
+
+ TE:['Teknik','Fysik','Programmering','Matematik'],
+
+ EK:['Företagsekonomi','Samhällskunskap','Matematik'],
+
+ SA:['Samhällskunskap','Historia','Svenska'],
+
+ ES:['Estetisk kommunikation','Historia','Svenska'],
+
+ HU:['Historia','Svenska','Engelska'],
+
+ BF:['Hälsa och välbefinnande','Svenska','Engelska'],
+
+ BA:['Bygg och anläggning','Matematik','Svenska'],
+
+ EE:['Programmering','Matematik','Engelska'],
+
+ FT:['Matematik','Engelska','Svenska'],
+
+ FS:['Samhällskunskap','Engelska','Svenska'],
+
+ HT:['Engelska','Svenska','Samhällskunskap'],
+
+ IN:['Matematik','Teknik','Svenska'],
+
+ NB:['Biologi','Matematik','Svenska'],
+
+ RL:['Matematik','Engelska','Svenska'],
+
+ VF:['Matematik','Teknik','Svenska'],
+
+ VO:['Hälsa och välbefinnande','Svenska','Engelska'],
+
+ AN:['Matematik','Svenska','Engelska']
+
+};
+
+function saveState(){try{localStorage.setItem(STATE_KEY,JSON.stringify(state))}catch(e){}}
+
+function saveProfileData(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(profile))}catch(e){}}
+
+function todayKey(){return new Date().toLocaleDateString('sv-SE')}
+
+function dateKeyDaysAgo(n){const d=new Date();d.setDate(d.getDate()-n);return d.toLocaleDateString('sv-SE')}
+
+function showToast(msg){
+
+ const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
+
+ clearTimeout(showToast.timeout);showToast.timeout=setTimeout(()=>el.classList.remove('show'),2300);
+
+}
+
+function openModal(id){document.getElementById(id).classList.add('open')}
+
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+
+function safeText(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+function finishOnboarding(){
+
+ profile={
+
+  name:document.getElementById('profileName').value.trim()||'Pluggnästet-elev',
+
+  year:document.getElementById('profileYear').value,
+
+  program:document.getElementById('profileProgram').value,
+
+  system:document.getElementById('profileSystem').value
+
+ };
+
+ saveProfileData();
+
+ document.getElementById('onboardingModal').classList.remove('open');
+
+ renderAll();
+
+ showToast('Din studieplats är redo ✦');
+
+}
+
+function openProfile(){
+
+ if(!profile){openModal('onboardingModal');return}
+
+ document.getElementById('editName').value=profile.name;
+
+ document.getElementById('editYear').value=profile.year;
+
+ document.getElementById('editProgram').value=profile.program;
+
+ document.getElementById('editSystem').value=profile.system;
+
+ openModal('profileModal');
+
+}
+
+function saveProfile(){
+
+ profile.name=document.getElementById('editName').value.trim()||'Pluggnästet-elev';
+
+ profile.year=document.getElementById('editYear').value;
+
+ profile.program=document.getElementById('editProgram').value;
+
+ profile.system=document.getElementById('editSystem').value;
+
+ saveProfileData();closeModal('profileModal');renderAll();showToast('Studieprofil uppdaterad!');
+
+}
+
+function displayCourseName(c){return profile?.system==='gy11'?c.gy11:c.gy25}
+
+function relevantCourses(){
+
+ const p=profile?.program||'NA';
+
+ const primary=courseData.filter(c=>c.programs.includes('ALL')||c.programs.includes(p));
+
+ const extras=programExtra[p]||[];
+
+ extras.forEach(name=>{
+
+  if(!primary.some(c=>c.subject.toLowerCase()===name.toLowerCase())){
+
+   const match=courseData.find(c=>c.subject.toLowerCase()===name.toLowerCase());
+
+   if(match)primary.push(match);
+
+  }
+
+ });
+
+ return [...new Map(primary.map(c=>[c.id,c])).values()];
+
+}
+
+function levelForXP(xp){
+
+ let level=1,remaining=xp,needed=100;
+
+ while(remaining>=needed&&level<100){remaining-=needed;level++;needed=Math.round(100+level*16)}
+
+ return {level,remaining,needed};
+
+}
+
+function addXP(amount,reason){
+
+ if(amount<=0)return;
+
+ const before=levelForXP(state.xp).level;
+
+ state.xp+=amount;
+
+ recordActivity();
+
+ const after=levelForXP(state.xp).level;
+
+ state.history.unshift({date:todayKey(),label:reason||'Studieaktivitet',xp:amount});
+
+ state.history=state.history.slice(0,12);
+
+ saveState();renderStats();
+
+ showToast('+'+amount+' XP · '+(reason||'Bra jobbat!'));
+
+ if(after>before)setTimeout(()=>showToast('🎉 Du nådde nivå '+after+'!'),800);
+
+}
+
+function recordActivity(){
+
+ const today=todayKey(),yesterday=dateKeyDaysAgo(1);
+
+ if(state.lastActive!==today){
+
+  state.streak=state.lastActive===yesterday?(state.streak||0)+1:1;
+
+  state.lastActive=today;
+
+ }
+
+}
+
+function markMinutes(n){
+
+ const today=todayKey();
+
+ state.minutes=(state.minutes||0)+n;
+
+ state.week[today]=(state.week[today]||0)+n;
+
+ recordActivity();saveState();renderStats();
+
+}
+
+function renderStats(){
+
+ const L=levelForXP(state.xp);
+
+ const ids=['topXP','statXP','progressXP'];
+
+ document.getElementById('topXP').textContent=state.xp;
+
+ document.getElementById('statXP').textContent=state.xp;
+
+ document.getElementById('statLevel').textContent=L.level;
+
+ document.getElementById('statMinutes').textContent=state.minutes;
+
+ document.getElementById('statTasks').textContent=state.tasks;
+
+ document.getElementById('sideName').textContent=profile?.name||'Din profil';
+
+ document.getElementById('sideLevel').textContent='Nivå '+L.level+' · Elev';
+
+ document.getElementById('topStreak').textContent=state.streak||0;
+
+ document.getElementById('progressLevel').textContent=L.level;
+
+ document.getElementById('progressXP').textContent=state.xp+' XP';
+
+ document.getElementById('nextLevelText').textContent=L.remaining+' / '+L.needed+' XP till nästa nivå';
+
+ const pct=Math.round(L.remaining/L.needed*100);
+
+ document.getElementById('levelBar').style.width=pct+'%';
+
+ document.getElementById('levelRing').style.setProperty('--pct',pct+'%');
+
+ document.getElementById('progressStreak').textContent=(state.streak||0)+' dagar';
+
+ document.getElementById('storeXP').textContent=state.xp;
+
+ document.getElementById('topAvatar').textContent=state.avatar?.accessory==='headphones'?'🎧':'🧑‍🎓';
+
+}
+
+function go(page){
 
  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 
- const target=document.getElementById(page);
-
- if(!target)return;
+ const target=document.getElementById(page);if(!target)return;
 
  target.classList.add('active');
 
  document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+
+ const titles={
+
+  dashboard:['Välkommen till Pluggnästet','Din studieplats. Din utveckling. Din värld.'],
+
+  courses:['Mina kurser','Lär dig i din takt och följ din egen studieplan.'],
+
+  lesson:['Din lektion','Utforska, öva och förstå.'],
+
+  focus:['Studierummet','Hitta lugnet och ge dig själv utrymme att fokusera.'],
+
+  coach:['AI Study Coach','Hjälp att förstå – inte bara få svar.'],
+
+  avatar:['Avatarstudio','Skapa din karaktär och gör den till din egen.'],
+
+  progress:['Framsteg & belöningar','Se hur din kunskap och dina studievanor utvecklas.']
+
+ };
 
  document.getElementById('pageTitle').textContent=titles[page][0];
 
@@ -796,111 +1578,393 @@ function navigate(page){
 
  window.scrollTo({top:0,behavior:'smooth'});
 
- if(page==='courses')state.lessonOpened=true;
+ if(page==='courses')renderCourses();
+
+ if(page==='dashboard')renderDashboard();
+
+ if(page==='progress')renderProgress();
 
 }
 
-document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
 
-function updateStats(){
+function renderDashboard(){
 
- const level=Math.floor(state.xp/100)+1,remaining=state.xp%100;
+ const courses=relevantCourses().slice(0,4);
 
- ['topXP','statXP'].forEach(id=>document.getElementById(id).textContent=state.xp);
+ document.getElementById('dashboardCourses').innerHTML=courses.map(c=>{
 
- document.getElementById('statLevel').textContent=level;
+  const p=state.courseProgress[c.id]||0;
 
- document.getElementById('sideLevel').textContent=level;
+  return `<div class="course-card" onclick="openCourse('${c.id}')" role="button" tabindex="0">
 
- document.getElementById('statMinutes').textContent=state.minutes;
+   <div class="course-icon">${c.icon}</div><div class="course-info"><strong>${safeText(displayCourseName(c))}</strong><small>${safeText(c.unit)} · ${safeText(c.desc)}</small><div class="progress"><span style="width:${p}%"></span></div></div><span class="percent">${p}%</span></div>`;
 
- document.getElementById('statTasks').textContent=state.tasks;
+ }).join('');
 
- document.getElementById('progressLevel').textContent=level;
+ const tasks=state.doneTasks[todayKey()]||{};
 
- document.getElementById('progressXP').textContent=state.xp+' XP';
+ document.querySelectorAll('#dailyTasks .task-row').forEach(row=>{
 
- document.getElementById('levelProgress').style.width=remaining+'%';
+  const key=row.querySelector('.check').getAttribute('onclick').match(/'([^']+)'/)[1];
 
- document.getElementById('nextLevelText').textContent=remaining+' / 100 XP till nästa nivå';
+  const done=!!tasks[key];row.querySelector('.check').classList.toggle('done',done);row.querySelector('.check').textContent=done?'✓':'';
 
-}
+  row.classList.toggle('done',done);
 
-function addXP(n){state.xp+=n;save();toast('+'+n+' XP tillagda! ✦')}
+ });
 
-function toast(message){
+ document.getElementById('taskProgress').textContent=Object.values(tasks).filter(Boolean).length+' / 3';
 
- const el=document.getElementById('toast');el.textContent=message;el.classList.add('show');
+ renderBars('weekBars');
 
- setTimeout(()=>el.classList.remove('show'),2100);
+ const weak=Object.entries(state.mistakes).sort((a,b)=>b[1]-a[1])[0];
 
-}
+ const box=document.getElementById('recommendationBox');
 
-function completeTask(el){
+ if(weak){
 
- if(el.classList.contains('done'))return;
+  const c=courseData.find(c=>c.id===weak[0]);
 
- el.classList.add('done');el.innerHTML='✓';
+  box.innerHTML=`<div style="display:flex;gap:13px;align-items:center"><div class="course-icon">🎯</div><div style="flex:1"><strong style="font-size:12px">Träna vidare inom ${safeText(c?.topic||'ditt ämne')}</strong><p class="subtitle" style="margin:5px 0 0">Du har registrerat några svåra försök inom detta område. Repetera förklaringen och testa igen.</p></div><button class="button small" onclick="openCourse('${weak[0]}')">Öva ↗</button></div>`;
 
- el.parentElement.classList.add('done');state.tasks++;addXP(10);
+ }else{
 
- const count=document.querySelectorAll('#taskCard .task-check.done').length;
+  box.innerHTML=`<div style="display:flex;gap:13px;align-items:center"><div class="course-icon">✧</div><div><strong style="font-size:12px">Börja med en kort lektion</strong><p class="subtitle" style="margin:5px 0 0">När du har gjort några övningar kan Pluggnästet börja visa vilka områden som kan vara bra att repetera.</p></div></div>`;
 
- document.getElementById('taskCount').textContent=count+'/3';
-
-}
-
-function checkMath(){
-
- const v=document.getElementById('mathAnswer').value.trim().replace(',','.');
-
- const f=document.getElementById('mathFeedback');
-
- if(v==='4'){f.textContent='Rätt svar! Bra jobbat. 3x + 6 = 18 ger x = 4.';f.style.color='var(--green)';if(!state.mathDone){state.mathDone=true;addXP(20)}}
-
- else{f.textContent='Inte riktigt. Börja med att subtrahera 6 från båda sidor.';f.style.color='#f0a6b8'}
+ }
 
 }
 
-function checkMath2(){
+function completeDailyTask(key,el){
 
- const v=document.getElementById('mathAnswer2').value.trim().replace(',','.');
+ const tasks=state.doneTasks[todayKey()]||(state.doneTasks[todayKey()]={});
 
- const f=document.getElementById('mathFeedback2');
+ if(tasks[key])return;
 
- if(v==='7'){f.textContent='Helt rätt! 4x = 28, alltså x = 7. +20 XP!';f.style.color='var(--green)';if(!state.math2Done){state.math2Done=true;addXP(20)}}
+ tasks[key]=true;state.tasks++;
 
- else{f.textContent='Försök igen. Börja med att addera 8 på båda sidor.';f.style.color='#f0a6b8'}
+ const reward={lesson:10,exercise:15,focus:15}[key];
+
+ saveState();addXP(reward,'Dagens uppdrag');
+
+ renderDashboard();
 
 }
 
-let seconds=1500,interval=null,elapsed=0;
+function renderBars(targetId){
+
+ const labels=['M','T','O','T','F','L','S'];
+
+ const today=new Date();
+
+ const monday=new Date(today);monday.setDate(today.getDate()-((today.getDay()+6)%7));
+
+ const values=[];
+
+ for(let i=0;i<7;i++){
+
+  const d=new Date(monday);d.setDate(monday.getDate()+i);
+
+  values.push({label:labels[i],date:d.toLocaleDateString('sv-SE'),minutes:state.week[d.toLocaleDateString('sv-SE')]||0,isToday:d.toLocaleDateString('sv-SE')===todayKey()});
+
+ }
+
+ const max=Math.max(25,...values.map(v=>v.minutes));
+
+ document.getElementById(targetId).innerHTML=values.map(v=>`<div class="week-bar-wrap"><div class="week-bar ${v.isToday?'today':''}" style="height:${Math.max(4,v.minutes/max*85)}px" title="${v.minutes} minuter"></div><small>${v.label}</small></div>`).join('');
+
+}
+
+function renderCourses(){
+
+ const search=(document.getElementById('courseSearch')?.value||'').toLowerCase();
+
+ let list=relevantCourses().filter(c=>(c.subject+' '+displayCourseName(c)+' '+c.desc).toLowerCase().includes(search));
+
+ list=list.filter(c=>{
+
+  const p=state.courseProgress[c.id]||0;
+
+  return courseFilter==='all'||(courseFilter==='active'&&p>0)||(courseFilter==='new'&&p===0);
+
+ });
+
+ document.getElementById('courseIntro').textContent=(profile?programs[profile.program]+' · Årskurs '+profile.year:'')+' · '+(profile?.system==='gy11'?'Gy11 – kurser':'Gy25 – ämnesnivåer');
+
+ document.getElementById('studyPlanText').textContent='Visar ett första urval av ämnen kopplat till ditt program. Din exakta individuella studieplan kan skilja sig åt mellan skolor och inriktningar.';
+
+ document.getElementById('courseGrid').innerHTML=list.length?list.map(c=>{
+
+  const p=state.courseProgress[c.id]||0;
+
+  return `<article class="panel course-tile" onclick="openCourse('${c.id}')" role="button" tabindex="0">
+
+   <div class="tile-head"><div class="tile-icon">${c.icon}</div><span class="tile-badge">${p?'Påbörjad':'Tillgänglig'}</span></div>
+
+   <h3>${safeText(displayCourseName(c))}</h3><p>${safeText(c.desc)}</p>
+
+   <div class="progress"><span style="width:${p}%"></span></div>
+
+   <div class="tile-foot"><span>${safeText(c.unit)}</span><span>${p}% ↗</span></div>
+
+  </article>`;
+
+ }).join(''):'<div class="panel empty">Inga ämnen matchar din sökning. Ändra filter eller sökord.</div>';
+
+}
+
+function setCourseFilter(filter,btn){
+
+ courseFilter=filter;document.querySelectorAll('.course-filters .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderCourses();
+
+}
+
+function openCourse(id){
+
+ activeCourse=courseData.find(c=>c.id===id);if(!activeCourse)return;
+
+ document.getElementById('lessonEyebrow').textContent=displayCourseName(activeCourse);
+
+ document.getElementById('lessonTitle').textContent=activeCourse.unit;
+
+ document.getElementById('lessonSubtitle').textContent=activeCourse.desc;
+
+ document.getElementById('lessonProgressTag').textContent=(state.courseProgress[id]||0)+'% klart';
+
+ lessonTab('video',document.querySelector('[data-tab="video"]'));
+
+ go('lesson');
+
+ state.courseProgress[id]=Math.max(state.courseProgress[id]||0,10);saveState();
+
+}
+
+function lessonTab(tab,btn){
+
+ if(!activeCourse)return;
+
+ activeLessonTab=tab;
+
+ document.querySelectorAll('.lesson-menu button[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+
+ const c=activeCourse,area=document.getElementById('lessonPanel');
+
+ if(tab==='video'){
+
+  area.innerHTML=`<div class="eyebrow">VIDEOLEKTION · ${safeText(c.unit)}</div><h2>Se och förstå</h2>
+
+   <div class="video-placeholder"><div><div class="video-symbol">▶</div><strong style="font-size:12px">Videogenomgång</strong><p>Videomaterial för den här lektionen behöver läggas till i kursbiblioteket.</p><span class="mini-tag">Videospelare förberedd</span></div></div>
+
+   <p style="margin-top:16px">Videolektionerna kommer att delas upp i korta kapitel med tydliga mål och möjlighet att repetera ett avsnitt. Här finns plats för videokälla, kapitelmarkörer och hastighetskontroll när innehållet är producerat.</p>
+
+   <button class="button" onclick="lessonTab('read',document.querySelector('[data-tab=read]'))">Fortsätt till texten →</button>`;
+
+ }
+
+ if(tab==='read'){
+
+  area.innerHTML=`<div class="eyebrow">LÄS & FÖRSTÅ · ${safeText(c.unit)}</div><h2>${safeText(c.topic)}</h2>
+
+   <input class="input" id="textSearch" placeholder="Sök i texten..." oninput="searchLessonText()" style="margin-bottom:15px">
+
+   <div id="readingText"><p>${safeText(c.text)}</p><div class="formula">${safeText(c.id==='math'?'3x + 6 = 18':c.id==='physics'?'v = s / t':'Begrepp · Samband · Tillämpning')}</div><h3>Kom ihåg</h3><p>Försök att förklara det viktigaste med egna ord. Att kunna beskriva ett begrepp utan att titta i texten är ett bra sätt att testa om du förstår det.</p></div>
+
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:17px"><button class="button secondary" onclick="readText()">🔊 Läs upp texten</button><button class="button" onclick="markLessonDone()">Markera som genomförd</button></div>`;
+
+ }
+
+ if(tab==='practice'){
+
+  area.innerHTML=`<div class="eyebrow">ÖVNINGSUPPGIFT · STEG FÖR STEG</div><h2>Testa dina kunskaper</h2>
+
+   <p>${safeText(c.task)}</p>
+
+   <input class="input" id="exerciseAnswer" placeholder="Skriv ditt svar..." onkeydown="if(event.key==='Enter')checkExercise()">
+
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:11px"><button class="button" onclick="checkExercise()">Kontrollera svar</button><button class="button secondary" onclick="showHint()">Visa ledtråd</button></div>
+
+   <div id="exerciseHint"></div><div class="feedback" id="exerciseFeedback" aria-live="polite"></div>
+
+   <div id="solutionBox" style="display:none" class="hint"><strong>Genomgång</strong><br>${safeText(c.explain)}</div>`;
+
+ }
+
+ if(tab==='test'){
+
+  area.innerHTML=`<div class="eyebrow">KUNSKAPSKOLL</div><h2>Kontrollera vad du kan</h2>
+
+   <p>Testa dig själv med en kort fråga. Det här är en övningskontroll, inte ett officiellt nationellt prov.</p>
+
+   <div class="formula">${safeText(c.task)}</div>
+
+   <input class="input" id="testAnswer" placeholder="Ditt svar..." onkeydown="if(event.key==='Enter')checkTest()">
+
+   <button class="button" style="margin-top:12px" onclick="checkTest()">Rätta min övning</button>
+
+   <div class="feedback" id="testFeedback" aria-live="polite"></div>`;
+
+ }
+
+}
+
+function searchLessonText(){
+
+ const q=document.getElementById('textSearch').value.toLowerCase();
+
+ const p=document.getElementById('readingText');
+
+ p.style.opacity=(q&& !p.textContent.toLowerCase().includes(q))?'.35':'1';
+
+}
+
+function readText(){
+
+ if(!('speechSynthesis' in window)){showToast('Uppläsning stöds inte i den här webbläsaren.');return}
+
+ const text=activeCourse?.text||'';
+
+ speechSynthesis.cancel();
+
+ const utter=new SpeechSynthesisUtterance(text);utter.lang='sv-SE';utter.rate=.93;speechSynthesis.speak(utter);
+
+}
+
+function markLessonDone(){
+
+ if(!activeCourse)return;
+
+ if(!state.completedLessons.includes(activeCourse.id)){
+
+  state.completedLessons.push(activeCourse.id);
+
+  state.courseProgress[activeCourse.id]=Math.max(30,state.courseProgress[activeCourse.id]||0);
+
+  saveState();addXP(15,'Genomförd lektion');renderDashboard();
+
+ }else showToast('Den här lektionen är redan markerad som klar.');
+
+ document.getElementById('lessonProgressTag').textContent=(state.courseProgress[activeCourse.id]||0)+'% klart';
+
+}
+
+function showHint(){
+
+ document.getElementById('exerciseHint').innerHTML='<div class="hint">💡 '+safeText(activeCourse.hint)+'</div>';
+
+}
+
+function normalizeAnswer(s){return String(s).toLowerCase().trim().replace(/[.,!?]/g,'').replace(/\s+/g,' ')}
+
+function checkExercise(){
+
+ if(!activeCourse)return;
+
+ const field=document.getElementById('exerciseAnswer'),feedback=document.getElementById('exerciseFeedback');
+
+ if(!field.value.trim()){feedback.textContent='Skriv ett svar först.';feedback.className='feedback bad';return}
+
+ const correct=normalizeAnswer(field.value)===normalizeAnswer(activeCourse.answer);
+
+ if(correct){
+
+  feedback.textContent='Rätt! Bra resonemang. '+activeCourse.explain;
+
+  feedback.className='feedback good';
+
+  document.getElementById('solutionBox').style.display='block';
+
+  const key=activeCourse.id+'_practice';
+
+  if(!state.completedLessons.includes(key)){
+
+   state.completedLessons.push(key);state.courseProgress[activeCourse.id]=Math.min(100,(state.courseProgress[activeCourse.id]||30)+20);
+
+   state.tasks++;saveState();addXP(20,'Klarad övning');renderDashboard();
+
+  }
+
+ }else{
+
+  feedback.textContent='Inte riktigt ännu. Ta hjälp av ledtråden och försök igen.';
+
+  feedback.className='feedback bad';
+
+  state.mistakes[activeCourse.id]=(state.mistakes[activeCourse.id]||0)+1;saveState();
+
+ }
+
+}
+
+function checkTest(){
+
+ const field=document.getElementById('testAnswer'),feedback=document.getElementById('testFeedback');
+
+ if(!field.value.trim()){feedback.textContent='Skriv ett svar först.';feedback.className='feedback bad';return}
+
+ if(normalizeAnswer(field.value)===normalizeAnswer(activeCourse.answer)){
+
+  feedback.textContent='Bra! Du visar att du kan använda begreppet. '+activeCourse.explain;feedback.className='feedback good';
+
+  const key=activeCourse.id+'_test';
+
+  if(!state.completedLessons.includes(key)){state.completedLessons.push(key);state.courseProgress[activeCourse.id]=Math.min(100,(state.courseProgress[activeCourse.id]||40)+20);saveState();addXP(25,'Klarad kunskapskoll');}
+
+ }else{
+
+  feedback.textContent='Svaret stämmer inte riktigt. Läs förklaringen igen och testa övningen en gång till.';feedback.className='feedback bad';
+
+  state.mistakes[activeCourse.id]=(state.mistakes[activeCourse.id]||0)+1;saveState();
+
+ }
+
+}
+
+function showFormula(){openModal('formulaModal')}
+
+/* FOKUSTIMER */
+
+let timerSeconds=1500,timerLength=25,timerInterval=null,elapsedSeconds=0;
 
 function renderTimer(){
 
- document.getElementById('timer').textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
+ document.getElementById('timerDisplay').textContent=String(Math.floor(timerSeconds/60)).padStart(2,'0')+':'+String(timerSeconds%60).padStart(2,'0');
+
+}
+
+function setTimerLength(min){
+
+ timerLength=min;resetTimer();
+
+ document.getElementById('timerLabel').textContent=(min===5?'PAUS':'FOKUSPASS')+' · '+min+' MIN';
+
+ showToast(min+' minuters timer vald.');
 
 }
 
 function toggleTimer(){
 
- if(interval){clearInterval(interval);interval=null;document.getElementById('timerToggle').textContent='▶ Fortsätt';return}
+ if(timerInterval){clearInterval(timerInterval);timerInterval=null;document.getElementById('timerButton').textContent='▶ Fortsätt';return}
 
- document.getElementById('timerToggle').textContent='Ⅱ Pausa';
+ document.getElementById('timerButton').textContent='Ⅱ Pausa';
 
- interval=setInterval(()=>{
+ recordActivity();saveState();
 
-  seconds--;elapsed++;renderTimer();
+ timerInterval=setInterval(()=>{
 
-  if(elapsed%60===0){state.minutes++;save()}
+  timerSeconds--;elapsedSeconds++;renderTimer();
 
-  if(seconds<=0){
+  if(elapsedSeconds%60===0){markMinutes(1)}
 
-   clearInterval(interval);interval=null;seconds=1500;elapsed=0;renderTimer();
+  if(timerSeconds<=0){
 
-   document.getElementById('timerToggle').textContent='▶ Starta';
+   clearInterval(timerInterval);timerInterval=null;timerSeconds=timerLength*60;elapsedSeconds=0;renderTimer();
 
-   addXP(50);toast('Fokuspass klart! +50 XP 🎉');
+   document.getElementById('timerButton').textContent='▶ Starta fokus';
+
+   if(timerLength===25){addXP(40,'Avslutat fokuspass');showToast('Fokuspass klart! Bra jobbat.');}
+
+   else showToast('Pausen är slut. Välkommen tillbaka!');
 
   }
 
@@ -910,69 +1974,597 @@ function toggleTimer(){
 
 function resetTimer(){
 
- clearInterval(interval);interval=null;seconds=1500;elapsed=0;renderTimer();
+ clearInterval(timerInterval);timerInterval=null;timerSeconds=timerLength*60;elapsedSeconds=0;renderTimer();
 
- document.getElementById('timerToggle').textContent='▶ Starta';
-
-}
-
-function setRoom(room,button){
-
- document.getElementById('roomScene').className='room '+(room==='night'?'':room);
-
- document.querySelectorAll('.room-options .option').forEach(b=>b.classList.remove('active'));
-
- button.classList.add('active');
+ document.getElementById('timerButton').textContent='▶ Starta fokus';
 
 }
 
-function changeAvatar(prop,value){document.documentElement.style.setProperty(prop,value)}
+function setRoom(room,btn){
 
-function saveAvatar(){
+ document.getElementById('roomScene').className='room '+(room==='cozy'?'':room);
 
- state.avatar=true;save();toast('Din avatar är sparad!');
+ document.querySelectorAll('.room-options .filter-btn').forEach(b=>b.classList.remove('active'));
+
+ btn.classList.add('active');
 
 }
 
-function resetAvatar(){
+let audioContext=null,ambientOsc=null,ambientGain=null;
 
- document.documentElement.style.setProperty('--skin','#e9b99c');
+function toggleAmbient(){
 
- document.documentElement.style.setProperty('--hair','#4a3040');
+ const button=document.getElementById('soundButton');
 
- document.documentElement.style.setProperty('--outfit','#8070c9');
+ if(ambientOsc){ambientOsc.stop();ambientOsc=null;if(audioContext)audioContext.close();audioContext=null;button.textContent='♫ Starta ljud';return}
 
- document.querySelectorAll('.custom-row input').forEach((input,i)=>input.value=['#e9b99c','#4a3040','#8070c9'][i]);
+ try{
+
+  audioContext=new (window.AudioContext||window.webkitAudioContext)();
+
+  ambientOsc=audioContext.createOscillator();ambientGain=audioContext.createGain();
+
+  ambientOsc.type='sine';ambientOsc.frequency.value=110;
+
+  ambientGain.gain.value=.018;
+
+  ambientOsc.connect(ambientGain);ambientGain.connect(audioContext.destination);ambientOsc.start();
+
+  button.textContent='Ⅱ Stäng av ljud';
+
+ }catch(e){showToast('Ljudfunktionen stöds inte här.')}
+
+}
+
+/* COACH — LOKAL DEMO, INGEN EXTERN AI-ANSLUTNING */
+
+function appendMessage(text,type){
+
+ const box=document.getElementById('chatMessages'),msg=document.createElement('div');
+
+ msg.className='message '+type;msg.textContent=text;box.appendChild(msg);box.scrollTop=box.scrollHeight;
+
+}
+
+function localCoachReply(q){
+
+ const s=q.toLowerCase();
+
+ if(/ekvation|matte|matematik|x\s*=|algebra/.test(s))
+
+  return 'Vi tar det steg för steg. Målet när du löser en ekvation är att få den obekanta variabeln ensam på ena sidan.\\n\\nExempel: 2x + 4 = 14\\n1. Subtrahera 4 på båda sidor: 2x = 10.\\n2. Dela båda sidor med 2: x = 5.\\n\\nVill du testa att lösa en liknande uppgift själv?';
+
+ if(/plan|plugga|stress|hinna|schema/.test(s))
+
+  return 'Testa att göra en liten och tydlig plan:\\n\\n1. Välj ett konkret mål.\\n2. Dela upp målet i mindre uppgifter.\\n3. Börja med ett kort fokuspass.\\n4. Ta en paus och kontrollera vad du har förstått.\\n\\nDet är bättre att börja med ett rimligt steg än att planera allt på en gång.';
+
+ if(/förklara|vad är|betyder/.test(s))
+
+  return 'Jag hjälper gärna till att reda ut begreppet. Börja med att skriva vilket ämne det gäller och vilket ord eller vilken del som känns svår. Jag kan sedan ge en enklare förklaring och ett exempel.';
+
+ if(/ledtråd|hint|hjälp/.test(s))
+
+  return 'Vi börjar med en ledtråd i stället för hela svaret. Fundera på vilket begrepp eller vilken regel som passar till frågan. Skriv vad du redan vet, så kan du bygga vidare därifrån.';
+
+ if(/svag|fel|träna|öva/.test(s)){
+
+  const entries=Object.entries(state.mistakes).sort((a,b)=>b[1]-a[1]);
+
+  if(entries.length){const c=courseData.find(c=>c.id===entries[0][0]);return 'Utifrån de övningar du har gjort verkar '+(c?.topic||'ett område')+' vara värt att repetera. Öppna kursen och läs förklaringen igen innan du försöker på nytt.'}
+
+ }
+
+ return 'Tack för din fråga! Försök att beskriva vilket ämne du arbetar med och vad du redan har förstått. Då blir det lättare att hitta ett bra nästa steg. I den här förhandsversionen är jag begränsad till lokala pedagogiska exempel; en riktig AI-modell kopplas till senare.';
 
 }
 
 function sendChat(){
 
- const input=document.getElementById('chatInput'),value=input.value.trim();
+ const input=document.getElementById('chatInput'),q=input.value.trim();if(!q)return;
 
- if(!value)return;
+ appendMessage(q,'user');input.value='';
 
- const box=document.getElementById('chatMessages');
-
- const user=document.createElement('div');user.className='message user';user.textContent=value;box.appendChild(user);
-
- const bot=document.createElement('div');bot.className='message bot';
-
- let answer='Bra fråga! Jag är just nu en förhandsvisning av studiecoachen. En riktig AI-version kommer kunna analysera din fråga och ge dig en personlig förklaring.';
-
- if(/ekvation|matte|matematik/i.test(value))answer='Ett bra sätt att lösa en ekvation är att försöka få x ensamt. Gör samma räkneoperation på båda sidor av likhetstecknet. Vill du testa med 2x + 4 = 14?';
-
- else if(/plugga|plan|studie/i.test(value))answer='Testa att dela upp arbetet i korta pass. Välj ett tydligt mål, fokusera i 25 minuter och ta sedan en kort paus. Börja med det som känns viktigast.';
-
- bot.textContent=answer;box.appendChild(bot);input.value='';box.scrollTop=box.scrollHeight;
+ setTimeout(()=>appendMessage(localCoachReply(q),'bot'),250);
 
 }
 
-document.getElementById('dateLabel').textContent=new Intl.DateTimeFormat('sv-SE',{weekday:'long',day:'numeric',month:'long'}).format(new Date()).toUpperCase();
+function showWeakAreas(){
 
-updateStats();
+ go('progress');
+
+ const items=Object.entries(state.mistakes).sort((a,b)=>b[1]-a[1]);
+
+ showToast(items.length?'Dina träningsområden visas i framstegsöversikten.':'Gör några övningar först så kan vi hitta möjliga träningsområden.');
+
+}
+
+/* AVATAR & BUTIK */
+
+const storeItems=[
+
+ {id:'basic',name:'Standardstil',icon:'🧑‍🎓',price:0,description:'Din första stil.'},
+
+ {id:'star',name:'Stjärnaura',icon:'🌟',price:120,description:'En glittrande stjärna.'},
+
+ {id:'crown',name:'Liten krona',icon:'👑',price:180,description:'En liten nivåsymbol.'},
+
+ {id:'headphones',name:'Hörlurar',icon:'🎧',price:150,description:'Fokus i din egen värld.'},
+
+ {id:'planet',name:'Planetvakt',icon:'🪐',price:260,description:'En kosmisk stil.'},
+
+ {id:'sparkles',name:'Ljusgloria',icon:'✨',price:350,description:'Ett mjukt ljussken.'}
+
+];
+
+function updateAvatarColor(){
+
+ state.avatar.skin=document.getElementById('skinColor').value;
+
+ state.avatar.hair=document.getElementById('hairColor').value;
+
+ state.avatar.outfit=document.getElementById('outfitColor').value;
+
+ state.avatar.eyes=document.getElementById('eyeColor').value;
+
+ state.avatar.accessory=document.getElementById('accessorySelect').value;
+
+ state.avatar.aura=document.getElementById('auraSelect').value;
+
+ if(window.updateAvatar3D)window.updateAvatar3D(state.avatar);
+
+ saveState();
+
+}
+
+function applyAvatarControls(){
+
+ const a=state.avatar;
+
+ document.getElementById('skinColor').value=a.skin;
+
+ document.getElementById('hairColor').value=a.hair;
+
+ document.getElementById('outfitColor').value=a.outfit;
+
+ document.getElementById('eyeColor').value=a.eyes;
+
+ document.getElementById('accessorySelect').value=a.accessory||'none';
+
+ document.getElementById('auraSelect').value=a.aura||'purple';
+
+ if(window.updateAvatar3D)window.updateAvatar3D(a);
+
+}
+
+function saveAvatar(){updateAvatarColor();showToast('Avatarens utseende sparat!')}
+
+function resetAvatar(){
+
+ state.avatar={skin:'#e9b99c',hair:'#493447',outfit:'#8174d8',eyes:'#48394f',accessory:'none',aura:'purple'};
+
+ saveState();applyAvatarControls();showToast('Avatar återställd.');
+
+}
+
+function openStore(){renderStore();openModal('storeModal')}
+
+function renderStore(){
+
+ document.getElementById('storeXP').textContent=state.xp;
+
+ document.getElementById('storeGrid').innerHTML=storeItems.map(item=>{
+
+  const owned=state.unlocked.includes(item.id);
+
+  const equipped=state.equipped===item.id;
+
+  return `<div class="panel store-item"><div class="item-icon">${item.icon}</div><strong>${item.name}</strong><small>${item.description}</small><div style="margin-top:8px;font-size:10px;color:#d8c7ff">${item.price?item.price+' XP':'Gratis'}</div>
+
+  <button class="button ${owned?'secondary':''} small" onclick="buyItem('${item.id}')">${equipped?'Vald':owned?'Använd': 'Lås upp'}</button></div>`;
+
+ }).join('');
+
+}
+
+function buyItem(id){
+
+ const item=storeItems.find(i=>i.id===id);if(!item)return;
+
+ if(state.unlocked.includes(id)){state.equipped=id;saveState();renderStore();renderWardrobe();showToast('Föremål valt!');return}
+
+ if(state.xp<item.price){showToast('Du behöver fler XP för det här föremålet.');return}
+
+ state.xp-=item.price;state.unlocked.push(id);state.equipped=id;saveState();renderStats();renderStore();renderWardrobe();showToast(item.name+' upplåst!');
+
+}
+
+function renderWardrobe(){
+
+ const equipped=storeItems.find(i=>i.id===state.equipped)||storeItems[0];
+
+ document.getElementById('wardrobeSummary').innerHTML=`<div style="display:flex;align-items:center;gap:13px"><div class="course-icon" style="font-size:26px">${equipped.icon}</div><div><strong style="font-size:11px">Du använder: ${equipped.name}</strong><p class="subtitle" style="margin:4px 0 0">${state.unlocked.length} av ${storeItems.length} föremål upplåsta.</p></div><button class="button ghost small" onclick="openStore()" style="margin-left:auto">Butik ↗</button></div>`;
+
+}
+
+/* FRAMSTEG */
+
+function renderProgress(){
+
+ const badges=[
+
+  ['🌱','Första steget','Du har skapat din studieprofil.',true],
+
+  ['📘','Kunskapssökare','Genomför en lektion.',state.completedLessons.length>0],
+
+  ['🧠','Övningsmästare','Klara en övningsuppgift.',state.completedLessons.some(x=>x.includes('practice'))],
+
+  ['⏳','Fokusvän','Slutför ett fokuspass.',state.history.some(x=>x.label==='Avslutat fokuspass')],
+
+  ['🔥','Vanebyggare','Studera flera dagar i följd.',(state.streak||0)>=3],
+
+  ['🏆','Nivå 5','Nå nivå 5.',levelForXP(state.xp).level>=5]
+
+ ];
+
+ document.getElementById('achievements').innerHTML=badges.map(b=>`<div class="achievement" style="opacity:${b[3]?1:.45}"><div class="achievement-icon">${b[0]}</div><div><strong>${b[1]} ${b[3]?'✓':'🔒'}</strong><small>${b[2]}</small></div></div>`).join('');
+
+ const weak=Object.entries(state.mistakes).sort((a,b)=>b[1]-a[1]);
+
+ document.getElementById('weakAreas').innerHTML=weak.length?weak.map(([id,n])=>{
+
+  const c=courseData.find(x=>x.id===id);
+
+  return `<div class="achievement"><div class="achievement-icon">🎯</div><div style="flex:1"><strong>${safeText(c?.topic||id)}</strong><small>${n} försök registrerade som svåra</small></div><button class="button ghost small" onclick="openCourse('${id}')">Öva</button></div>`;
+
+ }).join(''):'<p class="subtitle">Det finns ännu inte tillräckligt med övningsdata för en personlig behovsanalys. När du gör uppgifter kan Pluggnästet föreslå vad du kan repetera.</p>';
+
+ const entries=state.history||[];
+
+ document.getElementById('xpHistory').innerHTML=entries.length?entries.slice(0,8).map(h=>`<div class="xp-history"><span>${safeText(h.label)} <small style="color:var(--muted)">· ${safeText(h.date)}</small></span><strong style="color:var(--green)">+${h.xp} XP</strong></div>`).join(''):'<p class="subtitle">Din aktivitetshistorik visas när du börjar plugga.</p>';
+
+ document.getElementById('weekTotal').textContent=Object.entries(state.week).filter(([k])=>k>=dateKeyDaysAgo(6)).reduce((a,[,v])=>a+v,0)+' min';
+
+ renderBars('progressBars');
+
+}
+
+/* MINIRÄKNARE — liten parser med prioriteringsregler */
+
+function openCalculator(){openModal('calculatorModal')}
+
+function calculate(){
+
+ const source=document.getElementById('calcInput').value.replace(/,/g,'.').trim();
+
+ const out=document.getElementById('calcResult');
+
+ try{
+
+  if(!source||!/^[0-9+\-*/().\s]+$/.test(source))throw new Error('Ogiltigt uttryck');
+
+  const tokens=source.match(/\d+(?:\.\d+)?|[()+\-*/]/g)||[];
+
+  let pos=0;
+
+  function expression(){
+
+   let value=term();
+
+   while(tokens[pos]==='+'||tokens[pos]==='-'){const op=tokens[pos++],rhs=term();value=op==='+'?value+rhs:value-rhs}
+
+   return value;
+
+  }
+
+  function term(){
+
+   let value=factor();
+
+   while(tokens[pos]==='*'||tokens[pos]==='/'){const op=tokens[pos++],rhs=factor();if(op==='/'&&rhs===0)throw new Error('Division med noll');value=op==='*'?value*rhs:value/rhs}
+
+   return value;
+
+  }
+
+  function factor(){
+
+   if(tokens[pos]==='-'){pos++;return -factor()}
+
+   if(tokens[pos]==='+'){pos++;return factor()}
+
+   if(tokens[pos]==='('){pos++;const v=expression();if(tokens[pos]!==')')throw new Error('Saknar parentes');pos++;return v}
+
+   const token=tokens[pos++];if(!token||!Number.isFinite(Number(token)))throw new Error('Kontrollera uttrycket');return Number(token);
+
+  }
+
+  const value=expression();if(pos!==tokens.length||!Number.isFinite(value))throw new Error('Kontrollera uttrycket');
+
+  out.textContent=Number(value.toFixed(8)).toString();
+
+ }catch(e){out.textContent='Kontrollera uttrycket'}
+
+}
+
+/* STARTUP */
+
+function renderAll(){
+
+ renderStats();renderDashboard();renderCourses();renderProgress();renderWardrobe();applyAvatarControls();
+
+ document.getElementById('dateLabel').textContent=new Intl.DateTimeFormat('sv-SE',{weekday:'long',day:'numeric',month:'long'}).format(new Date()).toUpperCase();
+
+}
+
+if(profile){renderAll()}else{openModal('onboardingModal');renderStats()}
 
 renderTimer();
+
+</script>
+
+<script type="module">
+
+/* -------------------------------------------------------
+
+   THREE.JS AVATAR — OPTIONAL CDN MODULE
+
+   If the CDN is unavailable, the rest of the platform
+
+   continues to work and the emoji fallback remains visible.
+
+   ------------------------------------------------------- */
+
+try{
+
+ const THREE=await import('https://cdn.jsdelivr.net/npm/three@0.172.0/build/three.module.js');
+
+ const {OrbitControls}=await import('https://cdn.jsdelivr.net/npm/three@0.172.0/examples/jsm/controls/OrbitControls.js');
+
+ const canvas=document.getElementById('avatarCanvas');
+
+ const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+
+ renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+
+ renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);
+
+ renderer.outputColorSpace=THREE.SRGBColorSpace;
+
+ renderer.toneMapping=THREE.ACESFilmicToneMapping;
+
+ renderer.toneMappingExposure=1.15;
+
+ const scene=new THREE.Scene();
+
+ const camera=new THREE.PerspectiveCamera(34,canvas.clientWidth/canvas.clientHeight,.1,100);
+
+ camera.position.set(0,1.65,5.8);
+
+ scene.add(new THREE.HemisphereLight(0xdedaff,0x28233b,2.1));
+
+ const key=new THREE.DirectionalLight(0xffffff,3.2);key.position.set(3,5,5);scene.add(key);
+
+ const fill=new THREE.PointLight(0xa78bfa,28,9);fill.position.set(-2,2,2);scene.add(fill);
+
+ const rim=new THREE.PointLight(0x83b5ff,22,9);rim.position.set(2,2,-2);scene.add(rim);
+
+ const controls=new OrbitControls(camera,renderer.domElement);
+
+ controls.target.set(0,1.55,0);
+
+ controls.enableDamping=true;controls.enablePan=false;
+
+ controls.minDistance=4.4;controls.maxDistance=7;
+
+ controls.minPolarAngle=.6;controls.maxPolarAngle=2.1;
+
+ const avatar=new THREE.Group();scene.add(avatar);
+
+ const floor=new THREE.Mesh(new THREE.CircleGeometry(1.35,64),new THREE.MeshBasicMaterial({color:0x8470c9,transparent:true,opacity:.12}));
+
+ floor.rotation.x=-Math.PI/2;floor.position.y=-.04;scene.add(floor);
+
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(1.08,.018,8,80),new THREE.MeshBasicMaterial({color:0xa78bfa,transparent:true,opacity:.7}));
+
+ ring.rotation.x=Math.PI/2;ring.position.y=.015;scene.add(ring);
+
+ const material=(color,roughness=.8)=>new THREE.MeshStandardMaterial({color,roughness});
+
+ const sphere=(parent,x,y,z,sx,sy,sz,mat)=>{
+
+  const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),mat);
+
+  mesh.position.set(x,y,z);mesh.scale.set(sx,sy,sz);parent.add(mesh);return mesh;
+
+ };
+
+ const cylinderBetween=(parent,a,b,radius,mat)=>{
+
+  const v1=new THREE.Vector3(...a),v2=new THREE.Vector3(...b);
+
+  const direction=new THREE.Vector3().subVectors(v2,v1);
+
+  const mesh=new THREE.Mesh(new THREE.CylinderGeometry(radius*.8,radius,direction.length(),14),mat);
+
+  mesh.position.copy(v1).add(v2).multiplyScalar(.5);
+
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize());
+
+  parent.add(mesh);return mesh;
+
+ };
+
+ let currentColors={skin:'#e9b99c',hair:'#493447',outfit:'#8174d8',eyes:'#48394f',accessory:'none',aura:'purple'};
+
+ let accessoryGroup=null;
+
+ function buildAvatar(){
+
+  while(avatar.children.length)avatar.remove(avatar.children[0]);
+
+  const skin=material(currentColors.skin,.72),hair=material(currentColors.hair,.7);
+
+  const outfit=material(currentColors.outfit,.76),pants=material('#34364d');
+
+  const shoes=material('#e6dff5'),eyes=material(currentColors.eyes,.4);
+
+  const dark=material('#302538');
+
+  /* legs and shoes */
+
+  cylinderBetween(avatar,[-.18,.78,0],[-.2,.18,.02],.115,pants);
+
+  cylinderBetween(avatar,[.18,.78,0],[.2,.18,.02],.115,pants);
+
+  sphere(avatar,-.2,.12,.1,.17,.11,.25,shoes);
+
+  sphere(avatar,.2,.12,.1,.17,.11,.25,shoes);
+
+  /* body */
+
+  sphere(avatar,0,1.17,0,.47,.62,.31,outfit);
+
+  sphere(avatar,0,1.53,0,.48,.2,.32,outfit);
+
+  /* arms */
+
+  cylinderBetween(avatar,[-.42,1.43,0],[-.57,.88,.1],.105,outfit);
+
+  cylinderBetween(avatar,[.42,1.43,0],[.57,.88,.1],.105,outfit);
+
+  sphere(avatar,-.57,.84,.1,.12,.13,.12,skin);
+
+  sphere(avatar,.57,.84,.1,.12,.13,.12,skin);
+
+  /* neck and head */
+
+  cylinderBetween(avatar,[0,1.66,0],[0,1.88,0],.13,skin);
+
+  sphere(avatar,0,2.28,0,.43,.53,.37,skin);
+
+  /* ears */
+
+  sphere(avatar,-.43,2.28,0,.09,.14,.1,skin);
+
+  sphere(avatar,.43,2.28,0,.09,.14,.1,skin);
+
+  /* hair cap and front fringe */
+
+  sphere(avatar,0,2.62,-.015,.45,.29,.39,hair);
+
+  sphere(avatar,-.18,2.48,.28,.25,.18,.16,hair);
+
+  sphere(avatar,.12,2.47,.3,.28,.17,.14,hair);
+
+  /* eyes, brows, nose and mouth */
+
+  sphere(avatar,-.16,2.32,.35,.045,.07,.035,eyes);
+
+  sphere(avatar,.16,2.32,.35,.045,.07,.035,eyes);
+
+  sphere(avatar,0,2.2,.37,.045,.065,.045,skin);
+
+  const mouth=new THREE.Mesh(new THREE.TorusGeometry(.055,.012,7,24,Math.PI),dark);
+
+  mouth.position.set(0,2.105,.356);mouth.rotation.z=Math.PI;avatar.add(mouth);
+
+  /* hair side details */
+
+  sphere(avatar,-.39,2.27,.11,.12,.33,.13,hair);
+
+  sphere(avatar,.39,2.27,.11,.12,.33,.13,hair);
+
+  /* accessory */
+
+  accessoryGroup=new THREE.Group();avatar.add(accessoryGroup);
+
+  if(currentColors.accessory==='halo'){
+
+   const halo=new THREE.Mesh(new THREE.TorusGeometry(.48,.025,10,48),material('#e9d3ff',.3));
+
+   halo.position.y=2.98;halo.rotation.x=.18;accessoryGroup.add(halo);
+
+  }
+
+  if(currentColors.accessory==='headphones'){
+
+   const band=new THREE.Mesh(new THREE.TorusGeometry(.45,.055,10,48,Math.PI),material('#332d51'));
+
+   band.position.set(0,2.45,0);band.rotation.z=Math.PI;accessoryGroup.add(band);
+
+   sphere(accessoryGroup,-.43,2.3,0,.11,.2,.12,material('#a78bfa'));
+
+   sphere(accessoryGroup,.43,2.3,0,.11,.2,.12,material('#a78bfa'));
+
+  }
+
+  if(currentColors.accessory==='glasses'){
+
+   const frames=material('#343044',.4);
+
+   const left=new THREE.Mesh(new THREE.TorusGeometry(.105,.018,8,24),frames);
+
+   const right=left.clone();left.position.set(-.16,2.32,.375);right.position.set(.16,2.32,.375);
+
+   left.scale.set(1,1.15,1);right.scale.set(1,1.15,1);
+
+   accessoryGroup.add(left,right);
+
+   cylinderBetween(accessoryGroup,[-.055,2.32,.39],[.055,2.32,.39],.012,frames);
+
+  }
+
+ }
+
+ buildAvatar();
+
+ window.updateAvatar3D=(colors)=>{
+
+  currentColors={...currentColors,...colors};
+
+  fill.color.set(currentColors.aura==='blue'?0x83b5ff:currentColors.aura==='pink'?0xeca8d9:currentColors.aura==='green'?0x73d9ae:0xa78bfa);
+
+  buildAvatar();
+
+ };
+
+ document.getElementById('avatarFallback').style.display='none';
+
+ function resize(){
+
+  const w=canvas.clientWidth||320,h=canvas.clientHeight||400;
+
+  renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+
+ }
+
+ if('ResizeObserver' in window)new ResizeObserver(resize).observe(canvas);
+
+ else window.addEventListener('resize',resize);
+
+ function animate(){
+
+  requestAnimationFrame(animate);
+
+  controls.update();
+
+  renderer.render(scene,camera);
+
+ }
+
+ animate();
+
+ if(window.state?.avatar)window.updateAvatar3D(window.state.avatar);
+
+}catch(error){
+
+ console.warn('3D-avatar kunde inte laddas. Resten av Pluggnästet fungerar ändå.',error);
+
+ document.getElementById('avatarFallback').style.display='block';
+
+ document.getElementById('avatarCanvas').style.display='none';
+
+}
 
 </script>
 
