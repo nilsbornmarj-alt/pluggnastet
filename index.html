@@ -8,105 +8,415 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pluggnästet – Study Universe</title>
+<meta name="theme-color" content="#10101b">
+
+<title>Pluggnästet — Din studie värld</title>
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+
+  --bg:#0c0c15;
+
+  --panel:#151522;
+
+  --panel2:#1c1b2c;
+
+  --line:rgba(255,255,255,.075);
+
+  --text:#f4f1ff;
+
+  --muted:#9290a9;
+
+  --purple:#a78bfa;
+
+  --blue:#78a8ff;
+
+  --pink:#ed9bd5;
+
+  --green:#75d9b0;
+
+  --radius:20px;
+
+}
+
 *{box-sizing:border-box}
 
-body{margin:0;background:#101020;color:#f5efff;font-family:Inter,Arial,sans-serif}
+body{
 
-header{padding:22px 18px;text-align:center;background:#19172f;border-bottom:1px solid #40365e}
+  margin:0;background:var(--bg);color:var(--text);
 
-header h1{margin:0;color:#d2b5ff;font-size:30px}
+  font-family:'DM Sans',sans-serif;min-height:100vh;
 
-header p{color:#b9afd0;margin:7px 0 0}
+  background-image:radial-gradient(ellipse at 75% 0%,rgba(112,78,190,.15),transparent 40%);
 
-nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:#17152a;position:sticky;top:0;z-index:5}
+}
 
-nav button{white-space:nowrap;background:#292542;color:#eee;border:1px solid #514775;padding:11px 15px;border-radius:12px}
+button{font:inherit;cursor:pointer}
 
-nav button.active{background:#a98af5;color:#1a1530}
+.app{display:flex;min-height:100vh}
 
-main{max-width:1100px;margin:auto;padding:16px}
+.sidebar{
 
-.page{display:none}
+  width:245px;position:fixed;inset:0 auto 0 0;
+
+  padding:27px 18px;background:rgba(15,15,25,.95);
+
+  border-right:1px solid var(--line);z-index:10;
+
+  display:flex;flex-direction:column;
+
+}
+
+.logo{display:flex;align-items:center;gap:11px;padding:0 10px 34px}
+
+.logo-mark{
+
+  width:39px;height:39px;border-radius:13px;
+
+  display:grid;place-items:center;font-size:21px;
+
+  background:linear-gradient(135deg,#a78bfa,#6b75e8);
+
+  box-shadow:0 5px 25px #8c70ed44;
+
+}
+
+.logo-name{font-family:'Space Grotesk';font-size:19px;font-weight:700}
+
+.logo-name span{color:var(--purple)}
+
+.nav-label{font-size:10px;letter-spacing:1.5px;color:#69677e;font-weight:800;padding:0 12px;margin:10px 0}
+
+.nav-btn{
+
+  display:flex;align-items:center;gap:13px;width:100%;
+
+  border:0;background:transparent;color:var(--muted);
+
+  padding:12px;border-radius:12px;text-align:left;
+
+  margin:2px 0;font-size:13px;font-weight:600;transition:.2s;
+
+}
+
+.nav-btn:hover,.nav-btn.active{background:#29253c;color:#fff}
+
+.nav-btn.active{box-shadow:inset 3px 0 var(--purple)}
+
+.nav-icon{font-size:18px;width:23px;text-align:center}
+
+.sidebar-bottom{margin-top:auto}
+
+.profile-mini{display:flex;align-items:center;gap:10px;padding:13px;background:var(--panel);border:1px solid var(--line);border-radius:15px}
+
+.mini-avatar{width:35px;height:35px;border-radius:12px;background:linear-gradient(140deg,#b68ef4,#e9a9d8);display:grid;place-items:center;font-size:20px}
+
+.mini-name{font-size:12px;font-weight:700}
+
+.mini-level{font-size:10px;color:var(--muted);margin-top:3px}
+
+.main{margin-left:245px;width:calc(100% - 245px);padding:32px 4.2%;max-width:1700px}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+
+.eyebrow{font-size:11px;color:var(--muted);letter-spacing:1.4px;text-transform:uppercase}
+
+h1,h2,h3,p{margin-top:0}
+
+h1{font:700 clamp(25px,3vw,35px) 'Space Grotesk';margin:7px 0}
+
+.subtitle{color:var(--muted);font-size:13px}
+
+.top-actions{display:flex;align-items:center;gap:12px}
+
+.pill{background:var(--panel);border:1px solid var(--line);border-radius:30px;padding:9px 13px;font-size:12px;color:#e8dfff}
+
+.avatar-top{width:39px;height:39px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#f1a5d6);display:grid;place-items:center;font-size:21px}
+
+.page{display:none;animation:fade .3s ease}
 
 .page.active{display:block}
 
-.card{background:#211f40;border:1px solid #514775;border-radius:20px;padding:19px;margin-bottom:16px}
+@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
 
-h2{margin:0 0 15px;font-size:22px}
+.hero{
 
-h3{margin:0 0 9px}
+  border:1px solid #a58bfa28;border-radius:25px;padding:30px;
 
-.muted{color:#b9afd0}
+  min-height:205px;position:relative;overflow:hidden;
 
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  background:linear-gradient(110deg,#282344,#1b1d35 60%,#202b45);
 
-.stat{background:#302b50;border-radius:14px;padding:13px;text-align:center}
+  display:flex;align-items:center;justify-content:space-between;
 
-.stat strong{display:block;font-size:22px;color:#d8c5ff;margin-top:5px}
+}
 
-button{cursor:pointer;font:inherit}
+.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:8%;top:-170px;background:#a78bfa25;filter:blur(10px)}
 
-.action{background:#ac8cf7;color:#1b1530;border:0;border-radius:12px;padding:12px 16px;font-weight:bold}
+.hero-content{position:relative;z-index:1;max-width:550px}
 
-.secondary{background:#34304f;color:#fff;border:1px solid #625687;border-radius:12px;padding:11px 14px}
+.hero h2{font:700 clamp(24px,3vw,34px) 'Space Grotesk';margin:12px 0}
 
-select{width:100%;background:#302b50;color:white;border:1px solid #66598c;border-radius:10px;padding:12px;font-size:15px}
+.hero p{color:#c1bad9;font-size:13px;line-height:1.7;max-width:420px}
 
-label{display:block;color:#c9b9e8;font-size:14px;margin:13px 0 6px}
+.hero-art{font-size:95px;position:relative;z-index:1;filter:drop-shadow(0 15px 20px #0005);padding-right:4%}
 
-#avatarStage{height:440px;border-radius:17px;overflow:hidden;background:radial-gradient(circle,#55427e,#211b40 75%);touch-action:pan-y}
+.btn{
 
-#avatarStage canvas{display:block;width:100%;height:100%}
+  border:0;border-radius:11px;padding:11px 17px;
 
-.columns{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+  color:white;background:linear-gradient(120deg,#9978ec,#727fe8);
 
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  font-size:12px;font-weight:700;box-shadow:0 5px 18px #8168dc30;
 
-.item{background:#302b50;padding:13px;border-radius:13px;margin:8px 0}
+}
 
-.item button{margin-top:9px}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
 
-.room{min-height:260px;border-radius:18px;background:radial-gradient(ellipse at 50% 100%,#554078,#22203f 65%,#111126);display:flex;align-items:center;justify-content:center;text-align:center;padding:25px;position:relative;overflow:hidden}
+.btn.secondary{background:#ffffff0c;border:1px solid var(--line);box-shadow:none}
 
-.lamp{position:absolute;right:12%;top:12%;width:65px;height:65px;border-radius:50%;background:#ffdc9a;box-shadow:0 0 65px 35px #e8a65b55}
+.btn.small{padding:8px 12px}
 
-.desk{position:absolute;bottom:28px;width:75%;height:18px;background:#72517b;border-radius:10px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:27px 0 14px}
 
-.roomText{position:relative;z-index:1;background:#211f40bb;padding:20px;border-radius:15px}
+.section-head h3{font:600 17px 'Space Grotesk';margin:0}
 
-.question{font-size:19px;line-height:1.5;margin:15px 0}
+.section-head span{font-size:11px;color:var(--muted)}
 
-.answer{display:block;width:100%;text-align:left;background:#302b50;color:white;border:1px solid #625687;padding:13px;margin:8px 0;border-radius:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:18px}
 
-.answer:active{background:#625087}
+.stat,.card{
 
-#timer{font-size:58px;font-weight:bold;text-align:center;color:#d7c1ff;margin:20px}
+  background:linear-gradient(145deg,#191927,#151521);
 
-.progress{height:10px;background:#393451;border-radius:20px;overflow:hidden;margin:12px 0}
+  border:1px solid var(--line);border-radius:var(--radius);padding:18px;
 
-.progress div{height:100%;background:#b99bff;width:0%;transition:width .3s}
+}
 
-footer{text-align:center;padding:25px;color:#8f85a9;font-size:12px}
+.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
 
-@media(max-width:650px){
+.stat-icon{font-size:18px}
 
- .columns{grid-template-columns:1fr}
+.stat-value{font:700 25px 'Space Grotesk';margin:12px 0 3px}
 
- .stats{grid-template-columns:1fr 1fr 1fr}
+.stat-foot{font-size:10px;color:var(--green)}
 
- #avatarStage{height:390px}
+.grid-2{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
 
- main{padding:11px}
+.course-list{display:grid;gap:11px}
 
- header h1{font-size:26px}
+.course{
 
- .controls{grid-template-columns:1fr}
+  display:flex;align-items:center;gap:14px;padding:14px;
+
+  background:#ffffff04;border:1px solid var(--line);border-radius:15px;
+
+}
+
+.course-icon{width:43px;height:43px;border-radius:13px;display:grid;place-items:center;font-size:21px;background:#9577ed20}
+
+.course-info{flex:1}
+
+.course-info strong{font-size:12px}
+
+.course-info small{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+
+.progress{height:5px;border-radius:10px;background:#ffffff12;margin-top:9px;overflow:hidden}
+
+.progress span{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#a78bfa,#78a8ff)}
+
+.course-percent{font-size:11px;color:#c4b5fd}
+
+.task{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}
+
+.task:last-child{border:0}
+
+.task-check{width:19px;height:19px;border:1px solid #706b8d;border-radius:6px;display:grid;place-items:center;cursor:pointer}
+
+.task-check.done{background:#8d7ae4;border-color:#8d7ae4}
+
+.task.done span{text-decoration:line-through;color:var(--muted)}
+
+.room{
+
+  min-height:440px;border-radius:24px;overflow:hidden;position:relative;
+
+  border:1px solid #b39af833;
+
+  background:
+
+  radial-gradient(ellipse at 50% 80%,#b58bfa25,transparent 40%),
+
+  linear-gradient(160deg,#1c2540,#171629 55%,#30213d);
+
+}
+
+.room.space{background:radial-gradient(ellipse at 50% 80%,#7772e844,transparent 50%),linear-gradient(160deg,#101c38,#19132c)}
+
+.room.nature{background:radial-gradient(ellipse at 50% 90%,#67c49b35,transparent 45%),linear-gradient(160deg,#172e32,#17251f)}
+
+.room-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+.window{position:absolute;top:35px;width:170px;height:155px;border:7px solid #302d48;border-radius:80px 80px 8px 8px;background:linear-gradient(#293d65,#4d4872 55%,#f1b1a4);box-shadow:0 0 55px #a78bfa22}
+
+.window:before,.window:after{content:"";position:absolute;background:#302d48}
+
+.window:before{width:5px;height:100%;left:50%}
+
+.window:after{height:5px;width:100%;top:58%}
+
+.desk{position:absolute;bottom:0;width:80%;height:100px;background:linear-gradient(#674a48,#382c39);border-top:8px solid #9d756b;box-shadow:0 -15px 40px #0004}
+
+.lamp{position:absolute;bottom:103px;left:17%;font-size:49px;filter:drop-shadow(0 0 18px #ffc77d)}
+
+.room-center{position:relative;z-index:2;text-align:center;margin-top:35px}
+
+.timer{font:700 clamp(48px,8vw,75px) 'Space Grotesk';letter-spacing:-3px;text-shadow:0 5px 30px #a78bfa66}
+
+.timer-label{font-size:11px;letter-spacing:2px;color:#d0c5ec;text-transform:uppercase}
+
+.room-controls{display:flex;gap:9px;justify-content:center;margin-top:19px}
+
+.room-bottom{position:absolute;z-index:3;bottom:17px;left:0;right:0;text-align:center;font-size:11px;color:#d2c9e5}
+
+.room-options{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+
+.option{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:9px 13px;border-radius:30px;font-size:11px}
+
+.option.active{border-color:var(--purple);color:white;background:#a78bfa20}
+
+.study-layout{display:grid;grid-template-columns:1.5fr .7fr;gap:17px}
+
+.lesson-card{padding:25px}
+
+.lesson-card h2{font:700 23px 'Space Grotesk'}
+
+.lesson-card p{font-size:13px;line-height:1.8;color:#b3b0c4}
+
+.formula{padding:20px;text-align:center;background:#a78bfa12;border:1px solid #a78bfa33;border-radius:14px;font:600 22px 'Space Grotesk';margin:20px 0;color:#d9c9ff}
+
+.answer-input{width:100%;background:#0f0f1b;border:1px solid #ffffff20;color:white;border-radius:11px;padding:13px;font:inherit;outline:none}
+
+.answer-input:focus{border-color:var(--purple)}
+
+.feedback{font-size:12px;margin-top:12px;min-height:18px}
+
+.chapter{padding:13px;border-radius:12px;border:1px solid var(--line);margin-bottom:9px;cursor:pointer;font-size:12px}
+
+.chapter:hover,.chapter.active{background:#a78bfa18;border-color:#a78bfa66}
+
+.chapter small{display:block;color:var(--muted);margin-top:5px}
+
+.coach-box{min-height:350px;display:flex;flex-direction:column}
+
+.chat-messages{flex:1;padding:5px 0}
+
+.message{padding:13px 15px;border-radius:14px;margin:10px 0;max-width:85%;font-size:12px;line-height:1.7}
+
+.message.bot{background:#a78bfa17;border:1px solid #a78bfa22}
+
+.message.user{background:#30304a;margin-left:auto}
+
+.chat-row{display:flex;gap:8px;margin-top:15px}
+
+.chat-row input{flex:1;min-width:0}
+
+.avatar-stage{
+
+  height:350px;border-radius:20px;position:relative;overflow:hidden;
+
+  display:grid;place-items:center;
+
+  background:radial-gradient(ellipse at 50% 80%,#a78bfa35,transparent 55%),linear-gradient(145deg,#202039,#161624);
+
+  border:1px solid var(--line);
+
+}
+
+.avatar-figure{display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 15px 16px #0007);transition:.2s}
+
+.avatar-head{width:105px;height:112px;border-radius:46% 46% 44% 44%;background:var(--skin,#e9b99c);position:relative;z-index:2}
+
+.avatar-hair{position:absolute;top:-14px;left:-5px;width:115px;height:57px;border-radius:55% 55% 20% 20%;background:var(--hair,#4a3040);z-index:3}
+
+.avatar-eyes{position:absolute;top:51px;left:23px;width:60px;display:flex;justify-content:space-between}
+
+.avatar-eyes i{width:8px;height:11px;border-radius:50%;background:#342738}
+
+.avatar-body{width:130px;height:125px;border-radius:45px 45px 20px 20px;background:var(--outfit,#8070c9);margin-top:-5px;position:relative}
+
+.avatar-body:before,.avatar-body:after{content:"";position:absolute;top:22px;width:32px;height:105px;border-radius:20px;background:inherit}
+
+.avatar-body:before{left:-22px;transform:rotate(9deg)}
+
+.avatar-body:after{right:-22px;transform:rotate(-9deg)}
+
+.avatar-legs{display:flex;gap:12px}
+
+.avatar-legs i{width:34px;height:60px;border-radius:12px;background:#34334b}
+
+.custom-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}
+
+input[type=color]{width:38px;height:30px;border:0;background:none;cursor:pointer}
+
+.level-ring{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#a78bfa 0 68%,#ffffff13 68%);margin:15px auto}
+
+.level-inner{width:108px;height:108px;border-radius:50%;background:#191927;display:grid;place-items:center;text-align:center}
+
+.level-inner strong{font:700 29px 'Space Grotesk'}
+
+.achievement{display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--line);border-radius:13px;margin:9px 0}
+
+.achievement-icon{font-size:23px}
+
+.achievement small{display:block;color:var(--muted);margin-top:4px}
+
+.mobile-bar{display:none}
+
+.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:#29253c;border:1px solid #a78bfa66;padding:12px 18px;border-radius:13px;font-size:12px;z-index:30;transition:.25s;pointer-events:none}
+
+.toast.show{opacity:1;transform:translateX(-50%)}
+
+@media(max-width:950px){
+
+ .sidebar{width:205px}.main{margin-left:205px;width:calc(100% - 205px);padding:27px 3%}
+
+ .stats{grid-template-columns:repeat(2,1fr)}
+
+}
+
+@media(max-width:680px){
+
+ .sidebar{display:none}.main{margin:0;width:100%;padding:22px 17px 95px}
+
+ .topbar{margin-bottom:22px}.top-actions .pill{display:none}
+
+ .hero{padding:23px;min-height:190px}.hero-art{font-size:65px;padding:0}
+
+ .grid-2,.study-layout{grid-template-columns:1fr}
+
+ .stats{gap:9px}.stat{padding:14px}.stat-value{font-size:22px}
+
+ .mobile-bar{
+
+  display:flex;position:fixed;z-index:20;bottom:0;left:0;right:0;
+
+  background:#11111df2;backdrop-filter:blur(20px);
+
+  border-top:1px solid var(--line);justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom));
+
+ }
+
+ .mobile-bar button{border:0;background:none;color:var(--muted);font-size:9px;display:flex;flex-direction:column;align-items:center;gap:4px}
+
+ .mobile-bar button span{font-size:19px}.mobile-bar button.active{color:#c5aaff}
+
+ .room{min-height:410px}.window{top:30px}.room-center{margin-top:45px}
 
 }
 
@@ -116,793 +426,553 @@ footer{text-align:center;padding:25px;color:#8f85a9;font-size:12px}
 
 <body>
 
-<header>
+<div class="app">
 
-<h1>🐝 Pluggnästet</h1>
+<aside class="sidebar">
 
-<p>Ditt rum. Din stil. Din studieresa.</p>
+  <div class="logo"><div class="logo-mark">✦</div><div class="logo-name">Plugg<span>nästet</span></div></div>
+
+  <div class="nav-label">MENY</div>
+
+  <button class="nav-btn active" data-page="home"><span class="nav-icon">⌂</span>Översikt</button>
+
+  <button class="nav-btn" data-page="room"><span class="nav-icon">◷</span>Studierum</button>
+
+  <button class="nav-btn" data-page="courses"><span class="nav-icon">▤</span>Mina kurser</button>
+
+  <button class="nav-btn" data-page="coach"><span class="nav-icon">✧</span>AI-coach</button>
+
+  <button class="nav-btn" data-page="avatar"><span class="nav-icon">♙</span>Avatarstudio</button>
+
+  <button class="nav-btn" data-page="progress"><span class="nav-icon">◈</span>Framsteg</button>
+
+  <div class="sidebar-bottom">
+
+    <div class="profile-mini"><div class="mini-avatar">🧑‍🎓</div><div><div class="mini-name">Min profil</div><div class="mini-level">Nivå <span id="sideLevel">1</span> · Pluggare</div></div></div>
+
+  </div>
+
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+
+  <div><div class="eyebrow" id="dateLabel">DIN STUDIEPLATS</div><h1 id="pageTitle">Välkommen tillbaka!</h1><div class="subtitle" id="pageSubtitle">Dags att ta ett steg närmare dina mål.</div></div>
+
+  <div class="top-actions"><div class="pill">✦ <span id="topXP">0</span> XP</div><div class="avatar-top">🧑‍🎓</div></div>
 
 </header>
 
-<nav>
-
-<button class="active" data-page="home">🏠 Hem</button>
-
-<button data-page="avatar">🧑 Avatar</button>
-
-<button data-page="room">🌙 Studierum</button>
-
-<button data-page="math">📚 Matematik</button>
-
-<button data-page="focus">⏱️ Fokus</button>
-
-<button data-page="shop">🛍️ Butik</button>
-
-</nav>
-
-<main>
-
 <section class="page active" id="home">
 
-<div class="card">
+  <div class="hero">
 
-<h2>Välkommen till Pluggnästet!</h2>
+    <div class="hero-content">
 
-<p class="muted">En liten stunds fokus kan göra stor skillnad.</p>
+      <div class="eyebrow">✦ DIN STUDIEVÄRLD</div>
 
-<div class="stats">
+      <h2>Små steg. Stora framsteg.</h2>
 
-<div class="stat">⭐ XP<strong id="xp">1250</strong></div>
+      <p>Välkommen till din egen studieplats. Lär dig i din takt, samla XP och bygg vanor som tar dig framåt.</p>
 
-<div class="stat">🏆 Nivå<strong id="level">4</strong></div>
+      <button class="btn" onclick="navigate('room')">Starta ett fokuspass ↗</button>
 
-<div class="stat">🔥 Studiedagar<strong id="streak">1</strong></div>
+    </div>
 
-</div>
+    <div class="hero-art">🌙</div>
 
-<div class="progress"><div id="levelBar"></div></div>
+  </div>
 
-<p class="muted" id="levelText">Samla XP för att nå nästa nivå.</p>
+  <div class="stats">
 
-</div>
+    <div class="stat"><div class="stat-top">Totala XP <span class="stat-icon">✦</span></div><div class="stat-value" id="statXP">0</div><div class="stat-foot">Samla poäng när du pluggar</div></div>
 
-<div class="card">
+    <div class="stat"><div class="stat-top">Din nivå <span class="stat-icon">♛</span></div><div class="stat-value" id="statLevel">1</div><div class="stat-foot">Fortsätt utvecklas</div></div>
 
-<h2>🌟 Din nästa aktivitet</h2>
+    <div class="stat"><div class="stat-top">Fokusminuter <span class="stat-icon">◷</span></div><div class="stat-value" id="statMinutes">0</div><div class="stat-foot">Minuter i studierummet</div></div>
 
-<div class="columns">
+    <div class="stat"><div class="stat-top">Avklarade uppgifter <span class="stat-icon">✓</span></div><div class="stat-value" id="statTasks">0</div><div class="stat-foot">En uppgift i taget</div></div>
 
-<div>
+  </div>
 
-<h3>📐 Matematik</h3>
+  <div class="grid-2">
 
-<p class="muted">Träna på ekvationer och algebra.</p>
+    <div>
 
-<button class="action" onclick="showPage('math')">Börja plugga</button>
+      <div class="section-head"><h3>Fortsätt lära dig</h3><span>DIN STUDIEPLAN</span></div>
 
-</div>
+      <div class="course-list">
 
-<div>
+        <div class="course"><div class="course-icon">📐</div><div class="course-info"><strong>Matematik 1c</strong><small>Algebra · Ekvationer</small><div class="progress"><span style="width:35%"></span></div></div><div class="course-percent">35%</div></div>
 
-<h3>🌙 Fokusrum</h3>
+        <div class="course"><div class="course-icon">⚛️</div><div class="course-info"><strong>Fysik 1</strong><small>Rörelse och krafter</small><div class="progress"><span style="width:12%"></span></div></div><div class="course-percent">12%</div></div>
 
-<p class="muted">Hitta lugnet och koncentrationen.</p>
+        <div class="course"><div class="course-icon">🧪</div><div class="course-info"><strong>Kemi 1</strong><small>Materia och atomer</small><div class="progress"><span style="width:5%"></span></div></div><div class="course-percent">5%</div></div>
 
-<button class="action" onclick="showPage('room')">Öppna rummet</button>
+      </div>
 
-</div>
+    </div>
 
-</div>
+    <div>
 
-</div>
+      <div class="section-head"><h3>Dagens uppdrag</h3><span id="taskCount">0/3</span></div>
 
-<div class="card">
+      <div class="card" id="taskCard">
 
-<h2>🎯 Dagens mål</h2>
+        <div class="task"><div class="task-check" onclick="completeTask(this)">✓</div><span>Öppna en lektion</span></div>
 
-<p class="muted">Genomför en matematikövning och ett fokuserat pass.</p>
+        <div class="task"><div class="task-check" onclick="completeTask(this)">✓</div><span>Gör en matteövning</span></div>
 
-</div>
+        <div class="task"><div class="task-check" onclick="completeTask(this)">✓</div><span>Fokusera i 10 minuter</span></div>
 
-</section>
+      </div>
 
-<section class="page" id="avatar">
+    </div>
 
-<div class="card">
-
-<h2>✨ Min 3D-avatar</h2>
-
-<div id="avatarStage"></div>
-
-<p class="muted" style="text-align:center">Dra med fingret för att vrida din avatar ↔</p>
-
-</div>
-
-<div class="card">
-
-<h2>🎨 Anpassa din karaktär</h2>
-
-<div class="controls">
-
-<div><label>Frisyr</label><select id="hair">
-
-<option value="round">Rund frisyr</option>
-
-<option value="short">Kort frisyr</option>
-
-<option value="long">Lång frisyr</option>
-
-<option value="spiky">Busig frisyr</option>
-
-</select></div>
-
-<div><label>Hårfärg</label><select id="hairColor">
-
-<option value="#593c32">Chokladbrun</option>
-
-<option value="#211b2c">Midnattsvart</option>
-
-<option value="#e0b45e">Honungsblond</option>
-
-<option value="#a76bd6">Lavendel</option>
-
-<option value="#bd6689">Rosa</option>
-
-<option value="#648b9f">Blå</option>
-
-</select></div>
-
-<div><label>Hudton</label><select id="skin">
-
-<option value="#f2c5a5">Ljus varm</option>
-
-<option value="#d99b75">Mellan</option>
-
-<option value="#a96f50">Djup varm</option>
-
-<option value="#704832">Djup</option>
-
-</select></div>
-
-<div><label>Tröja</label><select id="clothes">
-
-<option value="#a78bfa">Lila hoodie</option>
-
-<option value="#77a9c9">Blå tröja</option>
-
-<option value="#8eae91">Grön tröja</option>
-
-<option value="#d58ca9">Rosa tröja</option>
-
-<option value="#e0ad68">Gyllene tröja</option>
-
-</select></div>
-
-<div><label>Byxor</label><select id="pants">
-
-<option value="#35334f">Midnattsblå</option>
-
-<option value="#777b91">Grå</option>
-
-<option value="#654b3d">Brun</option>
-
-<option value="#423f72">Lila</option>
-
-</select></div>
-
-<div><label>Accessoar</label><select id="extra">
-
-<option value="none">Ingen</option>
-
-<option value="headphones">Hörlurar</option>
-
-<option value="crown">Krona</option>
-
-<option value="glasses">Glasögon</option>
-
-<option value="star">Stjärna</option>
-
-</select></div>
-
-</div>
-
-<br>
-
-<button class="action" onclick="saveAvatar()">💾 Spara avatar</button>
-
-<p class="muted" id="avatarMessage">Dina val sparas på den här enheten.</p>
-
-</div>
+  </div>
 
 </section>
 
 <section class="page" id="room">
 
-<div class="card">
+  <div class="section-head"><h3>Ditt personliga studierum</h3><span>HITTA DITT FOKUS</span></div>
 
-<h2>🌙 Ditt personliga studierum</h2>
+  <div class="room" id="roomScene">
 
-<div class="room">
+    <div class="room-scene"><div class="window"></div><div class="lamp">♨</div><div class="desk"></div>
 
-<div class="lamp"></div>
+      <div class="room-center"><div class="timer-label" id="timerLabel">FOKUSTID</div><div class="timer" id="timer">25:00</div><div class="room-controls"><button class="btn" id="timerToggle" onclick="toggleTimer()">▶ Starta</button><button class="btn secondary" onclick="resetTimer()">↺ Återställ</button></div></div>
 
-<div class="roomText">
+      <div class="room-bottom">✦ Du behöver inte skynda. Bara börja.</div>
 
-<h2>Välkommen hem!</h2>
+    </div>
 
-<p>Här kan du fokusera på dina mål.</p>
+  </div>
 
-</div>
+  <div class="room-options"><button class="option active" onclick="setRoom('night',this)">🌙 Kvällsro</button><button class="option" onclick="setRoom('space',this)">🌌 Rymden</button><button class="option" onclick="setRoom('nature',this)">🌿 Naturen</button></div>
 
-<div class="desk"></div>
+  <div class="card"><strong style="font-size:13px">Fokustid</strong><p class="subtitle" style="margin:8px 0 0">Ett pass är 25 minuter. När timern är klar får du XP för ditt fokuspass.</p></div>
 
-</div>
+</section>
 
-<p class="muted">Ett lugnt utrymme för lärande, fokus och återhämtning.</p>
+<section class="page" id="courses">
 
-<button class="action" onclick="showPage('focus')">Starta fokuspass</button>
+  <div class="section-head"><h3>Mina kurser</h3><span>DIN LÄRANDE RESA</span></div>
 
-</div>
+  <div class="course-list">
 
-<div class="card">
+    <div class="course"><div class="course-icon">📐</div><div class="course-info"><strong>Matematik 1c</strong><small>Algebra, funktioner, geometri och statistik</small><div class="progress"><span style="width:35%"></span></div></div><button class="btn small" onclick="navigate('math')">Öppna</button></div>
 
-<h3>🪴 Ditt rum</h3>
+    <div class="course"><div class="course-icon">⚛️</div><div class="course-info"><strong>Fysik 1</strong><small>Rörelse, krafter och energi</small><div class="progress"><span style="width:12%"></span></div></div><span class="course-percent">12%</span></div>
 
-<p class="muted">Fler möbler, dekorationer och miljöer kommer i kommande versioner.</p>
+    <div class="course"><div class="course-icon">🧪</div><div class="course-info"><strong>Kemi 1</strong><small>Atomer, bindningar och reaktioner</small><div class="progress"><span style="width:5%"></span></div></div><span class="course-percent">5%</span></div>
 
-</div>
+    <div class="course"><div class="course-icon">💻</div><div class="course-info"><strong>Programmering</strong><small>Logik och problemlösning</small><div class="progress"><span style="width:0%"></span></div></div><span class="course-percent">0%</span></div>
+
+  </div>
+
+  <div class="section-head"><h3>Matematik 1c</h3><span>FÖRSTA KURSEN</span></div>
+
+  <div class="study-layout">
+
+    <div class="card lesson-card">
+
+      <div class="eyebrow">KAPITEL 01 · ALGEBRA</div><h2>Att lösa ekvationer</h2>
+
+      <p>En ekvation är en likhet som innehåller en eller flera obekanta. Målet är att hitta det värde som gör att båda sidor är lika stora.</p>
+
+      <div class="formula">2x + 4 = 14</div>
+
+      <p>För att lösa ekvationen gör vi samma sak på båda sidor:</p>
+
+      <p>1. Subtrahera 4 från båda sidor.<br>2. Då får vi 2x = 10.<br>3. Dela båda sidor med 2.<br>4. Då blir svaret x = 5.</p>
+
+      <div class="section-head"><h3>Testa själv</h3></div>
+
+      <p>Vad är x i ekvationen 3x + 6 = 18?</p>
+
+      <input class="answer-input" id="mathAnswer" placeholder="Skriv ditt svar här..." inputmode="decimal">
+
+      <button class="btn" style="margin-top:12px" onclick="checkMath()">Kontrollera svar</button>
+
+      <div class="feedback" id="mathFeedback"></div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="section-head"><h3>Kapitel</h3></div>
+
+      <div class="chapter active"><strong>01 · Algebra</strong><small>Påbörjad · Ekvationer</small></div>
+
+      <div class="chapter"><strong>02 · Funktioner</strong><small>Grafer och samband</small></div>
+
+      <div class="chapter"><strong>03 · Geometri</strong><small>Area och volym</small></div>
+
+      <div class="chapter"><strong>04 · Statistik</strong><small>Data och sannolikhet</small></div>
+
+    </div>
+
+  </div>
 
 </section>
 
 <section class="page" id="math">
 
-<div class="card">
+  <div class="eyebrow">MATEMATIK 1C</div><h1>Algebraövning</h1><p class="subtitle">Träna på att lösa ekvationer och få direkt feedback.</p>
 
-<h2>📐 Matematik – Algebra</h2>
+  <div class="card lesson-card" style="max-width:700px;margin-top:20px">
 
-<p class="muted">Träna på grunderna i algebra. Läs frågan och välj det svar du tror är rätt.</p>
+    <div class="eyebrow">ÖVNING 01</div><h2>Lös ekvationen</h2>
 
-<div class="item">
+    <div class="formula">4x − 8 = 20</div>
 
-<h3>Lektion 1: Vad är en variabel?</h3>
+    <p>Vilket värde har x?</p>
 
-<p>En variabel är en bokstav som representerar ett tal. I uttrycket 3x betyder det 3 multiplicerat med x.</p>
+    <input class="answer-input" id="mathAnswer2" placeholder="Ditt svar..." inputmode="decimal">
 
-</div>
+    <button class="btn" style="margin-top:12px" onclick="checkMath2()">Kontrollera</button>
 
-<div class="item">
+    <div class="feedback" id="mathFeedback2"></div>
 
-<h3>Lektion 2: Lös en enkel ekvation</h3>
-
-<p>Om x + 4 = 10, subtraherar vi 4 från båda sidor. Då får vi x = 6.</p>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h2>🧠 Kunskapsquiz</h2>
-
-<div id="quiz">
-
-<p class="question" id="question">Vad är x om x + 4 = 10?</p>
-
-<div id="answers"></div>
-
-<p id="feedback" class="muted"></p>
-
-</div>
-
-<button class="secondary" id="nextQuestion" onclick="nextQuestion()" style="display:none">Nästa fråga →</button>
-
-</div>
+  </div>
 
 </section>
 
-<section class="page" id="focus">
+<section class="page" id="coach">
 
-<div class="card">
+  <div class="eyebrow">DIN DIGITALA STUDIEKOMPIS</div><h1>AI Study Coach</h1><p class="subtitle">Ställ frågor, få förklaringar och lär dig steg för steg.</p>
 
-<h2>⏱️ Fokusläge</h2>
+  <div class="card coach-box" style="margin-top:20px">
 
-<p class="muted" style="text-align:center">Ta en sak i taget. Du klarar det!</p>
+    <div class="chat-messages" id="chatMessages">
 
-<div id="timer">25:00</div>
+      <div class="message bot">Hej! ✨ Jag är din studiecoach. Jag kan hjälpa dig att förstå svåra begrepp, förklara matte steg för steg och skapa studieplaner. Vad vill du lära dig idag?</div>
 
-<div class="progress"><div id="timerBar"></div></div>
+    </div>
 
-<div style="display:flex;justify-content:center;gap:9px;flex-wrap:wrap">
+    <div class="chat-row"><input class="answer-input" id="chatInput" placeholder="Skriv en fråga..." onkeydown="if(event.key==='Enter')sendChat()"><button class="btn" onclick="sendChat()">Skicka ↗</button></div>
 
-<button class="action" id="startTimer" onclick="startTimer()">Starta fokus</button>
+    <p class="subtitle" style="margin:10px 0 0">Detta är en gränssnittsdemonstration. En riktig AI-coach kräver en säker AI-anslutning.</p>
 
-<button class="secondary" onclick="pauseTimer()">Pausa</button>
-
-<button class="secondary" onclick="resetTimer()">Återställ</button>
-
-<button class="secondary" onclick="setBreak()">5 min paus</button>
-
-</div>
-
-<p class="muted" id="timerMessage" style="text-align:center">25 minuter fokus.</p>
-
-</div>
+  </div>
 
 </section>
 
-<section class="page" id="shop">
+<section class="page" id="avatar">
 
-<div class="card">
+  <div class="eyebrow">DIN KARAKTÄR</div><h1>Avatarstudio</h1><p class="subtitle">Skapa en karaktär som representerar dig i Pluggnästet.</p>
 
-<h2>🛍️ Avatarbutiken</h2>
+  <div class="grid-2" style="margin-top:20px">
 
-<p class="muted">Använd XP för att låsa upp nya stilar. Alla köp sparas lokalt.</p>
+    <div class="avatar-stage">
 
-<p>Din XP: ⭐ <strong id="shopXP">1250</strong></p>
+      <div class="avatar-figure" id="avatarFigure">
 
-<div id="shopItems"></div>
+        <div class="avatar-head" id="avatarHead"><div class="avatar-hair" id="avatarHair"></div><div class="avatar-eyes"><i></i><i></i></div></div>
 
-</div>
+        <div class="avatar-body" id="avatarBody"></div><div class="avatar-legs"><i></i><i></i></div>
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="section-head"><h3>Anpassa din avatar</h3></div>
+
+      <div class="custom-row"><span>Hudton</span><input type="color" value="#e9b99c" onchange="changeAvatar('--skin',this.value)"></div>
+
+      <div class="custom-row"><span>Hårfärg</span><input type="color" value="#4a3040" onchange="changeAvatar('--hair',this.value)"></div>
+
+      <div class="custom-row"><span>Klädfärg</span><input type="color" value="#8070c9" onchange="changeAvatar('--outfit',this.value)"></div>
+
+      <div style="margin-top:20px"><button class="btn" onclick="saveAvatar()">Spara avatar</button><button class="btn secondary" onclick="resetAvatar()" style="margin-left:7px">Återställ</button></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="page" id="progress">
+
+  <div class="eyebrow">DIN UTVECKLING</div><h1>Framsteg</h1><p class="subtitle">Varje fokuspass och varje uppgift tar dig framåt.</p>
+
+  <div class="grid-2" style="margin-top:20px">
+
+    <div class="card" style="text-align:center">
+
+      <div class="eyebrow">DIN NUVÅRANDE NIVÅ</div>
+
+      <div class="level-ring"><div class="level-inner"><div><strong id="progressLevel">1</strong><div style="font-size:10px;color:var(--muted)">NIVÅ</div></div></div></div>
+
+      <h3 id="progressXP">0 XP</h3><p class="subtitle">Samla XP genom att studera och öva.</p>
+
+      <div class="progress"><span id="levelProgress" style="width:0%"></span></div>
+
+      <p class="subtitle" id="nextLevelText" style="margin-top:9px">0 / 100 XP till nästa nivå</p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="section-head"><h3>Dina prestationer</h3></div>
+
+      <div class="achievement"><div class="achievement-icon">🌱</div><div><strong style="font-size:12px">Första steget</strong><small>Du har börjat din resa</small></div></div>
+
+      <div class="achievement"><div class="achievement-icon">📚</div><div><strong style="font-size:12px">Kunskapssökare</strong><small>Öppna din första lektion</small></div></div>
+
+      <div class="achievement"><div class="achievement-icon">⏳</div><div><strong style="font-size:12px">Fokusmästare</strong><small>Slutför ditt första fokuspass</small></div></div>
+
+    </div>
+
+  </div>
 
 </section>
 
 </main>
 
-<footer>Pluggnästet · Lär i din egen takt 💜</footer>
+</div>
 
-<script type="importmap">
+<nav class="mobile-bar">
 
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}
+  <button class="active" data-page="home"><span>⌂</span>Hem</button>
 
-</script>
+  <button data-page="room"><span>◷</span>Fokus</button>
 
-<script type="module">
+  <button data-page="courses"><span>▤</span>Kurser</button>
 
-import * as THREE from "three";
+  <button data-page="coach"><span>✧</span>Coach</button>
 
-const $=id=>document.getElementById(id);
+  <button data-page="avatar"><span>♙</span>Avatar</button>
 
-let data=JSON.parse(localStorage.getItem("pluggnastetData")||"{}");
+</nav>
 
-data.xp=data.xp??1250;
+<div class="toast" id="toast">Sparat!</div>
 
-data.streak=data.streak??1;
+<script>
 
-data.owned=data.owned||[];
+const titles={
 
-data.avatar=data.avatar||{};
+ home:['Välkommen tillbaka!','Dags att ta ett steg närmare dina mål.'],
 
-function saveData(){localStorage.setItem("pluggnastetData",JSON.stringify(data));updateStats()}
+ room:['Ditt studierum','Skapa lugn och hitta ditt fokus.'],
 
-function addXP(n){data.xp+=n;saveData()}
+ courses:['Mina kurser','Din personliga läranderesa börjar här.'],
+
+ math:['Algebraövning','Öva, förstå och utvecklas.'],
+
+ coach:['AI Study Coach','Din digitala studiekompis.'],
+
+ avatar:['Avatarstudio','Skapa din karaktär.'],
+
+ progress:['Dina framsteg','Se hur långt du har kommit.']
+
+};
+
+let state=JSON.parse(localStorage.getItem('pluggnastet_v2')||'{}');
+
+state.xp=state.xp||0;state.minutes=state.minutes||0;state.tasks=state.tasks||0;
+
+function save(){localStorage.setItem('pluggnastet_v2',JSON.stringify(state));updateStats()}
+
+function navigate(page){
+
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+
+ const target=document.getElementById(page);
+
+ if(!target)return;
+
+ target.classList.add('active');
+
+ document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+
+ document.getElementById('pageTitle').textContent=titles[page][0];
+
+ document.getElementById('pageSubtitle').textContent=titles[page][1];
+
+ window.scrollTo({top:0,behavior:'smooth'});
+
+ if(page==='courses')state.lessonOpened=true;
+
+}
+
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
 
 function updateStats(){
 
-$("xp").textContent=data.xp;
+ const level=Math.floor(state.xp/100)+1,remaining=state.xp%100;
 
-$("shopXP").textContent=data.xp;
+ ['topXP','statXP'].forEach(id=>document.getElementById(id).textContent=state.xp);
 
-$("level").textContent=Math.floor(data.xp/300)+1;
+ document.getElementById('statLevel').textContent=level;
 
-$("streak").textContent=data.streak;
+ document.getElementById('sideLevel').textContent=level;
 
-const progress=data.xp%300;
+ document.getElementById('statMinutes').textContent=state.minutes;
 
-$("levelBar").style.width=(progress/300*100)+"%";
+ document.getElementById('statTasks').textContent=state.tasks;
 
-$("levelText").textContent=(300-progress)+" XP till nästa nivå.";
+ document.getElementById('progressLevel').textContent=level;
+
+ document.getElementById('progressXP').textContent=state.xp+' XP';
+
+ document.getElementById('levelProgress').style.width=remaining+'%';
+
+ document.getElementById('nextLevelText').textContent=remaining+' / 100 XP till nästa nivå';
 
 }
+
+function addXP(n){state.xp+=n;save();toast('+'+n+' XP tillagda! ✦')}
+
+function toast(message){
+
+ const el=document.getElementById('toast');el.textContent=message;el.classList.add('show');
+
+ setTimeout(()=>el.classList.remove('show'),2100);
+
+}
+
+function completeTask(el){
+
+ if(el.classList.contains('done'))return;
+
+ el.classList.add('done');el.innerHTML='✓';
+
+ el.parentElement.classList.add('done');state.tasks++;addXP(10);
+
+ const count=document.querySelectorAll('#taskCard .task-check.done').length;
+
+ document.getElementById('taskCount').textContent=count+'/3';
+
+}
+
+function checkMath(){
+
+ const v=document.getElementById('mathAnswer').value.trim().replace(',','.');
+
+ const f=document.getElementById('mathFeedback');
+
+ if(v==='4'){f.textContent='Rätt svar! Bra jobbat. 3x + 6 = 18 ger x = 4.';f.style.color='var(--green)';if(!state.mathDone){state.mathDone=true;addXP(20)}}
+
+ else{f.textContent='Inte riktigt. Börja med att subtrahera 6 från båda sidor.';f.style.color='#f0a6b8'}
+
+}
+
+function checkMath2(){
+
+ const v=document.getElementById('mathAnswer2').value.trim().replace(',','.');
+
+ const f=document.getElementById('mathFeedback2');
+
+ if(v==='7'){f.textContent='Helt rätt! 4x = 28, alltså x = 7. +20 XP!';f.style.color='var(--green)';if(!state.math2Done){state.math2Done=true;addXP(20)}}
+
+ else{f.textContent='Försök igen. Börja med att addera 8 på båda sidor.';f.style.color='#f0a6b8'}
+
+}
+
+let seconds=1500,interval=null,elapsed=0;
+
+function renderTimer(){
+
+ document.getElementById('timer').textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
+
+}
+
+function toggleTimer(){
+
+ if(interval){clearInterval(interval);interval=null;document.getElementById('timerToggle').textContent='▶ Fortsätt';return}
+
+ document.getElementById('timerToggle').textContent='Ⅱ Pausa';
+
+ interval=setInterval(()=>{
+
+  seconds--;elapsed++;renderTimer();
+
+  if(elapsed%60===0){state.minutes++;save()}
+
+  if(seconds<=0){
+
+   clearInterval(interval);interval=null;seconds=1500;elapsed=0;renderTimer();
+
+   document.getElementById('timerToggle').textContent='▶ Starta';
+
+   addXP(50);toast('Fokuspass klart! +50 XP 🎉');
+
+  }
+
+ },1000);
+
+}
+
+function resetTimer(){
+
+ clearInterval(interval);interval=null;seconds=1500;elapsed=0;renderTimer();
+
+ document.getElementById('timerToggle').textContent='▶ Starta';
+
+}
+
+function setRoom(room,button){
+
+ document.getElementById('roomScene').className='room '+(room==='night'?'':room);
+
+ document.querySelectorAll('.room-options .option').forEach(b=>b.classList.remove('active'));
+
+ button.classList.add('active');
+
+}
+
+function changeAvatar(prop,value){document.documentElement.style.setProperty(prop,value)}
+
+function saveAvatar(){
+
+ state.avatar=true;save();toast('Din avatar är sparad!');
+
+}
+
+function resetAvatar(){
+
+ document.documentElement.style.setProperty('--skin','#e9b99c');
+
+ document.documentElement.style.setProperty('--hair','#4a3040');
+
+ document.documentElement.style.setProperty('--outfit','#8070c9');
+
+ document.querySelectorAll('.custom-row input').forEach((input,i)=>input.value=['#e9b99c','#4a3040','#8070c9'][i]);
+
+}
+
+function sendChat(){
+
+ const input=document.getElementById('chatInput'),value=input.value.trim();
+
+ if(!value)return;
+
+ const box=document.getElementById('chatMessages');
+
+ const user=document.createElement('div');user.className='message user';user.textContent=value;box.appendChild(user);
+
+ const bot=document.createElement('div');bot.className='message bot';
+
+ let answer='Bra fråga! Jag är just nu en förhandsvisning av studiecoachen. En riktig AI-version kommer kunna analysera din fråga och ge dig en personlig förklaring.';
+
+ if(/ekvation|matte|matematik/i.test(value))answer='Ett bra sätt att lösa en ekvation är att försöka få x ensamt. Gör samma räkneoperation på båda sidor av likhetstecknet. Vill du testa med 2x + 4 = 14?';
+
+ else if(/plugga|plan|studie/i.test(value))answer='Testa att dela upp arbetet i korta pass. Välj ett tydligt mål, fokusera i 25 minuter och ta sedan en kort paus. Börja med det som känns viktigast.';
+
+ bot.textContent=answer;box.appendChild(bot);input.value='';box.scrollTop=box.scrollHeight;
+
+}
+
+document.getElementById('dateLabel').textContent=new Intl.DateTimeFormat('sv-SE',{weekday:'long',day:'numeric',month:'long'}).format(new Date()).toUpperCase();
 
 updateStats();
 
-window.showPage=id=>{
-
-document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));
-
-document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
-
-if(id==="avatar")resizeAvatar();
-
-};
-
-document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
-
-const stage=$("avatarStage");
-
-const scene=new THREE.Scene();
-
-scene.background=new THREE.Color("#342951");
-
-const camera=new THREE.PerspectiveCamera(35,1,.1,100);
-
-camera.position.set(0,0,10);
-
-const renderer=new THREE.WebGLRenderer({antialias:true});
-
-renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-
-renderer.outputColorSpace=THREE.SRGBColorSpace;
-
-stage.appendChild(renderer.domElement);
-
-scene.add(new THREE.HemisphereLight(0xffffff,0x78618f,2));
-
-const light=new THREE.DirectionalLight(0xffffff,2.5);
-
-light.position.set(-3,5,6);scene.add(light);
-
-const fill=new THREE.PointLight(0xbda2ff,15,15);
-
-fill.position.set(3,2,3);scene.add(fill);
-
-const avatar=new THREE.Group();scene.add(avatar);
-
-const parts=new THREE.Group();avatar.add(parts);
-
-const mat=(color)=>new THREE.MeshStandardMaterial({color,roughness:.8});
-
-function sphere(parent,x,y,z,sx,sy,sz,color){
-
-const m=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),mat(color));
-
-m.position.set(x,y,z);m.scale.set(sx,sy,sz);parent.add(m);return m;
-
-}
-
-function torus(parent,x,y,z,r,t,color){
-
-const m=new THREE.Mesh(new THREE.TorusGeometry(r,t,12,48),mat(color));
-
-m.position.set(x,y,z);parent.add(m);return m;
-
-}
-
-function limb(x,y,z,length,radius,color,rotation=0){
-
-const m=new THREE.Mesh(new THREE.CapsuleGeometry(radius,length,8,16),mat(color));
-
-m.position.set(x,y,z);m.rotation.z=rotation;parts.add(m);return m;
-
-}
-
-function box(parent,x,y,z,sx,sy,sz,color){
-
-const m=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),mat(color));
-
-m.position.set(x,y,z);parent.add(m);return m;
-
-}
-
-function buildAvatar(){
-
-while(parts.children.length)parts.remove(parts.children[0]);
-
-const skin=$("skin").value,hair=$("hairColor").value;
-
-const clothes=$("clothes").value,pants=$("pants").value;
-
-const style=$("hair").value,extra=$("extra").value;
-
-const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.55,.75,8,24),mat(clothes));
-
-torso.position.y=-.65;torso.scale.set(1,.9,.8);parts.add(torso);
-
-sphere(parts,0,.15,0,.23,.3,.23,skin);
-
-limb(-.29,-1.65,0,.65,.20,pants);
-
-limb(.29,-1.65,0,.65,.20,pants);
-
-sphere(parts,-.30,-2.15,.13,.29,.17,.43,"#e5d9ff");
-
-sphere(parts,.30,-2.15,.13,.29,.17,.43,"#e5d9ff");
-
-limb(-.78,-.65,0,.65,.19,clothes,-.28);
-
-limb(.78,-.65,0,.65,.19,clothes,.28);
-
-sphere(parts,-1,-1.08,.04,.17,.17,.17,skin);
-
-sphere(parts,1,-1.08,.04,.17,.17,.17,skin);
-
-sphere(parts,0,1.15,0,.78,.95,.68,skin);
-
-sphere(parts,0,1.72,-.02,.81,.58,.7,hair);
-
-sphere(parts,0,1.48,.51,.72,.25,.25,hair);
-
-if(style==="long"){
-
-sphere(parts,-.68,.95,-.05,.18,.85,.3,hair);
-
-sphere(parts,.68,.95,-.05,.18,.85,.3,hair);
-
-}
-
-if(style==="short"){
-
-sphere(parts,-.62,1.25,-.05,.18,.35,.3,hair);
-
-sphere(parts,.62,1.25,-.05,.18,.35,.3,hair);
-
-}
-
-if(style==="spiky"){
-
-for(let i=-2;i<=2;i++){
-
-const spike=new THREE.Mesh(new THREE.ConeGeometry(.16,.48,16),mat(hair));
-
-spike.position.set(i*.24,2.12,0);spike.rotation.z=i*.16;parts.add(spike);
-
-}
-
-}
-
-sphere(parts,-.29,1.22,.61,.085,.13,.06,"#30233e");
-
-sphere(parts,.29,1.22,.61,.085,.13,.06,"#30233e");
-
-sphere(parts,0,1.03,.67,.055,.07,.045,"#d99f82");
-
-const smile=torus(parts,0,.91,.64,.13,.018,"#a65f6c");smile.scale.y=.38;
-
-if(extra==="headphones"){
-
-torus(parts,0,1.75,0,.83,.09,"#6bd0df");
-
-sphere(parts,-.79,1.35,0,.16,.25,.16,"#6bd0df");
-
-sphere(parts,.79,1.35,0,.16,.25,.16,"#6bd0df");
-
-}
-
-if(extra==="crown"){
-
-for(let i=0;i<5;i++){
-
-const spike=new THREE.Mesh(new THREE.ConeGeometry(.12,.32,4),mat("#f6ce65"));
-
-spike.position.set((i-2)*.22,2.28,0);parts.add(spike);
-
-}
-
-box(parts,0,2.12,0,.95,.12,.22,"#f6ce65");
-
-}
-
-if(extra==="glasses"){
-
-torus(parts,-.29,1.22,.69,.19,.035,"#e6d7ff");
-
-torus(parts,.29,1.22,.69,.19,.035,"#e6d7ff");
-
-box(parts,0,1.22,.69,.17,.045,.04,"#e6d7ff");
-
-}
-
-if(extra==="star"){
-
-const star=new THREE.Mesh(new THREE.OctahedronGeometry(.22),mat("#ffe17b"));
-
-star.position.set(.9,2.1,.1);parts.add(star);
-
-}
-
-}
-
-function applySavedAvatar(){
-
-Object.entries(data.avatar).forEach(([id,value])=>{if($(id))$(id).value=value});
-
-}
-
-applySavedAvatar();buildAvatar();
-
-["hair","hairColor","skin","clothes","pants","extra"].forEach(id=>$(id).addEventListener("change",buildAvatar));
-
-let rotation=0,drag=false,lastX=0;
-
-stage.addEventListener("pointerdown",e=>{drag=true;lastX=e.clientX;stage.setPointerCapture(e.pointerId)});
-
-stage.addEventListener("pointermove",e=>{if(drag){rotation+=(e.clientX-lastX)*.012;lastX=e.clientX}});
-
-stage.addEventListener("pointerup",()=>drag=false);
-
-stage.addEventListener("pointercancel",()=>drag=false);
-
-function resizeAvatar(){
-
-const w=stage.clientWidth,h=stage.clientHeight;
-
-renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
-
-}
-
-new ResizeObserver(resizeAvatar).observe(stage);resizeAvatar();
-
-let blink=0;
-
-function animate(){
-
-requestAnimationFrame(animate);
-
-avatar.rotation.y+=(rotation-avatar.rotation.y)*.12;
-
-avatar.position.y=Math.sin(Date.now()*.0015)*.035;
-
-renderer.render(scene,camera);
-
-}
-
-animate();
-
-window.saveAvatar=()=>{
-
-data.avatar={};
-
-["hair","hairColor","skin","clothes","pants","extra"].forEach(id=>data.avatar[id]=$(id).value);
-
-saveData();$("avatarMessage").textContent="✨ Din avatar är sparad!";
-
-};
-
-// Matematikquiz
-
-const questions=[
-
-{q:"Vad är x om x + 4 = 10?",a:["4","6","14"],correct:1,explain:"10 − 4 = 6, alltså är x = 6."},
-
-{q:"Vad är 3 × 5?",a:["8","15","20"],correct:1,explain:"Tre grupper med fem blir 15."},
-
-{q:"Vad är x om 2x = 12?",a:["6","10","14"],correct:0,explain:"Dela båda sidor med 2. x = 6."},
-
-{q:"Förenkla 4x + 2x.",a:["6x","8x","6"],correct:0,explain:"4x + 2x = 6x."},
-
-{q:"Vad är 10²?",a:["20","100","1000"],correct:1,explain:"10 gånger 10 är 100."}
-
-];
-
-let qIndex=0,answered=false;
-
-function renderQuestion(){
-
-const q=questions[qIndex];answered=false;
-
-$("question").textContent=q.q;$("feedback").textContent="";
-
-$("nextQuestion").style.display="none";$("answers").innerHTML="";
-
-q.a.forEach((a,i)=>{
-
-const b=document.createElement("button");b.className="answer";b.textContent=a;
-
-b.onclick=()=>{
-
-if(answered)return;answered=true;
-
-if(i===q.correct){$("feedback").textContent="Rätt! "+q.explain;addXP(25)}
-
-else $("feedback").textContent="Inte riktigt. "+q.explain;
-
-$("nextQuestion").style.display="inline-block";
-
-};$("answers").appendChild(b);
-
-});
-
-}
-
-window.nextQuestion=()=>{qIndex=(qIndex+1)%questions.length;renderQuestion()};
-
-renderQuestion();
-
-// Fokus-timer
-
-let total=1500,remaining=1500,interval=null;
-
-function showTimer(){
-
-const m=Math.floor(remaining/60),s=remaining%60;
-
-$("timer").textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-
-$("timerBar").style.width=((total-remaining)/total*100)+"%";
-
-}
-
-window.startTimer=()=>{
-
-if(interval)return;
-
-$("timerMessage").textContent="Bra jobbat – fokusera i din egen takt.";
-
-interval=setInterval(()=>{
-
-remaining--;showTimer();
-
-if(remaining<=0){
-
-clearInterval(interval);interval=null;
-
-$("timerMessage").textContent="Fokuspass klart! Du fick 50 XP.";
-
-addXP(50);
-
-}
-
-},1000);
-
-};
-
-window.pauseTimer=()=>{clearInterval(interval);interval=null;$("timerMessage").textContent="Pausat. Starta när du är redo."};
-
-window.resetTimer=()=>{pauseTimer();total=1500;remaining=1500;showTimer();$("timerMessage").textContent="25 minuter fokus."};
-
-window.setBreak=()=>{pauseTimer();total=300;remaining=300;showTimer();$("timerMessage").textContent="Fem minuters paus."};
-
-showTimer();
-
-// Butik
-
-const items=[
-
-{id:"hoodie",name:"Stjärnhoodie",cost:150,desc:"En hoodie med stjärnglans."},
-
-{id:"crown",name:"Gyllene krona",cost:250,desc:"En liten krona till din avatar."},
-
-{id:"headphones",name:"Neonhörlurar",cost:200,desc:"Lila och blå hörlurar."},
-
-{id:"star",name:"Magisk stjärna",cost:300,desc:"En stjärna som följer din stil."}
-
-];
-
-function renderShop(){
-
-$("shopItems").innerHTML="";
-
-items.forEach(item=>{
-
-const owned=data.owned.includes(item.id);
-
-const div=document.createElement("div");div.className="item";
-
-const title=document.createElement("h3");title.textContent=item.name;
-
-const desc=document.createElement("p");desc.className="muted";desc.textContent=item.desc;
-
-const button=document.createElement("button");button.className=owned?"secondary":"action";
-
-button.textContent=owned?"Upplåst ✓":"Köp · "+item.cost+" XP";
-
-button.disabled=owned;
-
-button.onclick=()=>{
-
-if(data.xp<item.cost){alert("Du behöver samla mer XP först!");return}
-
-data.xp-=item.cost;data.owned.push(item.id);
-
-if(item.id==="crown")$("extra").value="crown";
-
-if(item.id==="headphones")$("extra").value="headphones";
-
-if(item.id==="star")$("extra").value="star";
-
-if(item.id==="hoodie")$("clothes").value="#a78bfa";
-
-buildAvatar();saveAvatar();renderShop();saveData();
-
-};
-
-div.append(title,desc,button);$("shopItems").appendChild(div);
-
-});
-
-}
-
-renderShop();
+renderTimer();
 
 </script>
 
