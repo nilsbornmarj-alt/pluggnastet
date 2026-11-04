@@ -8,71 +8,61 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pluggnästet – Ditt study space</title>
+<title>Pluggnästet – Min avatar</title>
 
 <style>
 
 *{box-sizing:border-box}
 
-body{margin:0;background:#11131e;color:#f4f0ff;font-family:Inter,system-ui,sans-serif}
+body{margin:0;background:#111126;color:#f4efff;font-family:Arial,sans-serif;padding:22px}
 
-header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff12}
+header{text-align:center;margin-bottom:25px}
 
-.logo{font-size:23px;font-weight:800;letter-spacing:-1px}
+h1{color:#d9bdff;margin-bottom:5px}
 
-.logo span{color:#b49aff}
+.subtitle{color:#aaa1c7}
 
-nav a{color:#b9b5ca;text-decoration:none;margin-left:22px;font-size:14px}
+main{max-width:850px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
 
-main{max-width:1100px;margin:auto;padding:35px 22px}
+.panel{background:#201e3d;border:1px solid #454064;border-radius:22px;padding:20px}
 
-.welcome{color:#aaa5bd;font-size:14px}
+.avatar-area{background:radial-gradient(circle,#51427d,#211d42 70%);border-radius:18px;min-height:330px;display:flex;align-items:center;justify-content:center;flex-direction:column}
 
-h1{font-size:32px;margin:8px 0}
+.avatar{position:relative;width:190px;height:255px}
 
-.sub{color:#aaa5bd}
+.hair{position:absolute;top:10px;left:37px;width:116px;height:100px;background:#593c32;border-radius:55% 55% 35% 35%;z-index:2}
 
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0}
+.face{position:absolute;top:38px;left:43px;width:104px;height:112px;background:#f2c5a5;border-radius:48% 48% 46% 46%;z-index:3}
 
-.card{background:#1c1d2d;border:1px solid #ffffff12;border-radius:18px;padding:20px}
+.fringe{position:absolute;top:34px;left:44px;width:105px;height:48px;background:#593c32;border-radius:50% 50% 35% 20%;z-index:4}
 
-.stat{font-size:25px;font-weight:800;margin-top:7px}
+.eye{position:absolute;top:91px;width:9px;height:13px;background:#30233a;border-radius:50%;z-index:5}
 
-.muted{color:#aaa5bd;font-size:13px}
+.eye.left{left:70px}.eye.right{left:113px}
 
-.room{margin-top:25px;border-radius:24px;min-height:390px;padding:28px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 110%,#654d8c 0%,transparent 60%),linear-gradient(140deg,#292844,#171a2b 65%,#34304b);border:1px solid #ffffff20}
+.smile{position:absolute;top:119px;left:87px;width:18px;height:9px;border-bottom:3px solid #a45d69;border-radius:50%;z-index:5}
 
-.room h2{font-size:23px}
+.body{position:absolute;top:143px;left:23px;width:145px;height:105px;background:#a78bfa;border-radius:55px 55px 22px 22px;z-index:2}
 
-.timer{font-size:76px;font-weight:800;letter-spacing:-4px;margin:35px 0 20px;font-variant-numeric:tabular-nums}
+.neck{position:absolute;top:132px;left:83px;width:30px;height:28px;background:#f2c5a5;z-index:1}
 
-button{border:0;border-radius:12px;padding:12px 20px;font-weight:700;cursor:pointer;background:#b49aff;color:#171322}
+.accessory{position:absolute;top:18px;left:135px;font-size:28px;z-index:6}
 
-button.secondary{background:#ffffff16;color:white}
+.controls{display:grid;gap:14px}
 
-.controls{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+label{display:block;color:#cbbbe9;font-size:14px;margin-bottom:7px}
 
-.environments{display:flex;justify-content:center;gap:9px;margin-top:24px;flex-wrap:wrap}
+select{width:100%;padding:12px;background:#302b50;color:white;border:1px solid #655a88;border-radius:10px;font-size:15px}
 
-.environments button{font-size:12px;padding:9px 13px}
+button{padding:13px;border:0;border-radius:12px;background:#a78bfa;color:#17132a;font-weight:bold;font-size:15px;cursor:pointer}
 
-.section-title{margin:35px 0 15px}
+button:hover{background:#c5aaff}
 
-.courses{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stats{color:#cbbbe9;font-size:14px;margin-top:15px}
 
-.course{background:#1c1d2d;border:1px solid #ffffff12;border-radius:18px;padding:20px}
-
-.course .emoji{font-size:26px}
-
-.progress{height:6px;background:#343448;border-radius:8px;margin:15px 0 8px}
-
-.progress span{display:block;height:100%;background:#b49aff;border-radius:8px}
-
-footer{text-align:center;padding:35px;color:#77758c;font-size:12px}
-
-@media(max-width:650px){nav{display:none}.stats,.courses{grid-template-columns:1fr}.timer{font-size:62px}h1{font-size:27px}}
+@media(max-width:650px){main{grid-template-columns:1fr}body{padding:14px}}
 
 </style>
 
@@ -82,103 +72,187 @@ footer{text-align:center;padding:35px;color:#77758c;font-size:12px}
 
 <header>
 
-<div class="logo">pluggnästet<span>.</span></div>
+<h1>🐝 Pluggnästet</h1>
 
-<nav><a href="#hem">Hem</a><a href="#fokus">Fokusrum</a><a href="#kurser">Mina kurser</a></nav>
+<div class="subtitle">Ditt rum. Din stil. Din studieresa.</div>
 
 </header>
 
-<main id="hem">
+<main>
 
-<p class="welcome">DITT PERSONLIGA STUDIEUNIVERSUM</p>
+<section class="panel">
 
-<h1>Välkommen tillbaka! ✨</h1>
+<h2>Min avatar</h2>
 
-<p class="sub">En liten stunds fokus kan göra stor skillnad.</p>
+<div class="avatar-area">
 
-<div class="stats">
+<div class="avatar">
 
-<div class="card"><div class="muted">Dina studiepoäng</div><div class="stat">⭐ 1 250 XP</div><div class="muted">Nivå 4 · Kunskapssökare</div></div>
+<div class="hair" id="backHair"></div>
 
-<div class="card"><div class="muted">Din studiestreak</div><div class="stat">🔥 5 dagar</div><div class="muted">Fortsätt i din egen takt</div></div>
+<div class="neck"></div>
 
-<div class="card"><div class="muted">Veckans mål</div><div class="stat">3 / 5</div><div class="muted">Studiepass genomförda</div></div>
+<div class="body" id="outfit"></div>
+
+<div class="face"></div>
+
+<div class="fringe" id="frontHair"></div>
+
+<div class="eye left"></div><div class="eye right"></div>
+
+<div class="smile"></div>
+
+<div class="accessory" id="accessory"></div>
 
 </div>
 
-<section class="room" id="fokus">
+<div>✨ Din Pluggnästet-avatar</div>
 
-<p class="muted">✦ YOUR PERSONAL FOCUS SPACE ✦</p>
+</div>
 
-<h2>Välkommen till ditt fokusrum</h2>
+<div class="stats">⭐ 1 250 XP · Nivå 4</div>
 
-<p class="muted" id="mode">Dags att fokusera på dig själv.</p>
+</section>
 
-<div class="timer" id="timer">25:00</div>
+<section class="panel">
+
+<h2>Anpassa din stil</h2>
 
 <div class="controls">
 
-<button id="start">Starta fokus</button>
+<div>
 
-<button class="secondary" id="reset">Återställ</button>
+<label for="hair">Frisyr</label>
 
-<button class="secondary" id="break">Paus 5 min</button>
+<select id="hair">
+
+<option value="round">Mjuk och rund</option>
+
+<option value="short">Kort frisyr</option>
+
+<option value="long">Lång frisyr</option>
+
+</select>
 
 </div>
 
-<div class="environments">
+<div>
 
-<button class="secondary" onclick="setRoom(0)">🌙 Natt</button>
+<label for="hairColor">Hårfärg</label>
 
-<button class="secondary" onclick="setRoom(1)">🌌 Rymd</button>
+<select id="hairColor">
 
-<button class="secondary" onclick="setRoom(2)">🌿 Natur</button>
+<option value="#593c32">Chokladbrun</option>
+
+<option value="#171522">Midnattsvart</option>
+
+<option value="#d9a64e">Honungsblond</option>
+
+<option value="#a76bd6">Lavendel</option>
+
+<option value="#b85b76">Rosaröd</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label for="clothes">Kläder</label>
+
+<select id="clothes">
+
+<option value="#a78bfa">Lila hoodie</option>
+
+<option value="#77a9c9">Blå tröja</option>
+
+<option value="#8eae91">Grön tröja</option>
+
+<option value="#d58ca9">Rosa tröja</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label for="extra">Accessoar</label>
+
+<select id="extra">
+
+<option value="">Ingen</option>
+
+<option value="🎧">Hörlurar</option>
+
+<option value="⭐">Stjärna</option>
+
+<option value="🎀">Rosett</option>
+
+<option value="👑">Krona</option>
+
+</select>
+
+</div>
+
+<button id="save">Spara min avatar</button>
+
+<div id="message" class="stats">Välj din stil och spara!</div>
 
 </div>
 
 </section>
 
-<h2 class="section-title" id="kurser">📚 Dina kurser</h2>
-
-<div class="courses">
-
-<div class="course"><div class="emoji">📐</div><h3>Matematik</h3><p class="muted">Algebra och funktioner</p><div class="progress"><span style="width:65%"></span></div><small class="muted">65% genomfört</small></div>
-
-<div class="course"><div class="emoji">🧬</div><h3>Biologi</h3><p class="muted">Cellen och genetik</p><div class="progress"><span style="width:40%"></span></div><small class="muted">40% genomfört</small></div>
-
-<div class="course"><div class="emoji">📖</div><h3>Svenska</h3><p class="muted">Textanalys och skrivande</p><div class="progress"><span style="width:80%"></span></div><small class="muted">80% genomfört</small></div>
-
-</div>
-
 </main>
-
-<footer>Pluggnästet · Lär dig i din egen takt ♡</footer>
 
 <script>
 
-let seconds=1500,interval=null;
+const ids=["hair","hairColor","clothes","extra"];
 
-const timer=document.getElementById('timer');
+function update(){
 
-const mode=document.getElementById('mode');
+const hair=document.getElementById("hair").value;
 
-function show(){timer.textContent=String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')}
+const color=document.getElementById("hairColor").value;
 
-document.getElementById('start').onclick=()=>{
+document.getElementById("backHair").style.background=color;
 
-if(interval){clearInterval(interval);interval=null;document.getElementById('start').textContent='Fortsätt';return}
+document.getElementById("frontHair").style.background=color;
 
-document.getElementById('start').textContent='Pausa';
+document.getElementById("outfit").style.background=document.getElementById("clothes").value;
 
-interval=setInterval(()=>{if(seconds>0){seconds--;show()}else{clearInterval(interval);interval=null;mode.textContent='Bra jobbat! Ditt pass är klart ✨';document.getElementById('start').textContent='Starta igen'}},1000)
+const back=document.getElementById("backHair");
 
-};
+const front=document.getElementById("frontHair");
 
-document.getElementById('reset').onclick=()=>{clearInterval(interval);interval=null;seconds=1500;show();document.getElementById('start').textContent='Starta fokus';mode.textContent='Dags att fokusera på dig själv.'};
+back.style.height=hair==="long"?"165px":hair==="short"?"65px":"100px";
 
-document.getElementById('break').onclick=()=>{clearInterval(interval);interval=null;seconds=300;show();mode.textContent='Ta en välförtjänt paus.';document.getElementById('start').textContent='Starta paus'};
+back.style.width=hair==="short"?"105px":"116px";
 
-function setRoom(n){let b=['radial-gradient(ellipse at 50% 110%,#654d8c,transparent 60%),linear-gradient(140deg,#292844,#171a2b 65%,#34304b)','radial-gradient(ellipse at 50% 110%,#315b87,transparent 60%),linear-gradient(140deg,#151d3c,#111526 65%,#302b56)','radial-gradient(ellipse at 50% 110%,#386b55,transparent 60%),linear-gradient(140deg,#183b37,#111e28 65%,#344b40)'];document.querySelector('.room').style.background=b[n]}
+front.style.height=hair==="short"?"30px":"48px";
+
+document.getElementById("accessory").textContent=document.getElementById("extra").value;
+
+}
+
+ids.forEach(id=>document.getElementById(id).addEventListener("change",update));
+
+document.getElementById("save").addEventListener("click",()=>{
+
+const data={};
+
+ids.forEach(id=>data[id]=document.getElementById(id).value);
+
+localStorage.setItem("pluggnastetAvatar",JSON.stringify(data));
+
+document.getElementById("message").textContent="✨ Din avatar är sparad!";
+
+});
+
+const saved=JSON.parse(localStorage.getItem("pluggnastetAvatar")||"null");
+
+if(saved)ids.forEach(id=>{if(saved[id])document.getElementById(id).value=saved[id]});
+
+update();
 
 </script>
 
